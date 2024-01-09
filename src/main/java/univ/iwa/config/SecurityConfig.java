@@ -32,8 +32,9 @@ public class SecurityConfig {
 		http.authorizeHttpRequests((auth)->auth
 			.requestMatchers("/auth/welcome", "/auth/addNewUser", "/auth/generateToken").permitAll() 
 			.requestMatchers("/auth/user/**").authenticated() 
-			.requestMatchers("/auth/admin/**").authenticated() 	
-			).csrf(csrf->csrf.disable())
+			.requestMatchers("/auth/admin/**").authenticated()
+								.requestMatchers("/auth/format/**").authenticated()
+				).csrf(csrf->csrf.disable())
 			.authenticationProvider(authenticationProvider()) 
 			.addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class) ;	
 		return http.build();
