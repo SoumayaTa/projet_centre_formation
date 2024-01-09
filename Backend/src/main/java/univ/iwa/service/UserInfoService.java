@@ -8,15 +8,20 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder; 
 import org.springframework.stereotype.Service;
 
+import univ.iwa.model.Formation;
 import univ.iwa.model.UserInfo;
 import univ.iwa.model.UserInfoDetails;
+import univ.iwa.repository.FormationRepository;
 import univ.iwa.repository.UserInfoRepository;
 
-import java.util.Optional; 
+import java.util.Date;
+import java.util.Optional;
 
 @Service
 public class UserInfoService implements UserDetailsService { 
-	@Autowired UserInfoRepository repository; 
+	@Autowired UserInfoRepository repository;
+	@Autowired
+	FormationRepository formationRepo;
 	@Autowired PasswordEncoder encoder; 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException { 
@@ -33,6 +38,7 @@ public class UserInfoService implements UserDetailsService {
 		repository.save(format);
 		return "User Added Successfully"; 
 	}
+
 	@PostConstruct
 	public String adminDefault(){
 		UserInfo admin = new UserInfo();

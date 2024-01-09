@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import univ.iwa.model.AuthRequest;
+import univ.iwa.model.Formation;
 import univ.iwa.model.UserInfo;
 import univ.iwa.service.JwtService;
 import univ.iwa.service.UserInfoService;
@@ -28,7 +29,8 @@ public class UserController {
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public String addNewUser(@RequestBody UserInfo format) {
         return service.addUser(format);
-    } 
+    }
+
 
     @GetMapping("/assistant/assistantProfile")
     @PreAuthorize("hasAuthority('ROLE_ASSISTANT')")

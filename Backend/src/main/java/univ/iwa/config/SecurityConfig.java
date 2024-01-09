@@ -31,9 +31,10 @@ public class SecurityConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception { 
 		http.authorizeHttpRequests((auth)->auth
 			.requestMatchers("/auth/welcome", "/auth/addNewUser", "/auth/generateToken").permitAll() 
-			.requestMatchers("/auth/user/**").authenticated() 
+			.requestMatchers("/auth/assistant/**").authenticated()
 			.requestMatchers("/auth/admin/**").authenticated()
 								.requestMatchers("/auth/format/**").authenticated()
+								.requestMatchers("/form/**").authenticated()
 				).csrf(csrf->csrf.disable())
 			.authenticationProvider(authenticationProvider()) 
 			.addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class) ;	
