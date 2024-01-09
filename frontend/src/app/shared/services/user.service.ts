@@ -1,13 +1,14 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { UserAuthService } from './user-auth.service';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { UserAuthService } from "./user-auth.service";
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  private API_BASE_URL = "http://localhost:9095/auth";  
+  private API_BASE_URL = "http://localhost:9095/auth";
 
   constructor(
     private httpClient: HttpClient,

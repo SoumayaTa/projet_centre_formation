@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { UserAuthService } from '../_services/userService/user-auth.service';
-import { UserService } from '../_services/userService/user.service';
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
+import { UserAuthService } from "src/app/shared/services/user-auth.service";
+import { UserService } from "src/app/shared/services/user.service";
 
 @Component({
   selector: 'app-login',
@@ -16,19 +16,19 @@ export class LoginComponent implements OnInit {
     private userAuthService: UserAuthService,
     private router:Router,
     private formBuilder: FormBuilder
-    
+
     ){
       this.loginForm=this.formBuilder.group({
         userName: ['', [Validators.required, Validators.minLength(4)]],
         userPassword: ['', [Validators.required,Validators.maxLength(15),Validators.minLength(6)]],
-      
+
       })
 
   }
 
 
   ngOnInit(): void {
-   
+
   }
 
 }
