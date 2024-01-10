@@ -36,6 +36,7 @@ public class SecurityConfig {
 								.requestMatchers("/auth/format/**").authenticated()
 								.requestMatchers("/form/formation/**").authenticated()
 								.requestMatchers("/entreprise/**").authenticated()
+								.requestMatchers("/calendrier/**").authenticated()
 				).csrf(csrf->csrf.disable())
 			.authenticationProvider(authenticationProvider()) 
 			.addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class) ;	
