@@ -47,4 +47,6 @@ export class UserAuthService {
   public isAssistant(): boolean {
     return this.hasRole('ROLE_ASSISTANT');
   }
+
+  
 }
