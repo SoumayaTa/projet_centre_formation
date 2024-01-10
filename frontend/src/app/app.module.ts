@@ -12,6 +12,9 @@ import { HomeComponent } from './views/home/home.component';
 import { LoginComponent } from './views/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AgrupaMaterialModule } from './material/agrupa-material.module';
+import { AdminComponent } from './views/admin/admin.component';
+import { FormateurComponent } from './views/formateur/formateur.component';
+import { AssistantComponent } from './views/assistant/assistant.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +22,9 @@ import { AgrupaMaterialModule } from './material/agrupa-material.module';
     HeaderComponent,
     HomeComponent,
     LoginComponent,
+    AdminComponent,
+    FormateurComponent,
+    AssistantComponent,
   ],
   imports: [
     BrowserModule,
