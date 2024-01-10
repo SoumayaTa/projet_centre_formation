@@ -67,4 +67,8 @@ public class FormationService {
     public List<Formation> findByDate(LocalDate date) {
         return repository.findByDate(date);
     }
+
+    public List<Formation> getallformation() {
+        return repository.findAll();
+    }
 }
