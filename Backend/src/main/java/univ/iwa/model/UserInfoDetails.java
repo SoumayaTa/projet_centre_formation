@@ -10,14 +10,16 @@ import java.util.stream.Collectors;
 
 public class UserInfoDetails implements UserDetails { 
 	private String name; 
-	private String password; 
-	private List<GrantedAuthority> authorities; 
+	private String password;
+//	private String roles;
+	private List<GrantedAuthority> authorities;
 	public UserInfoDetails(UserInfo userInfo) { 
 		name = userInfo.getName(); 
-		password = userInfo.getPassword(); 
-		authorities = Arrays.stream(userInfo.getRoles().split(",")) 
-				.map(SimpleGrantedAuthority::new) 
-				.collect(Collectors.toList()); 
+		password = userInfo.getPassword();
+//		roles=userInfo.getRoles();
+		authorities = Arrays.stream(userInfo.getRoles().split(","))
+				.map(SimpleGrantedAuthority::new)
+				.collect(Collectors.toList());
 	} 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() { 
