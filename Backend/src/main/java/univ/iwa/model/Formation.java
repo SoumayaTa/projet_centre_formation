@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -23,5 +24,5 @@ public class Formation {
     private String programme;
     private String categorie;
     private String ville;
-    private Date date;
+    private LocalDate date;
 }
