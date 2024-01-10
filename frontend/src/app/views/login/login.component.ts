@@ -12,23 +12,46 @@ import { UserService } from "src/app/shared/services/user.service";
 export class LoginComponent implements OnInit {
   loginForm;
   showPassword: boolean = true;
-  constructor(private userService: UserService,
+
+  constructor(
+    private userService: UserService,
     private userAuthService: UserAuthService,
     private router:Router,
     private formBuilder: FormBuilder
-
-    ){
-      this.loginForm=this.formBuilder.group({
-        userName: ['', [Validators.required, Validators.minLength(4)]],
-        userPassword: ['', [Validators.required,Validators.maxLength(15),Validators.minLength(6)]],
-
-      })
-
+  ){
+    this.loginForm = this.formBuilder.group({
+      username: ['', [Validators.required, Validators.minLength(4)]],
+      password: ['', [Validators.required, Validators.maxLength(15), Validators.minLength(6)]],
+    });
   }
 
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
-
+  public login() {
+    console.log('Function called');
+    console.log(this.loginForm.value);
+    console.log('Function fhhfhf');
+    this.userService.login(this.loginForm.value).subscribe(
+      
+      (response: any) => {
+        console.log("respo")
+        console.log("roll "+response.role)
+        this.userAuthService.setRoles(response.role);
+        this.userAuthService.setToken(response.message);
+        const role = response.role;
+        console.log(response);
+        if (role === 'ROLE_ADMIN') {
+          this.router.navigate(['/admin']);  
+        } else if (role === 'ROLE_ASSISTANT') {
+          this.router.navigate(['/assistant']);  
+        } else if (role === 'ROLE_FORMAT') {
+          this.router.navigate(['/format']);  
+        }
+      },
+      (err) => {
+        console.log("hshgshs");
+        console.log(err);
+      }
+    );
   }
-
 }
