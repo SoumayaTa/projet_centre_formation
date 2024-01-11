@@ -1,1 +1,64 @@
-<p>admin works!</p>
+<!-- app.component.html -->
+
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card p-4" style="width: 100%; max-width: 400px;">
+      <h2 class="mb-4 text-center">Login</h2>
+  
+      <form [formGroup]="addFormateurForm" (ngSubmit)="addUser()" novalidate class="d-flex flex-column align-items-center">
+  
+        <div class="mb-3 w-100">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Username</mat-label>
+            <input matInput placeholder="Enter your username" type="text" formControlName="username"
+              [ngClass]="{'error-field': addFormateurForm?.get('username')?.invalid && addFormateurForm?.get('username')?.touched }"
+            >
+            <div *ngIf="addFormateurForm?.get('username')?.hasError('required') && addFormateurForm?.get('username')?.touched" class="error-message">
+              Le nom d'utilisateur est requis.
+            </div>
+            <div *ngIf="addFormateurForm?.get('username')?.hasError('minlength') && addFormateurForm?.get('username')?.touched" class="error-message">
+              Le nom d'utilisateur doit contenir au moins 3 caractères.
+            </div>
+          </mat-form-field>
+        </div>
+  
+        <div class="mb-3 w-100">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Enter your email" type="email" formControlName="email"
+              [ngClass]="{'error-field': addFormateurForm?.get('email')?.invalid && addFormateurForm?.get('email')?.touched }"
+            >
+            <div *ngIf="addFormateurForm?.get('email')?.hasError('required') && addFormateurForm?.get('email')?.touched" class="error-message">
+              L'email est requis.
+            </div>
+            <div *ngIf="addFormateurForm?.get('email')?.hasError('email') && addFormateurForm?.get('email')?.touched" class="error-message">
+              L'email n'est pas valide.
+            </div>
+          </mat-form-field>
+        </div>
+  
+        <div class="mb-3 w-100">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Enter your password" [type]="showPassword ? 'password' : 'text'" formControlName="password"
+              [ngClass]="{'error-field-password': addFormateurForm?.get('password')?.invalid && addFormateurForm?.get('password')?.touched }"
+            >
+            <div *ngIf="addFormateurForm?.get('password')?.hasError('required') && addFormateurForm?.get('password')?.touched" class="error-message-password">
+              Le mot de passe est requis.
+            </div>
+            <div *ngIf="addFormateurForm?.get('password')?.hasError('maxlength') && addFormateurForm?.get('password')?.touched" class="error-message-password">
+              Le mot de passe doit contenir moins de 15 caractères.
+            </div>
+            <div *ngIf="addFormateurForm?.get('password')?.hasError('minlength') && addFormateurForm?.get('password')?.touched" class="error-message-password">
+              Le mot de passe doit contenir au moins 6 caractères.
+            </div>
+          </mat-form-field>
+        </div>
+  
+        <div class="mb-3 w-100">
+          <button class="btn btn-primary w-100 login-button" mat-raised-button color="primary">Login</button>
+        </div>
+  
+      </form>
+    </div>
+  </div>
+  

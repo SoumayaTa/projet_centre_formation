@@ -33,6 +33,7 @@ public class SecurityConfig {
 			.requestMatchers("/auth/welcome", "/auth/addNewUser", "/auth/generateToken", "/form/getByDate/**", "/form/getByVille/**", "/form/getByCategorie/**","/form/getall").permitAll()
 			.requestMatchers("/auth/assistant/**").authenticated()
 			.requestMatchers("/auth/admin/**").authenticated()
+			                     
 								.requestMatchers("/auth/format/**").authenticated()
 								.requestMatchers("/form/formation/**").authenticated()
 								.requestMatchers("/entreprise/**").authenticated()
