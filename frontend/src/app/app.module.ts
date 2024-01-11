@@ -16,6 +16,7 @@ import { AdminComponent } from './views/admin/admin.component';
 import { FormateurComponent } from './views/formateur/formateur.component';
 import { AssistantComponent } from './views/assistant/assistant.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
