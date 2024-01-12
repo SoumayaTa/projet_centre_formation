@@ -1,4 +1,4 @@
-package univ.iwa.model;
+package univ.iwa.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

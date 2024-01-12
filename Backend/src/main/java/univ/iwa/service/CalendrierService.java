@@ -2,7 +2,7 @@ package univ.iwa.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
+import univ.iwa.dto.CalendrierDto;
 import univ.iwa.model.Calendrier;
 import univ.iwa.model.Entreprise;
 import univ.iwa.model.Formation;
@@ -17,25 +17,28 @@ import java.util.Optional;
 @Service
 public class CalendrierService {
     @Autowired
-    CalendrierRepository repository;
-    @Autowired
-    FormationRepository formationRepository;
-    @Autowired
-    UserInfoRepository userInfoRepository;
-    @Autowired
-    EntrepriseRepository entrepriseRepository;
+    private CalendrierRepository repository;
 
-    public String addCalendrier(Calendrier calendrier, Long formationId, int formateurId,
-                                Long entrepriseId){
-        calendrier.setDatedebut(calendrier.getDatedebut());
-        calendrier.setDatefin(calendrier.getDatefin());
+    @Autowired
+    private FormationRepository formationRepository;
+
+    @Autowired
+    private UserInfoRepository userInfoRepository;
+
+    @Autowired
+    private EntrepriseRepository entrepriseRepository;
+
+    public CalendrierDto addCalendrier(CalendrierDto calendrierDto, Long formationId, int formateurId, Long entrepriseId) {
         Optional<Formation> formation = formationRepository.findById(formationId);
         Optional<UserInfo> formateur = userInfoRepository.findById(formateurId);
         Optional<Entreprise> entreprise = entrepriseRepository.findById(entrepriseId);
-        calendrier.setFormation(formation.get());
-        calendrier.setFormateur(formateur.get());
-        calendrier.setEntreprise(entreprise.get());
-        repository.save(calendrier);
-        return "calendar added successfully";
+
+            Calendrier entity = new Calendrier();
+            entity.setDatedebut(calendrierDto.getDatedebut());
+            entity.setDatefin(calendrierDto.getDatefin());
+            entity.setFormation(formation.get());
+            entity.setFormateur(formateur.get());
+            entity.setEntreprise(entreprise.get());
+            return CalendrierDto.toDto( repository.save(entity));
     }
 }

@@ -2,6 +2,7 @@ package univ.iwa.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import univ.iwa.dto.FormationDto;
 import univ.iwa.model.Formation;
 import univ.iwa.repository.FormationRepository;
 
@@ -9,13 +10,14 @@ import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class FormationService {
     @Autowired
     FormationRepository repository;
 
-    public String addFormation(Formation form) throws ParseException {
+    public FormationDto addFormation(FormationDto form) throws ParseException {
         form.setNom(form.getNom());
         form.setCategorie(form.getCategorie());
         form.setCout(form.getCout());
@@ -25,9 +27,9 @@ public class FormationService {
         form.setProgramme(form.getProgramme());
         form.setVille(form.getVille());
         form.setNombreHeur(form.getNombreHeur());
-        repository.save(form);
-        return "Formation added successfully";
+        return FormationDto.toDto(repository.save(Formation.toEntity(form)));
     }
+
     public String deleteFormation(Long id) {
         Optional<Formation> existingForm = repository.findById(id);
 
@@ -39,7 +41,7 @@ public class FormationService {
         }
     }
 
-    public String updateFormation(Long id, Formation newForm) {
+    public FormationDto updateFormation(Long id, FormationDto newForm) {
         Optional<Formation> existingForm = repository.findById(id);
         if (existingForm.isPresent()) {
             Formation form = existingForm.get();
@@ -50,25 +52,37 @@ public class FormationService {
             form.setProgramme(newForm.getProgramme());
             form.setVille(newForm.getVille());
             form.setNombreHeur(newForm.getNombreHeur());
-            repository.save(form);
-            return "Formation updated successfully";
+            return FormationDto.toDto(repository.save(form));
         } else {
-            return "Formation not found";
+            return null;
         }
     }
-   public List<Formation> findByCategorie(String categorie){
-        return repository.findByCategorie(categorie);
+
+    public List<FormationDto> findByCategorie(String categorie){
+        List<Formation> formations = repository.findByCategorie(categorie);
+        return formations.stream()
+                .map(FormationDto::toDto)
+                .collect(Collectors.toList());
     }
 
-    public List<Formation> findByVille(String ville) {
-        return repository.findByVille(ville);
+    public List<FormationDto> findByVille(String ville) {
+        List<Formation> formations = repository.findByVille(ville);
+        return formations.stream()
+                .map(FormationDto::toDto)
+                .collect(Collectors.toList());
     }
 
-    public List<Formation> findByDate(LocalDate date) {
-        return repository.findByDate(date);
+    public List<FormationDto> findByDate(LocalDate date) {
+        List<Formation> formations = repository.findByDate(date);
+        return formations.stream()
+                .map(FormationDto::toDto)
+                .collect(Collectors.toList());
     }
 
-    public List<Formation> getallformation() {
-        return repository.findAll();
+    public List<FormationDto> getallformation() {
+        List<Formation> formations = repository.findAll();
+        return formations.stream()
+                .map(FormationDto::toDto)
+                .collect(Collectors.toList());
     }
 }

@@ -1,5 +1,4 @@
 package univ.iwa.controller;
-import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,8 +8,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
-import univ.iwa.model.AuthRequest;
-import univ.iwa.model.Formation;
+import univ.iwa.dto.AuthRequest;
 import univ.iwa.model.UserInfo;
 import univ.iwa.service.JwtService;
 import univ.iwa.service.UserInfoService;
@@ -35,11 +33,11 @@ public class UserController {
         return service.addUser(format);
     }
 
-
     @GetMapping("/assistant/assistantProfile")
     @PreAuthorize("hasAuthority('ROLE_ASSISTANT')")
     public String userProfile() { return "Welcome to Assistant Profile"; }
-    @GetMapping("/admin/adminProfile") 
+
+    @GetMapping("/admin/adminProfile")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')") 
     public String adminProfile() { return "Welcome to Admin Profile"; }
 
@@ -50,7 +48,6 @@ public class UserController {
     @PostMapping("/generateToken")
     public ResponseEntity<String> authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
-
         if (authentication.isAuthenticated()) {
             System.out.println("gen token");
             List<String> roles = authentication.getAuthorities().stream()

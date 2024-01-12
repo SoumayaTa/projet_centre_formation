@@ -3,6 +3,7 @@ package univ.iwa.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import univ.iwa.dto.EntrepriseDto;
 import univ.iwa.model.Entreprise;
 import univ.iwa.service.EntrepriseService;
 
@@ -17,19 +18,19 @@ public class EntrepriseController {
 
     @GetMapping("/getallEntreprise")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_ASSISTANT')")
-    public List<Entreprise> getAllEntreprise(){
+    public List<EntrepriseDto> getAllEntreprise(){
         return service.getAllEntreprise();
     }
 
     @PostMapping("/addNewEntreprise")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_ASSISTANT')")
-    public String addNewEntreprise (@RequestBody Entreprise entreprise){
+    public EntrepriseDto addNewEntreprise (@RequestBody EntrepriseDto entreprise){
         return  service.addNewEntreprise(entreprise);
     }
 
     @PutMapping("/updateEntreprise/{id}")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_ASSISTANT')")
-    public String updateEntreprise(@PathVariable long id, @RequestBody Entreprise updatedEntreprise) {
+    public EntrepriseDto updateEntreprise(@PathVariable long id, @RequestBody EntrepriseDto updatedEntreprise) {
         return service.updateEntreprise(id, updatedEntreprise);
     }
 

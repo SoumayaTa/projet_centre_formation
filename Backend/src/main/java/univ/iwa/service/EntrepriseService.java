@@ -2,46 +2,47 @@ package univ.iwa.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import univ.iwa.dto.EntrepriseDto;
 import univ.iwa.model.Entreprise;
 import univ.iwa.repository.EntrepriseRepository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class EntrepriseService {
     @Autowired
     EntrepriseRepository repository;
 
-    public List<Entreprise> getAllEntreprise(){
-        return repository.findAll();
+    public List<EntrepriseDto> getAllEntreprise() {
+        List<Entreprise> entreprises = repository.findAll();
+        return entreprises.stream()
+                .map(EntrepriseDto::toDto)
+                .collect(Collectors.toList());
     }
-    public String addNewEntreprise(Entreprise entreprise){
+    public EntrepriseDto addNewEntreprise(EntrepriseDto entreprise){
         entreprise.setName(entreprise.getName());
         entreprise.setAddress(entreprise.getAddress());
         entreprise.setUrl(entreprise.getUrl());
         entreprise.setPhoneNumber(entreprise.getPhoneNumber());
         entreprise.setEmail(entreprise.getEmail());
-        repository.save(entreprise);
-        return "entreprise added successfuly";
+        return EntrepriseDto.toDto(repository.save(Entreprise.toEntity(entreprise)));
     }
 
-    public String updateEntreprise(long id, Entreprise updatedEntreprise) {
-        Optional<Entreprise> existingEntrepriseOptional = repository.findById(id);
-
-        if (existingEntrepriseOptional.isPresent()) {
-            Entreprise existingEntreprise = existingEntrepriseOptional.get();
-            existingEntreprise.setName(updatedEntreprise.getName());
-            existingEntreprise.setAddress(updatedEntreprise.getAddress());
-            existingEntreprise.setUrl(updatedEntreprise.getUrl());
-            existingEntreprise.setPhoneNumber(updatedEntreprise.getPhoneNumber());
-            existingEntreprise.setEmail(updatedEntreprise.getEmail());
-            repository.save(existingEntreprise);
-            return "Entreprise updated successfully";
-        } else {
-            return "Entreprise not found";
-        }
+    public EntrepriseDto updateEntreprise(long id, EntrepriseDto entreprisedto) {
+        Optional<Entreprise> entrepriseOptional = repository.findById(id);
+            Entreprise entity = entrepriseOptional.get();
+            entity.setName(entreprisedto.getName());
+            entity.setAddress(entreprisedto.getAddress());
+            entity.setUrl(entreprisedto.getUrl());
+            entity.setPhoneNumber(entreprisedto.getPhoneNumber());
+            entity.setEmail(entreprisedto.getEmail());
+            Entreprise updatedEntity = Entreprise.toEntity(entreprisedto);
+            repository.save(updatedEntity);
+            return EntrepriseDto.toDto(updatedEntity);
     }
+
 
     public String removeEntreprise(long id) {
         Optional<Entreprise> entrepriseOptional = repository.findById(id);

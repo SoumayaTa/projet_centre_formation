@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import univ.iwa.dto.FormationDto;
 import univ.iwa.model.Formation;
 import univ.iwa.service.FormationService;
 
@@ -19,7 +20,7 @@ public class FormationController {
 
     @PostMapping("formation/addFormation")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_ASSISTANT')")
-    public String addNewFormation(@RequestBody Formation formation) throws ParseException {
+    public FormationDto addNewFormation(@RequestBody FormationDto formation) throws ParseException {
         return service.addFormation(formation);
     }
 
@@ -30,20 +31,20 @@ public class FormationController {
     }
     @PutMapping("formation/updateFormation/{id}")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_ASSISTANT')")
-    public String updateFormation(@PathVariable Long id, @RequestBody Formation form) {
+    public FormationDto updateFormation(@PathVariable Long id, @RequestBody FormationDto form) {
         return service.updateFormation(id, form);
     }
     @GetMapping("/getByCategorie/{categorie}")
-    public List<Formation> findByCategorie(@PathVariable String categorie){
+    public List<FormationDto> findByCategorie(@PathVariable String categorie){
         return service.findByCategorie(categorie);
     }
 
     @GetMapping("/getByVille/{ville}")
-    public List<Formation> getByVille(@PathVariable String ville) {
+    public List<FormationDto> getByVille(@PathVariable String ville) {
         return  service.findByVille(ville);
     }
     @GetMapping("/getByDate")
-    public List<Formation> getByDate(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+    public List<FormationDto> getByDate(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
         try {
             return service.findByDate(date);
         } catch (Exception e) {
@@ -52,7 +53,7 @@ public class FormationController {
         }
     }
     @GetMapping("/getall")
-    public List<Formation> getallFormation(){
+    public List<FormationDto> getallFormation(){
         return service.getallformation();
     }
 
