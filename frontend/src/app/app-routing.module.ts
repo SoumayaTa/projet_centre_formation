@@ -12,6 +12,7 @@ const routes: Routes = [
   { path: 'admin', component: AdminComponent,canActivate:[AuthGuard],data:{roles:['ROLE_ADMIN']}},
   { path: 'format', component: FormateurComponent,canActivate:[AuthGuard],data:{roles:['ROLE_FORMAT']}},
   { path: 'assistant', component: AssistantComponent,canActivate:[AuthGuard],data:{roles:['ROLE_ASSISTANT']}},
+  
   { path: 'login', component: LoginComponent},
   { path: '**', redirectTo: 'home'}
 ];
