@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { User } from "src/app/model/user.model";
 import { UserAuthService } from "./user-auth.service";
 
 
@@ -8,7 +9,7 @@ import { UserAuthService } from "./user-auth.service";
 })
 export class UserService {
 
-  private API_BASE_URL = "http://localhost:9096/auth";
+  private API_BASE_URL = "http://localhost:9095/auth";
 
   constructor(
     private httpClient: HttpClient,
@@ -19,10 +20,9 @@ export class UserService {
   requestHeader=new HttpHeaders(
     {'NO-AUTH': 'True'}
   )
-  public login(loginData: any) {
-    return this.httpClient.post(this.API_BASE_URL + "/generateToken", loginData,{headers:this.requestHeader});
+  public login(loginData: User) {
+    return this.httpClient.post(this.API_BASE_URL + "/generateToken", loginData, { headers: this.requestHeader });
   }
-
 
 
   public forFormateur() {

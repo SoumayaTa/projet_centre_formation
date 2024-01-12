@@ -15,7 +15,8 @@ import { AgrupaMaterialModule } from './material/agrupa-material.module';
 import { AdminComponent } from './views/admin/admin.component';
 import { FormateurComponent } from './views/formateur/formateur.component';
 import { AssistantComponent } from './views/assistant/assistant.component';
-
+import { AddFormateurComponent } from './views/add-formateur/add-formateur.component';
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,6 +26,7 @@ import { AssistantComponent } from './views/assistant/assistant.component';
     AdminComponent,
     FormateurComponent,
     AssistantComponent,
+    AddFormateurComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,6 +39,12 @@ import { AssistantComponent } from './views/assistant/assistant.component';
     FormsModule,
     ReactiveFormsModule,
     AgrupaMaterialModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+    }),
+   
 
   ],
   providers: [],

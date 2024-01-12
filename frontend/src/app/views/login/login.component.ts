@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
+import { User } from "src/app/model/user.model";
 import { UserAuthService } from "src/app/shared/services/user-auth.service";
 import { UserService } from "src/app/shared/services/user.service";
 
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private userService: UserService,
     private userAuthService: UserAuthService,
-    private router:Router,
+    private router: Router,
     private formBuilder: FormBuilder
   ){
     this.loginForm = this.formBuilder.group({
@@ -31,21 +32,27 @@ export class LoginComponent implements OnInit {
     console.log('Function called');
     console.log(this.loginForm.value);
     console.log('Function fhhfhf');
-    this.userService.login(this.loginForm.value).subscribe(
-      
+
+    // Utilisez le modèle User ici
+    const user: User = {
+      username: this.loginForm.value.username ?? '',
+      password: this.loginForm.value.password ?? '',
+    };
+
+    this.userService.login(user).subscribe(
       (response: any) => {
-        console.log("respo")
-        console.log("roll "+response.role)
+        console.log("respo");
+        console.log("roll " + response.role);
         this.userAuthService.setRoles(response.role);
         this.userAuthService.setToken(response.message);
         const role = response.role;
         console.log(response);
         if (role === 'ROLE_ADMIN') {
-          this.router.navigate(['/admin']);  
+          this.router.navigate(['/admin']);
         } else if (role === 'ROLE_ASSISTANT') {
-          this.router.navigate(['/assistant']);  
+          this.router.navigate(['/assistant']);
         } else if (role === 'ROLE_FORMAT') {
-          this.router.navigate(['/format']);  
+          this.router.navigate(['/format']);
         }
       },
       (err) => {
