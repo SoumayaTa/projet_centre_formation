@@ -9,7 +9,7 @@
         <div class="mb-3 w-100">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Username</mat-label>
-            <input matInput placeholder="Enter your username" type="text" formControlName="username"
+            <input matInput placeholder="Enter your username" type="text" formControlName="name"
               [ngClass]="{'error-field': addFormateurForm?.get('username')?.invalid && addFormateurForm?.get('username')?.touched }"
             >
             <div *ngIf="addFormateurForm?.get('username')?.hasError('required') && addFormateurForm?.get('username')?.touched" class="error-message">
