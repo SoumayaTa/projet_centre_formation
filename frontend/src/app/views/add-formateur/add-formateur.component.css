@@ -1,6 +1,7 @@
 /* Ajoutez ces styles dans un fichier CSS séparé */
 
 .container {
+    background: url('../../../assets/images/add_formateur.jpg') no-repeat center center fixed;
     display: flex;
     justify-content: center;
     align-items: center;
