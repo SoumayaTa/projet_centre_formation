@@ -1,22 +1,38 @@
-<mat-toolbar color="primary" class="mat-toolbar-single-row">
-    <span>
-        Gestion Formation
-    </span>
-
-    <span class="space-buttons"></span>
-    <button mat-raised-button color="accent"  routerLink="/login" *ngIf="!isLoggedIn()"> 
-        Login
+<!-- app.component.html -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <!-- Bouton de bascule à gauche -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
     </button>
-    <button *ngIf="isLoggedIn()" (click)="logout()"mat-raised-button color="warn">
-        LogOut
-      </button>
-</mat-toolbar>
+    <a class="navbar-brand" routerLink="/home">Gestion de la Formation</a>
+    
+    <!-- Structure modifiée pour le bouton de bascule à gauche -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ">
+        <!-- Bouton pour les utilisateurs administrateurs -->
+        <li class="nav-item" *ngIf="isAdmin()">
+          <a class="nav-link" routerLink="/admin">
+            <i class="bi bi-person-plus"></i> Ajouter un Nouveau Formateur
+          </a>
+        </li>
+        <!-- Bouton pour les utilisateurs non connectés -->
+        
+      </ul>
 
-<mat-toolbar color="primary" *ngIf="isLoggedIn()">
-    <button   mat-raised-button color="primary" routerLink="/home">
-        Home
-      </button>
-      <button *ngIf="isAdmin()"  mat-raised-button color="primary" routerLink="/admin">
-        AddNewFormateur
-      </button>
-</mat-toolbar>
+      <!-- Bouton pour la déconnexion à gauche -->
+      <ul class="navbar-nav ms-auto" >
+        <li class="nav-item" *ngIf="isLoggedIn()">
+          <button class="btn btn-custom1" (click)="logout()" style="margin-left: 0;">
+            <i class="bi bi-box-arrow-right"></i> Déconnexion
+          </button>
+        </li>
+        <li class="nav-item" *ngIf="!isLoggedIn()">
+          <button class="btn btn-custom me-2" routerLink="/login">
+            <i class="bi bi-box-arrow-in-right"></i> Connexion
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

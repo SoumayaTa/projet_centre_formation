@@ -1,3 +1,70 @@
-.space-buttons{
-    flex: 1 1 auto;
-  }
+/* styles.css */
+
+@import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.17.0/font/bootstrap-icons.css');
+
+.navbar {
+  background: linear-gradient(to right,#381e97, #6c30b9, #5957cc, #beacbc);
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 25px;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+}
+
+.navbar-nav {
+  margin-right: 20px;
+}
+
+.navbar-nav .nav-item {
+  margin-right: 20px;
+}
+
+
+.nav-link {
+  transition: color 0.9s ease;
+}
+/* styles.css */
+/* styles.css */
+/* styles.css */
+.btn-custom {
+  color: white;
+  border-color: #6c30b9;
+ 
+  font-weight: bold;
+}
+
+/* Styles pour le bouton lorsqu'il est actif (clic) */
+.btn-custom:active,
+.btn-custom:focus {
+  color: white;
+  border-color: hsl(249, 77%, 42%);
+  background-color: hsl(256, 81%, 40%);
+}
+/* styles.css */
+/* Ajoutez ces styles pour le lien "Ajouter un Nouveau Formateur" */
+.nav-item .nav-link {
+  color: white;
+  font-weight: bold; /* Texte en gras */
+}
+
+.nav-item .nav-link:hover {
+  color: hsl(271, 86%, 22%); /* Couleur de survol de votre choix */
+  text-decoration: underline; /* Surligne le texte lors du survol */
+}
+.btn-custom1 {
+  color: white;
+  border-color: #6c30b9;
+ 
+  font-weight: bold;
+}
+.btn-custom1:active,
+.btn-custom1:focus {
+  color: white;
+  border-color: hsl(249, 77%, 42%);
+  background-color: hsl(256, 81%, 40%);
+}
+
+
+
+

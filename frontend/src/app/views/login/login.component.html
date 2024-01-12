@@ -1,6 +1,6 @@
 <div class="login-container">
   <div class="card text-center p-4">
-    <h2 class="mb-4 text-center">Login</h2>
+    <h2 class="mb-4 text-center" style="color:hsl(249, 77%, 42%); font-weight: bold;">Login</h2>
 
     <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate class="d-flex flex-column align-items-center">
 
@@ -38,7 +38,10 @@
       </div>
 
       <div class="mb-3 w-100">
-        <button class="btn btn-primary w-100 login-button" mat-raised-button color="primary">Login</button>
+        <button class="btn btn-primary w-100 login-button" mat-raised-button color="primary" style="color: white;
+        border-color: hsl(249, 77%, 42%);
+        background-color: hsl(256, 81%, 40%);
+        font-weight: bold;">Login</button>
       </div>
 
     </form>
