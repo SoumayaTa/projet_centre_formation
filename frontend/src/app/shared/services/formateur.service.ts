@@ -37,6 +37,30 @@ export class FormateurService {
     return this.httpClient.get(`${this.API_BASE_URL}/format/formatProfile`, { responseType: "text" });
   }
 
+  public showFormateurs(): Observable<Formateur[]> {
+
+    const jwtToken = this.userAuthService.getToken();
+    if (jwtToken) {
+      const headers = new HttpHeaders({
+        'Authorization': 'Bearer ' + jwtToken,
+        'Content-Type': 'application/json'
+      });
+      console.log(jwtToken);
+      
+      return this.httpClient.get<Formateur[]>(`${this.API_BASE_URL}/allFormateur`, { headers });
+    }else{
+      console.log('Token JWT non disponible');
+    }
+    return new Observable<any>();
+  }
+
+  public deleteFormateur(id:number){
+    return this.httpClient.delete(`${this.API_BASE_URL}/deleteFormateur/`+id)
+  }
+
+  public updateFormateur(idfor:number,formateur:Formateur){
+    return this.httpClient.put("http://localhost:9095/auth/updateUser"+idfor,formateur)
+  }
 
 
 }

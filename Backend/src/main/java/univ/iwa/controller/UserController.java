@@ -52,6 +52,15 @@ public class UserController {
     public UserInfoDto updateUser(@RequestBody UserInfoDto userdto, @PathVariable int id){
         return userInfoService.updateUser(userdto,id);
     }
+    @GetMapping("/allFormateur")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @ResponseBody
+    public List<UserInfo> getAllFormateurs() {
+        System.out.println("called");
+        List<UserInfo> formateurs = userInfoService.getAllFormateurs();
+        System.out.println("called");
+        return formateurs;
+    }
     @GetMapping("/assistant/assistantProfile")
     @PreAuthorize("hasAuthority('ROLE_ASSISTANT')")
     public String assistantProfile() {

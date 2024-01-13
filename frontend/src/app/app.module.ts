@@ -17,6 +17,7 @@ import { FormateurComponent } from './views/formateur/formateur.component';
 import { AssistantComponent } from './views/assistant/assistant.component';
 import { AddFormateurComponent } from './views/add-formateur/add-formateur.component';
 import { ToastrModule } from 'ngx-toastr';
+import { FormateurDetailsComponent } from './views/formateur-details/formateur-details.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,6 +28,7 @@ import { ToastrModule } from 'ngx-toastr';
     FormateurComponent,
     AssistantComponent,
     AddFormateurComponent,
+    FormateurDetailsComponent,
   ],
   imports: [
     BrowserModule,
