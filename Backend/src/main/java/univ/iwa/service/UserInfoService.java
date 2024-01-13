@@ -71,4 +71,9 @@ public class UserInfoService implements UserDetailsService {
 		return "assistant added successfully";
 	}
 
+	public void deleteFormateur(Long id) {
+		repository.deleteById(id);
+	}
+
+
 } 
