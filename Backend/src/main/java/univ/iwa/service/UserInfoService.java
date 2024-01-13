@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder; 
 import org.springframework.stereotype.Service;
 
+import univ.iwa.dto.UserInfoDto;
 import univ.iwa.model.Formation;
 import univ.iwa.model.UserInfo;
 import univ.iwa.model.UserInfoDetails;
@@ -37,6 +38,16 @@ public class UserInfoService implements UserDetailsService {
 		format.setRoles("ROLE_FORMAT");
 		repository.save(format);
 		return "User Added Successfully"; 
+	}
+
+	public UserInfoDto updateUser(UserInfoDto userinfodto, int id) {
+		Optional<UserInfo> optionalUser = repository.findById(id);
+		UserInfo entity = optionalUser.get();
+		entity.setName(userinfodto.getName());
+		entity.setEmail(userinfodto.getEmail());
+		entity.setPassword(userinfodto.getPassword());
+		entity.setRoles(userinfodto.getRoles());
+		return UserInfoDto.toDto(repository.save(entity));
 	}
 
 	@PostConstruct
