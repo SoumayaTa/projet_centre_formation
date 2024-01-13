@@ -10,6 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import univ.iwa.dto.AuthRequest;
+import univ.iwa.dto.UserInfoDto;
 import univ.iwa.model.UserInfo;
 import univ.iwa.service.JwtService;
 import univ.iwa.service.UserInfoService;
@@ -46,6 +47,11 @@ public class UserController {
         return userInfoService.addUser(userInfo);
     }
 
+    @PutMapping("/updateUser/{id}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    public UserInfoDto updateUser(@RequestBody UserInfoDto userdto, @PathVariable int id){
+        return userInfoService.updateUser(userdto,id);
+    }
     @GetMapping("/assistant/assistantProfile")
     @PreAuthorize("hasAuthority('ROLE_ASSISTANT')")
     public String assistantProfile() {

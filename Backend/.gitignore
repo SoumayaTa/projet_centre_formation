@@ -19,6 +19,10 @@ target/
 *.iml
 *.ipr
 *.properties
+<<<<<<< HEAD
+=======
+
+>>>>>>> 606ddab9c65c31496e2bd5c4161d1b187b19accb
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
