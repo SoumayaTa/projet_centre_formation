@@ -16,6 +16,7 @@ import univ.iwa.repository.FormationRepository;
 import univ.iwa.repository.UserInfoRepository;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -75,5 +76,8 @@ public class UserInfoService implements UserDetailsService {
 		repository.deleteById(id);
 	}
 
+	public List<UserInfo> getAllFormateurs() {
+      return repository.findByRoles("ROLE_FORMAT");
 
+	}
 } 
