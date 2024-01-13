@@ -1,7 +1,7 @@
 /* Ajoutez ces styles dans un fichier CSS séparé */
 
 .container {
-    background: url('../../../assets/images/add_formateur.jpg') no-repeat center center fixed;
+    background: url('../../../assets/images/login.jpg') no-repeat center center fixed;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -10,6 +10,7 @@
   
   .card {
     width: 400px;
+    background-color: rgba(255, 255, 255, 0.8);
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }

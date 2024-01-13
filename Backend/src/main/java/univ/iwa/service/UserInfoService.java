@@ -1,6 +1,7 @@
 package univ.iwa.service;
 
 import jakarta.annotation.PostConstruct;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails; 
 import org.springframework.security.core.userdetails.UserDetailsService; 
@@ -16,28 +17,31 @@ import univ.iwa.repository.FormationRepository;
 import univ.iwa.repository.UserInfoRepository;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserInfoService implements UserDetailsService { 
+public class UserInfoService implements UserDetailsService {
 	@Autowired UserInfoRepository repository;
 	@Autowired
 	FormationRepository formationRepo;
-	@Autowired PasswordEncoder encoder; 
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException { 
-		Optional<UserInfo> userDetail = repository.findByName(username); 
+	@Autowired PasswordEncoder encoder;
 
-		return userDetail.map(UserInfoDetails::new) 
-				.orElseThrow(() -> new UsernameNotFoundException("User not found " + username)); 
-	} 
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		Optional<UserInfo> userDetail = repository.findByName(username);
+
+		return userDetail.map(UserInfoDetails::new)
+				.orElseThrow(() -> new UsernameNotFoundException("User not found " + username));
+	}
+
 	public String addUser(UserInfo format) {
 		format.setName(format.getName());
 		format.setPassword(encoder.encode(format.getPassword()));
 		format.setEmail(format.getEmail());
 		format.setRoles("ROLE_FORMAT");
 		repository.save(format);
-		return "User Added Successfully"; 
+		return "User Added Successfully";
 	}
 
 	public UserInfoDto updateUser(UserInfoDto userinfodto, int id) {
@@ -62,6 +66,7 @@ public class UserInfoService implements UserDetailsService {
 		repository.save(admin);
 		return "admin added successfully";
 	}
+
 	@PostConstruct
 	public String assistantDefault(){
 		UserInfo assistant = new UserInfo();
@@ -73,9 +78,13 @@ public class UserInfoService implements UserDetailsService {
 		return "assistant added successfully";
 	}
 
+
 	public void deleteFormateur(Long id) {
-		repository.deleteById(id);
+		repository.deleteById(id.intValue());
 	}
 
+	public List<UserInfo> getAllFormateurs() {
+      return repository.findByRoles("ROLE_FORMAT");
 
+	}
 } 
