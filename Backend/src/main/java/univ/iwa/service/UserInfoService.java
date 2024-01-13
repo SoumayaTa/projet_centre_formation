@@ -1,6 +1,7 @@
 package univ.iwa.service;
 
 import jakarta.annotation.PostConstruct;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails; 
 import org.springframework.security.core.userdetails.UserDetailsService; 
@@ -72,6 +73,7 @@ public class UserInfoService implements UserDetailsService {
 		return "assistant added successfully";
 	}
 
+	@Transactional
 	public void deleteFormateur(Long id) {
 		repository.deleteById(id);
 	}
