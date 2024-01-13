@@ -15,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/form")
 public class FormationController {
+
     @Autowired
     FormationService service;
 
@@ -52,6 +53,7 @@ public class FormationController {
             return null;
         }
     }
+
     @GetMapping("/getall")
     public List<FormationDto> getallFormation(){
         return service.getallformation();
