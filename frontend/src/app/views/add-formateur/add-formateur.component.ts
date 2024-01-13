@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-
-// Assurez-vous que le chemin du modèle est correct
 import { FormateurService } from 'src/app/shared/services/formateur.service';
 import { Formateur } from 'src/app/model/Formateur.model';
 import { UserAuthService } from 'src/app/shared/services/user-auth.service';
@@ -14,11 +12,12 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AddFormateurComponent implements OnInit {
   formateurForm;
-  formateur: Formateur = {
+  formateur: Formateur ={
+    id: 0,
     name: '',
     password: '',
     email: ''
-  };
+  }
 
   constructor(private formBuilder: FormBuilder, private formateurService: FormateurService,
     private userAuthService: UserAuthService,
