@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import org.springframework.web.cors.CorsConfiguration;
 import univ.iwa.filters.JwtAuthFilter;
 import univ.iwa.service.UserInfoService;
 
@@ -32,7 +33,7 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
-				.cors(withDefaults())
+				.cors(cors->cors.configurationSource(request -> new CorsConfiguration(corsFilter())))
 				.authorizeHttpRequests((auth)->auth
 			.requestMatchers("/auth/welcome", "/auth/addNewUser", "/auth/generateToken", "/form/getByDate/**", "/form/getByVille/**", "/form/getByCategorie/**","/form/getall").permitAll()
 			.requestMatchers("/auth/assistant/**").authenticated()
@@ -42,11 +43,10 @@ public class SecurityConfig {
 								.requestMatchers("/form/formation/**").authenticated()
 								.requestMatchers("/entreprise/**").authenticated()
 								.requestMatchers("/calendrier/**").authenticated()
-								.requestMatchers("auth/allFormateur").authenticated()
-								.requestMatchers("auth/deleteFormateur").authenticated()
+								.requestMatchers("/auth/**").authenticated()
 				).csrf(csrf->csrf.disable())
 			.authenticationProvider(authenticationProvider())
-			.addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class) ;
+			.addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class);
 		return http.build();
 	}
 	// Password Encoding
@@ -65,4 +65,14 @@ public class SecurityConfig {
 	public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
 		return config.getAuthenticationManager();
 	}
+
+	public CorsConfiguration corsFilter() {
+		CorsConfiguration config = new CorsConfiguration();
+		config.setAllowCredentials(true);
+		config.addAllowedOrigin("http://localhost:4200");
+		config.addAllowedHeader("*");
+		config.addAllowedMethod("*");
+		return config;
+	}
+
 }

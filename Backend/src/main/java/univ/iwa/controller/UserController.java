@@ -81,8 +81,8 @@ public class UserController {
 
     @DeleteMapping("/deleteFormateur/{id}")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    public void deleteFormateur(@PathVariable Long id) {
-       userInfoService.deleteFormateur(id);
+    public void deleteFormateur(@PathVariable("id") long id) {
+        userInfoService.deleteFormateur(id);
     }
 
     @PostMapping("/generateToken")
