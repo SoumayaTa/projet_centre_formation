@@ -45,7 +45,9 @@ public class UserInfoService implements UserDetailsService {
 		UserInfo entity = optionalUser.get();
 		entity.setName(userinfodto.getName());
 		entity.setEmail(userinfodto.getEmail());
-		entity.setPassword(userinfodto.getPassword());
+		if (userinfodto.getPassword() != null && !userinfodto.getPassword().isEmpty()) {
+			entity.setPassword(encoder.encode(userinfodto.getPassword()));
+		}
 		entity.setRoles("ROLE_FORMAT");
 		return UserInfoDto.toDto(repository.save(entity));
 	}
