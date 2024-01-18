@@ -9,7 +9,7 @@ import { UserAuthService } from "./user-auth.service";
 })
 export class UserService {
 
-  private API_BASE_URL = "http://localhost:9095/auth";
+  private API_BASE_URL = "http://localhost:8080/auth";
 
   constructor(
     private httpClient: HttpClient,
