@@ -18,6 +18,7 @@ import { AssistantComponent } from './views/assistant/assistant.component';
 import { AddFormateurComponent } from './views/add-formateur/add-formateur.component';
 import { ToastrModule } from 'ngx-toastr';
 import { FormateurDetailsComponent } from './views/formateur-details/formateur-details.component';
+import { ConfirmationDialogComponent } from './views/confirmation-dialog/confirmation-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +30,7 @@ import { FormateurDetailsComponent } from './views/formateur-details/formateur-d
     AssistantComponent,
     AddFormateurComponent,
     FormateurDetailsComponent,
+    ConfirmationDialogComponent,
   ],
   imports: [
     BrowserModule,

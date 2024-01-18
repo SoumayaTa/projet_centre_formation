@@ -1,0 +1,10 @@
+<!-- Contenu de la boîte de dialogue de confirmation -->
+<h1 mat-dialog-title class="mat-h1">Confirmation</h1>
+<div mat-dialog-content>
+  <p>{{ data.message }}</p>
+</div>
+<div mat-dialog-actions>
+  <!-- Boutons Annuler et OK -->
+  <button mat-button class="mat-button-secondary" (click)="onNoClick()">Annuler</button>
+  <button mat-button color="warn" [mat-dialog-close]="true" #confirmButton>OK</button>
+</div>
