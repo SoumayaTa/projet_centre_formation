@@ -25,7 +25,7 @@ export class FormateurDetailsComponent implements OnInit {
   this.formateurService.showFormateurs().subscribe(
     (resp:Formateur[])=>{
       console.log("hhhh");
-      
+      this.FormateurDetails=resp;
       resp.forEach(f=>this.FormateurDetails.push(f));
     },(err:HttpErrorResponse)=>{
       console.log(err);
@@ -38,6 +38,17 @@ export class FormateurDetailsComponent implements OnInit {
   }
 
   public deleteFormateur(id:number){
+    console.log("delete")
+    this.formateurService.deleteFormateurs(id).subscribe(
+      () => {
+        console.log('Formateur supprimé avec succès.');
+       
+        // Ajoutez ici tout autre code que vous souhaitez exécuter après la suppression réussie
+      },
+      (erreur) => {
+        console.error('Erreur lors de la suppression du formateur :', erreur);
+      }
+    );
 
   }
 

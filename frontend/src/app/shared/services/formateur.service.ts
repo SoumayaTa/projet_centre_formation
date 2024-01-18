@@ -8,7 +8,7 @@ import { UserAuthService } from './user-auth.service';
   providedIn: 'root'
 })
 export class FormateurService {
-  private API_BASE_URL = "http://localhost:9095/auth";
+  private API_BASE_URL = "http://localhost:8080/auth";
   constructor(private httpClient: HttpClient,
     private userAuthService: UserAuthService) { }
 
@@ -43,6 +43,7 @@ export class FormateurService {
     if (jwtToken) {
       const headers = new HttpHeaders({
         'Authorization': 'Bearer ' + jwtToken,
+
         'Content-Type': 'application/json'
       });
       console.log(jwtToken);
@@ -54,12 +55,26 @@ export class FormateurService {
     return new Observable<any>();
   }
 
-  public deleteFormateur(id:number){
-    return this.httpClient.delete(`${this.API_BASE_URL}/deleteFormateur/`+id)
+  public deleteFormateurs(id:number): Observable<any>{
+    const jwtToken = this.userAuthService.getToken();
+    if (jwtToken) {
+      const headers = new HttpHeaders({
+        'Authorization': 'Bearer ' + jwtToken,
+
+        'Content-Type': 'application/json'
+      });
+      console.log(jwtToken);
+    return this.httpClient.delete(`${this.API_BASE_URL}/deleteFormateur/`+id,{ headers })
+    }else {
+      
+      console.log('Token JWT non disponible');
+      
+    }
+    return new Observable<any>();
   }
 
   public updateFormateur(idfor:number,formateur:Formateur){
-    return this.httpClient.put("http://localhost:9095/auth/updateUser"+idfor,formateur)
+    return this.httpClient.put("http://localhost:8080/auth/updateUser"+idfor,formateur)
   }
 
 
