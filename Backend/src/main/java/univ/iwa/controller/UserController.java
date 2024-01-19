@@ -40,7 +40,7 @@ public class UserController {
 
     @PostMapping("/addNewUser")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    public String addNewUser(@RequestBody UserInfo userInfo) {
+    public String addNewUser(@RequestBody UserInfoDto userInfo) {
         System.out.println("############");
         System.out.println(userInfo);
         System.out.println("############");
@@ -55,11 +55,8 @@ public class UserController {
     @GetMapping("/allFormateur")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @ResponseBody
-    public List<UserInfo> getAllFormateurs() {
-        System.out.println("called");
-        List<UserInfo> formateurs = userInfoService.getAllFormateurs();
-        System.out.println("called");
-        return formateurs;
+    public List<UserInfoDto> getAllFormateurs() {
+        return userInfoService.getAllFormateurs();
     }
     @GetMapping("/assistant/assistantProfile")
     @PreAuthorize("hasAuthority('ROLE_ASSISTANT')")
@@ -82,7 +79,6 @@ public class UserController {
     @DeleteMapping("/deleteFormateur/{id}")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public void deleteFormateur(@PathVariable("id") long id) {
-    	
         userInfoService.deleteFormateur(id);
     }
 
@@ -93,7 +89,6 @@ public class UserController {
             List<String> roles = authentication.getAuthorities().stream()
                     .map(GrantedAuthority::getAuthority)
                     .collect(Collectors.toList());
-
             String token = jwtService.generateToken(authRequest.getUsername(), roles.get(0));
             return ResponseEntity.ok("{\"message\":\"" + token + "\",\"role\":\"" + roles.get(0) + "\"}");
         } else {

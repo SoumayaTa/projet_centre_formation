@@ -28,17 +28,4 @@ public class Formation {
     private String ville;
     private LocalDate date;
 
-    public static Formation toEntity(FormationDto form) {
-        return Formation.builder()
-                .id(form.getId())
-                .nom(form.getNom())
-                .nombreHeur(form.getNombreHeur())
-                .cout(form.getCout())
-                .objectifs(form.getObjectifs())
-                .programme(form.getProgramme())
-                .categorie(form.getCategorie())
-                .ville(form.getVille())
-                .date(form.getDate())
-                .build();
-    }
 }

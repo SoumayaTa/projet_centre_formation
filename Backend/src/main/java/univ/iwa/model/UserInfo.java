@@ -22,14 +22,6 @@ public class UserInfo {
 	private String password;
 	private String roles;
 
-	public static UserInfo toEntity(UserInfoDto user) {
-		return UserInfo.builder()
-				.id(user.getId())
-				.name(user.getName())
-				.password(user.getPassword())
-				.roles(user.getRoles())
-				.email(user.getEmail()).build();
 
-	}
 } 
 

@@ -56,7 +56,7 @@ public class FormationController {
 
     @GetMapping("/getall")
     public List<FormationDto> getallFormation(){
-        return service.getallformation();
+        return service.getAllFormations();
     }
 
 }

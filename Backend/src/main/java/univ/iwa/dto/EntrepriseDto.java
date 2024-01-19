@@ -11,21 +11,10 @@ import univ.iwa.model.Entreprise;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EntrepriseDto {
-    private long id;
     private String name;
     private String address;
     private String phoneNumber;
     private String email;
     private String url;
 
-    public static EntrepriseDto toDto(Entreprise entreprise){
-        return EntrepriseDto.builder()
-                .id(entreprise.getId())
-                .name(entreprise.getName())
-                .address(entreprise.getAddress())
-                .phoneNumber(entreprise.getPhoneNumber())
-                .email(entreprise.getEmail())
-                .url(entreprise.getUrl())
-                .build();
-    }
 }

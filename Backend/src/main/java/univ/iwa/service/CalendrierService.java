@@ -1,5 +1,6 @@
 package univ.iwa.service;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import univ.iwa.dto.CalendrierDto;
@@ -28,7 +29,10 @@ public class CalendrierService {
     @Autowired
     private EntrepriseRepository entrepriseRepository;
 
-    public CalendrierDto addCalendrier(CalendrierDto calendrierDto, Long formationId, int formateurId, Long entrepriseId) {
+    @Autowired
+    private ModelMapper modelMapper;
+
+   /* public CalendrierDto addCalendrier(CalendrierDto calendrierDto, Long formationId, int formateurId, Long entrepriseId) {
         Optional<Formation> formation = formationRepository.findById(formationId);
         Optional<UserInfo> formateur = userInfoRepository.findById(formateurId);
         Optional<Entreprise> entreprise = entrepriseRepository.findById(entrepriseId);
@@ -40,5 +44,18 @@ public class CalendrierService {
             entity.setFormateur(formateur.get());
             entity.setEntreprise(entreprise.get());
             return CalendrierDto.toDto( repository.save(entity));
+    }*/
+
+    public CalendrierDto addCalendrier(CalendrierDto calendrierDto, Long formationId, int formateurId, Long entrepriseId) {
+        Optional<Formation> formation = formationRepository.findById(formationId);
+        Optional<UserInfo> formateur = userInfoRepository.findById(formateurId);
+        Optional<Entreprise> entreprise = entrepriseRepository.findById(entrepriseId);
+
+        Calendrier entity = modelMapper.map(calendrierDto, Calendrier.class);
+        entity.setFormation(formation.orElse(null));
+        entity.setFormateur(formateur.orElse(null));
+        entity.setEntreprise(entreprise.orElse(null));
+
+        return modelMapper.map(repository.save(entity), CalendrierDto.class);
     }
 }

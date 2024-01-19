@@ -16,7 +16,7 @@ public class EntrepriseController {
     @Autowired
     EntrepriseService service;
 
-    @GetMapping("/getallEntreprise")
+   @GetMapping("/getallEntreprise")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_ASSISTANT')")
     public List<EntrepriseDto> getAllEntreprise(){
         return service.getAllEntreprise();
@@ -28,13 +28,13 @@ public class EntrepriseController {
         return  service.addNewEntreprise(entreprise);
     }
 
-    @PutMapping("/updateEntreprise/{id}")
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_ASSISTANT')")
+   @PutMapping("/updateEntreprise/{id}")
+   @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_ASSISTANT')")
     public EntrepriseDto updateEntreprise(@PathVariable long id, @RequestBody EntrepriseDto updatedEntreprise) {
         return service.updateEntreprise(id, updatedEntreprise);
     }
 
-    @DeleteMapping("/removeEntreprise/{id}")
+  @DeleteMapping("/removeEntreprise/{id}")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_ASSISTANT')")
     public String removeEntreprise(@PathVariable long id) {
         return service.removeEntreprise(id);

@@ -1,5 +1,6 @@
 package univ.iwa.service;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import univ.iwa.dto.FormationDto;
@@ -16,18 +17,14 @@ import java.util.stream.Collectors;
 public class FormationService {
     @Autowired
     FormationRepository repository;
+    @Autowired
+    private ModelMapper modelMapper;
 
-    public FormationDto addFormation(FormationDto form) throws ParseException {
-        form.setNom(form.getNom());
-        form.setCategorie(form.getCategorie());
-        form.setCout(form.getCout());
-        LocalDate currentDate = LocalDate.now();
-        form.setDate(currentDate);
-        form.setObjectifs(form.getObjectifs());
-        form.setProgramme(form.getProgramme());
-        form.setVille(form.getVille());
-        form.setNombreHeur(form.getNombreHeur());
-        return FormationDto.toDto(repository.save(Formation.toEntity(form)));
+    public FormationDto addFormation(FormationDto form) {
+        Formation formationEntity = modelMapper.map(form, Formation.class);
+        formationEntity.setDate(LocalDate.now());
+        Formation savedFormation = repository.save(formationEntity);
+        return modelMapper.map(savedFormation, FormationDto.class);
     }
 
     public String deleteFormation(Long id) {
@@ -42,47 +39,39 @@ public class FormationService {
     }
 
     public FormationDto updateFormation(Long id, FormationDto newForm) {
-        Optional<Formation> existingForm = repository.findById(id);
-        if (existingForm.isPresent()) {
-            Formation form = existingForm.get();
-            form.setNom(newForm.getNom());
-            form.setCategorie(newForm.getCategorie());
-            form.setCout(newForm.getCout());
-            form.setObjectifs(newForm.getObjectifs());
-            form.setProgramme(newForm.getProgramme());
-            form.setVille(newForm.getVille());
-            form.setNombreHeur(newForm.getNombreHeur());
-            return FormationDto.toDto(repository.save(form));
-        } else {
-            return null;
-        }
+        Optional<Formation> existingFormOptional = repository.findById(id);
+        Formation existingForm = existingFormOptional.get();
+        //la date a modifie f front
+        modelMapper.map(newForm, existingForm);
+        repository.save(existingForm);
+        return modelMapper.map(existingForm, FormationDto.class);
     }
 
-    public List<FormationDto> findByCategorie(String categorie){
+    public List<FormationDto> findByCategorie(String categorie) {
         List<Formation> formations = repository.findByCategorie(categorie);
         return formations.stream()
-                .map(FormationDto::toDto)
+                .map(formation -> modelMapper.map(formation, FormationDto.class))
                 .collect(Collectors.toList());
     }
 
     public List<FormationDto> findByVille(String ville) {
         List<Formation> formations = repository.findByVille(ville);
         return formations.stream()
-                .map(FormationDto::toDto)
+                .map(formation -> modelMapper.map(formation, FormationDto.class))
                 .collect(Collectors.toList());
     }
 
     public List<FormationDto> findByDate(LocalDate date) {
         List<Formation> formations = repository.findByDate(date);
         return formations.stream()
-                .map(FormationDto::toDto)
+                .map(formation -> modelMapper.map(formation, FormationDto.class))
                 .collect(Collectors.toList());
     }
 
-    public List<FormationDto> getallformation() {
+    public List<FormationDto> getAllFormations() {
         List<Formation> formations = repository.findAll();
         return formations.stream()
-                .map(FormationDto::toDto)
+                .map(formation -> modelMapper.map(formation, FormationDto.class))
                 .collect(Collectors.toList());
     }
 }

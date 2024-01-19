@@ -14,7 +14,6 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FormationDto {
-    private Long id;
     private String nom;
     private Long nombreHeur;
     private Long cout;
@@ -24,17 +23,4 @@ public class FormationDto {
     private String ville;
     private LocalDate date;
 
-    public static FormationDto toDto(Formation formation){
-        return FormationDto.builder()
-                .id(formation.getId())
-                .nom(formation.getNom())
-                .nombreHeur(formation.getNombreHeur())
-                .cout(formation.getCout())
-                .objectifs(formation.getObjectifs())
-                .programme(formation.getProgramme())
-                .categorie(formation.getCategorie())
-                .ville(formation.getVille())
-                .date(formation.getDate())
-                .build();
-    }
 }

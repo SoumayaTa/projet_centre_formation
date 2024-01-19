@@ -22,13 +22,4 @@ public class Entreprise {
     private String email;
     private String url;
 
-    public static Entreprise toEntity(EntrepriseDto entreprise) {
-        return Entreprise.builder()
-                .id(entreprise.getId())
-                .name((entreprise.getName()))
-                .address(entreprise.getAddress())
-                .url(entreprise.getUrl())
-                .phoneNumber(entreprise.getPhoneNumber())
-                .email(entreprise.getEmail()).build();
-    }
 }

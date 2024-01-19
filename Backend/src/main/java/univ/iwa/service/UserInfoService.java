@@ -2,6 +2,7 @@ package univ.iwa.service;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.transaction.Transactional;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails; 
 import org.springframework.security.core.userdetails.UserDetailsService; 
@@ -19,6 +20,7 @@ import univ.iwa.repository.UserInfoRepository;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserInfoService implements UserDetailsService {
@@ -26,6 +28,9 @@ public class UserInfoService implements UserDetailsService {
 	@Autowired
 	FormationRepository formationRepo;
 	@Autowired PasswordEncoder encoder;
+	@Autowired
+	private ModelMapper modelMapper;
+
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -35,25 +40,34 @@ public class UserInfoService implements UserDetailsService {
 				.orElseThrow(() -> new UsernameNotFoundException("User not found " + username));
 	}
 
-	public String addUser(UserInfo format) {
+	/*public String addUser(UserInfoDto format) {
 		format.setName(format.getName());
 		format.setPassword(encoder.encode(format.getPassword()));
 		format.setEmail(format.getEmail());
 		format.setRoles("ROLE_FORMAT");
 		repository.save(format);
 		return "User Added Successfully";
+	}*/
+	public String addUser(UserInfoDto userInfoDto) {
+		UserInfo userInfo = modelMapper.map(userInfoDto, UserInfo.class);
+		userInfo.setPassword(encoder.encode(userInfo.getPassword()));
+		userInfo.setRoles("ROLE_FORMAT");
+		repository.save(userInfo);
+		return "User Added Successfully";
 	}
+
 
 	public UserInfoDto updateUser(UserInfoDto userinfodto, int id) {
 		Optional<UserInfo> optionalUser = repository.findById(id);
-		UserInfo entity = optionalUser.get();
-		entity.setName(userinfodto.getName());
-		entity.setEmail(userinfodto.getEmail());
+		UserInfo entity = optionalUser.orElseThrow(() -> new RuntimeException("User not found with id: " + id));
+		String oldPassword = entity.getPassword();
+		modelMapper.map(userinfodto, entity);
 		if (userinfodto.getPassword() != null && !userinfodto.getPassword().isEmpty()) {
 			entity.setPassword(encoder.encode(userinfodto.getPassword()));
+		} else {
+			entity.setPassword(oldPassword);
 		}
-		entity.setRoles("ROLE_FORMAT");
-		return UserInfoDto.toDto(repository.save(entity));
+		return modelMapper.map(repository.save(entity), UserInfoDto.class);
 	}
 
 	@PostConstruct
@@ -83,8 +97,11 @@ public class UserInfoService implements UserDetailsService {
 		repository.deleteById(id.intValue());
 	}
 
-	public List<UserInfo> getAllFormateurs() {
-      return repository.findByRoles("ROLE_FORMAT");
-
+	public List<UserInfoDto> getAllFormateurs() {
+      List<UserInfo> formateurs = repository.findByRoles("ROLE_FORMAT");
+		return formateurs.stream()
+				.map(user -> modelMapper.map(user, UserInfoDto.class))
+				.collect(Collectors.toList());
 	}
+
 } 
