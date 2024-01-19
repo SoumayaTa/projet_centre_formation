@@ -11,6 +11,7 @@ import univ.iwa.model.Entreprise;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EntrepriseDto {
+    private Long id;
     private String name;
     private String address;
     private String phoneNumber;

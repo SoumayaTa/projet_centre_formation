@@ -14,6 +14,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FormationDto {
+    private Long id;
     private String nom;
     private Long nombreHeur;
     private Long cout;

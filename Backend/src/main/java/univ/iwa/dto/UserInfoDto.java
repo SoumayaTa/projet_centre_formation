@@ -8,6 +8,7 @@ import univ.iwa.model.UserInfo;
 @Builder
 @Data @AllArgsConstructor @NoArgsConstructor
 public class UserInfoDto {
+    private  int id;
     private String name;
     private String email;
     private String password;
