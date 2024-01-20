@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/form")
+@CrossOrigin(origins = "*")
 public class FormationController {
 
     @Autowired

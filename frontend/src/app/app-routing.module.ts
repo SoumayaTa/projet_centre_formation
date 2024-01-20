@@ -8,6 +8,7 @@ import { FormateurDetailsComponent } from './views/formateur-details/formateur-d
 import { FormateurComponent } from './views/formateur/formateur.component';
 import { HomeComponent } from './views/home/home.component';
 import { LoginComponent } from './views/login/login.component';
+import { FormationComponent } from './views/formation/formation.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent},
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'addFormateur', component: AddFormateurComponent,canActivate:[AuthGuard],data:{roles:['ROLE_ADMIN']}},
   { path: 'login', component: LoginComponent},
   { path: 'allFormateur', component: FormateurDetailsComponent,canActivate:[AuthGuard],data:{roles:['ROLE_ADMIN']}},
+  { path: 'addformation', component: FormationComponent,canActivate:[AuthGuard],data:{roles:['ROLE_ADMIN']}},
   { path: '**', redirectTo: 'home'}
 ];
 

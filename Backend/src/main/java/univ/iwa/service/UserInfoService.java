@@ -49,8 +49,10 @@ public class UserInfoService implements UserDetailsService {
 		UserInfo entity = optionalUser.get();
 		entity.setName(userinfodto.getName());
 		entity.setEmail(userinfodto.getEmail());
-		entity.setPassword(userinfodto.getPassword());
-		entity.setRoles(userinfodto.getRoles());
+		if (userinfodto.getPassword() != null && !userinfodto.getPassword().isEmpty()) {
+			entity.setPassword(encoder.encode(userinfodto.getPassword()));
+		}
+		entity.setRoles("ROLE_FORMAT");
 		return UserInfoDto.toDto(repository.save(entity));
 	}
 
@@ -59,6 +61,7 @@ public class UserInfoService implements UserDetailsService {
 		UserInfo admin = new UserInfo();
 		admin.setId(1);
 		admin.setName("admin");
+		admin.setEmail("admin@gmail.com");
 		admin.setRoles("ROLE_ADMIN");
 		admin.setPassword(encoder.encode("adminadmin"));
 		repository.save(admin);

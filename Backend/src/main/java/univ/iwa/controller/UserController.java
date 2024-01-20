@@ -82,21 +82,27 @@ public class UserController {
     @DeleteMapping("/deleteFormateur/{id}")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public void deleteFormateur(@PathVariable("id") long id) {
+    	
         userInfoService.deleteFormateur(id);
     }
 
     @PostMapping("/generateToken")
     public ResponseEntity<String> authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
+    	System.out.println("generating token");
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
         if (authentication.isAuthenticated()) {
+        	System.out.println("auth ...");
+
             List<String> roles = authentication.getAuthorities().stream()
                     .map(GrantedAuthority::getAuthority)
                     .collect(Collectors.toList());
 
             String token = jwtService.generateToken(authRequest.getUsername(), roles.get(0));
+        	System.out.println("sending token");
+
             return ResponseEntity.ok("{\"message\":\"" + token + "\",\"role\":\"" + roles.get(0) + "\"}");
         } else {
-            throw new UsernameNotFoundException("Invalid user request!");
+        	return ResponseEntity.ok("User not found");
         }
     }
 }

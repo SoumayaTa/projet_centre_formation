@@ -9,7 +9,7 @@ import { UserAuthService } from "./user-auth.service";
 })
 export class UserService {
 
-  private API_BASE_URL = "http://localhost:9095/auth";
+  private API_BASE_URL = "http://localhost:8080/auth";
 
   constructor(
     private httpClient: HttpClient,
@@ -18,7 +18,9 @@ export class UserService {
 
 
   requestHeader=new HttpHeaders(
-    {'NO-AUTH': 'True'}
+    {'NO-AUTH': 'True',
+    'Content-Type' : "application/json"  
+    }
   )
   public login(loginData: User) {
     return this.httpClient.post(this.API_BASE_URL + "/generateToken", loginData, { headers: this.requestHeader });
