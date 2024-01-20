@@ -1,0 +1,23 @@
+<!-- edit-formateur-dialog.component.html -->
+<h2>Edit Formateur</h2>
+
+<form [formGroup]="form">
+  <mat-form-field>
+    <input matInput placeholder="ID" formControlName="id">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Name" formControlName="name">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Email" formControlName="email">
+  </mat-form-field>
+
+  <!-- Ajoutez d'autres champs du formulaire selon vos besoins -->
+
+  <div class="buttons-container">
+    <button mat-raised-button color="primary" (click)="saveChanges()">Enregistrer</button>
+    <button mat-raised-button color="warn" (click)="closeDialog()">Annuler</button>
+  </div>
+</form>

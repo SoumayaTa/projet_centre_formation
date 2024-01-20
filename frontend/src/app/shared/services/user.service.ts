@@ -18,7 +18,9 @@ export class UserService {
 
 
   requestHeader=new HttpHeaders(
-    {'NO-AUTH': 'True'}
+    {'NO-AUTH': 'True',
+    'Content-Type' : "application/json"  
+    }
   )
   public login(loginData: User) {
     return this.httpClient.post(this.API_BASE_URL + "/generateToken", loginData, { headers: this.requestHeader });
