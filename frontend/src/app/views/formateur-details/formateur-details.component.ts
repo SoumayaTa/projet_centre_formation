@@ -26,7 +26,9 @@ export class FormateurDetailsComponent implements OnInit {
     (resp:Formateur[])=>{
       console.log("hhhh");
       
-      resp.forEach(f=>this.FormateurDetails.push(f));
+      this.FormateurDetails = resp;
+      console.log(this.FormateurDetails);
+      
     },(err:HttpErrorResponse)=>{
       console.log(err);
     }
@@ -34,11 +36,18 @@ export class FormateurDetailsComponent implements OnInit {
   }
 
   public editFormateurDetails(id:number){
-
+     
+    
   }
 
   public deleteFormateur(id:number){
-
+    this.formateurService.deleteFormateur(id).subscribe(
+      (resp)=>{
+        this.showFormateur();
+      },(err:HttpErrorResponse)=>{
+        console.log(err);
+      }
+    )
   }
 
 

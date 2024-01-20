@@ -1,25 +1,25 @@
 <mat-toolbar color="primary" class="mat-toolbar-single-row">
   <span>
-      Gestion Formation
+    Gestion Formation
   </span>
 
   <span class="space-buttons"></span>
-  <button mat-raised-button color="accent" routerLink="/login" *ngIf="!isLoggedIn()"> 
-      Login
+  <button mat-icon-button color="accent" routerLink="/login" *ngIf="!isLoggedIn()">
+    <mat-icon>account_circle</mat-icon>
   </button>
-  <button *ngIf="isLoggedIn()" (click)="logout()" mat-raised-button color="warn">
-      LogOut
+  <button *ngIf="isLoggedIn()" (click)="logout()" mat-icon-button color="warn">
+    <mat-icon>lock_open</mat-icon>
   </button>
 </mat-toolbar>
 
 <mat-toolbar color="primary" *ngIf="isLoggedIn()">
   <button class="home-button" mat-raised-button color="primary" routerLink="/home">
-      Home
+    Home
   </button>
   <button *ngIf="isAdmin()" mat-raised-button color="primary" routerLink="/addFormateur">
-      AddNewFormateur
+    AddNewFormateur
   </button>
   <button *ngIf="isAdmin()" mat-raised-button color="primary" routerLink="/allFormateur">
     Show Formateurs
-</button>
+  </button>
 </mat-toolbar>

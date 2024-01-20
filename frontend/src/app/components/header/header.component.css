@@ -1,7 +1,29 @@
 .space-buttons{
     flex: 1 1 auto;
   }
-/* Ajoutez cette classe pour créer de l'espace entre les boutons */
+
 .home-button {
-  margin-right: 10px; /* Vous pouvez ajuster la valeur selon vos besoins */
+  margin-right: 10px; 
+}
+
+/* Style pour les boutons d'icônes */
+.mat-icon-button {
+  margin-left: 8px; /* Espace entre les boutons */
+}
+
+/* Style pour les icônes */
+.mat-icon {
+  font-size: 24px; /* Taille de la police de l'icône */
+}
+
+/* Style pour le bouton de connexion */
+.mat-toolbar[ngIf="!isLoggedIn()"] button[color="accent"] {
+  background-color: #2196f3; /* Couleur de fond pour le bouton de connexion */
+  color: white; /* Couleur du texte pour le bouton de connexion */
+}
+
+/* Style pour le bouton de déconnexion */
+.mat-toolbar[ngIf="isLoggedIn()"] button[color="warn"] {
+  background-color: #ff7043; /* Couleur de fond pour le bouton de déconnexion */
+  color: white; /* Couleur du texte pour le bouton de déconnexion */
 }

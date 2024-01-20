@@ -45,7 +45,7 @@ export class FormateurService {
         'Authorization': 'Bearer ' + jwtToken,
         'Content-Type': 'application/json'
       });
-      console.log(jwtToken);
+      
       
       return this.httpClient.get<Formateur[]>(`${this.API_BASE_URL}/allFormateur`, { headers });
     }else{
@@ -55,7 +55,17 @@ export class FormateurService {
   }
 
   public deleteFormateur(id:number){
-    return this.httpClient.delete(`${this.API_BASE_URL}/deleteFormateur/`+id)
+    const jwtToken = this.userAuthService.getToken();
+    if (jwtToken) {
+      const headers = new HttpHeaders({
+        'Authorization': 'Bearer ' + jwtToken,
+        'Content-Type': 'application/json'
+      });
+      return this.httpClient.delete(`${this.API_BASE_URL}/deleteFormateur/`+id, { headers })
+    }else{
+      console.log('Token JWT non disponible');
+    }
+    return new Observable<any>();
   }
 
   public updateFormateur(idfor:number,formateur:Formateur){
