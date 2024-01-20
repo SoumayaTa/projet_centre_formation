@@ -45,7 +45,6 @@ public class SecurityConfig {
 								.requestMatchers("/calendrier/**").authenticated()
 								.requestMatchers("/auth/allFormateur").authenticated()
 								.requestMatchers("/auth/deleteFormateur/**").authenticated()
-								
 
 				).csrf(csrf->csrf.disable())
 			.authenticationProvider(authenticationProvider())
