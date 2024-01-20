@@ -26,8 +26,10 @@ export class FormateurDetailsComponent implements OnInit {
   this.formateurService.showFormateurs().subscribe(
     (resp:Formateur[])=>{
       console.log("hhhh");
-      this.FormateurDetails=resp
-    
+      
+      this.FormateurDetails = resp;
+      console.log(this.FormateurDetails);
+      
     },(err:HttpErrorResponse)=>{
       console.log(err);
     }
@@ -35,10 +37,20 @@ export class FormateurDetailsComponent implements OnInit {
   }
 
   public editFormateurDetails(id:number){
-
+     
+    
   }
 
   public deleteFormateur(id:number){
+<<<<<<< HEAD
+    this.formateurService.deleteFormateur(id).subscribe(
+      (resp)=>{
+        this.showFormateur();
+      },(err:HttpErrorResponse)=>{
+        console.log(err);
+      }
+    )
+=======
     console.log("delete")
     this.formateurService.deleteFormateurs(id).subscribe(
       () => {
@@ -50,6 +62,7 @@ export class FormateurDetailsComponent implements OnInit {
       }
     );
 
+>>>>>>> a3a275aaacf85a5426c931b6486abcfce22257cf
   }
   ouvrirBoiteConfirmation(idFormateur: number): void {
     const dialogRef = this.dialog.open<ConfirmationDialogComponent, { message: string }>(ConfirmationDialogComponent, {

@@ -46,7 +46,7 @@ export class FormateurService {
 
         'Content-Type': 'application/json'
       });
-      console.log(jwtToken);
+      
       
       return this.httpClient.get<Formateur[]>(`${this.API_BASE_URL}/allFormateur`, { headers });
     }else{
