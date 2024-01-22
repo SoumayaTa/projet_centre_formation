@@ -2,12 +2,16 @@ package univ.iwa.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import univ.iwa.dto.FormationDto;
 import univ.iwa.model.Formation;
 import univ.iwa.service.FormationService;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.List;
@@ -25,6 +29,21 @@ public class FormationController {
     public FormationDto addNewFormation(@RequestBody FormationDto formation) throws ParseException {
         return service.addFormation(formation);
     }
+    @PostMapping("addFormation/image")
+    //@PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_ASSISTANT')")
+    public FormationDto addFormation(
+            @RequestParam String nom,
+            @RequestParam Long nombreHeur,
+            @RequestParam Long cout,
+            @RequestParam String objectifs,
+            @RequestParam String programme,
+            @RequestParam String categorie,
+            @RequestParam String ville,
+            @RequestParam MultipartFile image
+    )throws IllegalStateException, IOException {
+        return service.addFormationim(nom, nombreHeur, cout, objectifs, programme, categorie, ville, image);
+    }
+
 
     @DeleteMapping("formation/deleteFormation/{id}")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_ASSISTANT')")
@@ -59,5 +78,7 @@ public class FormationController {
     public List<FormationDto> getallFormation(){
         return service.getAllFormations();
     }
+
+
 
 }

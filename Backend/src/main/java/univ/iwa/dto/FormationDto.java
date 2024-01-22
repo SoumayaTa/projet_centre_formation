@@ -23,5 +23,15 @@ public class FormationDto {
     private String categorie;
     private String ville;
     private LocalDate date;
+    private String photos;
 
+    public FormationDto(String nom, Long nombreHeur, Long cout, String objectifs, String programme, String categorie, String ville) {
+        this.nom = nom;
+        this.nombreHeur = nombreHeur;
+        this.cout = cout;
+        this.objectifs = objectifs;
+        this.programme = programme;
+        this.categorie = categorie;
+        this.ville = ville;
+    }
 }
