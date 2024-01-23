@@ -33,6 +33,7 @@ import { FormationComponent } from './views/formation/formation.component';
     FormateurDetailsComponent,
     ConfirmationDialogComponent,
     FormationComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -45,6 +46,7 @@ import { FormationComponent } from './views/formation/formation.component';
     FormsModule,
     ReactiveFormsModule,
     AgrupaMaterialModule,
+ 
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-top-right',
