@@ -26,12 +26,12 @@ public class FormationService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public FormationDto addFormation(FormationDto form) {
-        Formation formationEntity = modelMapper.map(form, Formation.class);
-        formationEntity.setDate(LocalDate.now());
-        Formation savedFormation = repository.save(formationEntity);
-        return modelMapper.map(savedFormation, FormationDto.class);
-    }
+//    public FormationDto addFormation(FormationDto form) {
+//        Formation formationEntity = modelMapper.map(form, Formation.class);
+//        formationEntity.setDate(LocalDate.now());
+//        Formation savedFormation = repository.save(formationEntity);
+//        return modelMapper.map(savedFormation, FormationDto.class);
+//    }
 
 
 
