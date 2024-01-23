@@ -34,7 +34,7 @@ public class CalendrierService {
 
    /* public CalendrierDto addCalendrier(CalendrierDto calendrierDto, Long formationId, int formateurId, Long entrepriseId) {
         Optional<Formation> formation = formationRepository.findById(formationId);
-        Optional<UserInfo> formateur = userInfoRepository.findById(formateurId);
+        Optional<UserInfo> formausteur = userInfoRepository.findById(formateurId);
         Optional<Entreprise> entreprise = entrepriseRepository.findById(entrepriseId);
 
             Calendrier entity = new Calendrier();

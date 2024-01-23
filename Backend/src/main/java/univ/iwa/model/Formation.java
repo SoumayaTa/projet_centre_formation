@@ -27,5 +27,6 @@ public class Formation {
     private String categorie;
     private String ville;
     private LocalDate date;
-    private String imageUrl;
+    private  String photos;
+
 }

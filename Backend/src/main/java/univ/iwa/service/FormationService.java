@@ -10,6 +10,9 @@ import univ.iwa.repository.FormationRepository;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.List;
@@ -48,20 +51,6 @@ public class FormationService {
         return modelMapper.map(savedFormation, FormationDto.class);
     }
 
-
-//    public FormationDto addFormation(FormationDto form, MultipartFile image) throws IOException {
-//        Formation formationEntity = modelMapper.map(form, Formation.class);
-//        formationEntity.setDate(LocalDate.now());
-//
-//        String pathImage = "src/main/resources/static/images/" + formationEntity.getId() + ".png";
-//        image.transferTo(new File(pathImage));
-//
-//        String imageUrl = "http://localhost:8080/images/" + formationEntity.getId() + ".png";
-//        formationEntity.setImageUrl(imageUrl);
-//
-//        Formation savedFormation = repository.save(formationEntity);
-//        return modelMapper.map(savedFormation, FormationDto.class);
-//    }
 
 
     public String deleteFormation(Long id) {
@@ -111,4 +100,49 @@ public class FormationService {
                 .map(formation -> modelMapper.map(formation, FormationDto.class))
                 .collect(Collectors.toList());
     }
-}
+
+//    public FormationDto addFormationim(FormationDto form, MultipartFile image) throws IOException {
+//        Formation formationEntity = modelMapper.map(form, Formation.class);
+//        formationEntity.setDate(LocalDate.now());
+//        Formation savedFormation = repository.save(formationEntity);
+//        String pathImage = "src/main/resources/static/" + savedFormation.getId() + ".png";
+//        image.transferTo(new File(pathImage));
+//        String imageUrl = "http://localhost:8080/images/" + savedFormation.getId() + ".png";
+//        savedFormation.setPhotos(imageUrl);
+//        savedFormation = repository.save(savedFormation);
+//        return modelMapper.map(savedFormation, FormationDto.class);
+//    }
+
+
+    public FormationDto addFormationim(
+                String nom,
+                Long nombreHeur,
+                Long cout,
+                String objectifs,
+                String programme,
+                String categorie,
+                String ville,
+                MultipartFile image
+        ) throws IllegalStateException, IOException {
+            Formation formationEntity = modelMapper.map(new FormationDto(
+                    nom,
+                    nombreHeur,
+                    cout,
+                    objectifs,
+                    programme,
+                    categorie,
+                    ville
+                    ), Formation.class);
+            formationEntity.setDate(LocalDate.now());
+            formationEntity = repository.save(formationEntity);
+            String pathImage = "src/main/resources/static/";
+            Files.createDirectories(Paths.get(pathImage));
+            String imagePath = pathImage + formationEntity.getId() + ".png";
+            image.transferTo(Paths.get(imagePath));
+            String imageUrl = "http://localhost:8080/images/" + formationEntity.getId() + ".png";
+            formationEntity.setPhotos(imageUrl);
+            repository.save(formationEntity);
+            return modelMapper.map(formationEntity, FormationDto.class);
+        }
+    }
+

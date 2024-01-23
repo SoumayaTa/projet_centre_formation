@@ -24,32 +24,25 @@ public class FormationController {
     @Autowired
     FormationService service;
 
-//    @PostMapping("formation/addFormation")
-//    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_ASSISTANT')")
-//    public FormationDto addNewFormation(@RequestBody FormationDto formation) throws ParseException {
-//        return service.addFormation(formation);
-//    }
-
-//    @PostMapping(value ={"/formation/addFormation"},consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-//    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_ASSISTANT')")
-//    public FormationDto addFormation(
-//            @RequestPart("formationDto") FormationDto formationDto,
-//            @RequestParam("imageUrl") MultipartFile image
-//    ) throws IOException {
-//        return service.addFormation(formationDto, image);
-//    }
-
-
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
-    @PostMapping(value = "formation/addFormation", consumes = {"multipart/form-data"})
-    public ResponseEntity<FormationDto> addFormation(
-            @RequestPart(value = "formationDto") FormationDto formationDto,
-            @RequestPart(value = "image") MultipartFile image
-    ) throws IOException {
-        FormationDto result = service.addFormation(formationDto, image);
-        return ResponseEntity.ok(result);
-}
-
+    @PostMapping("formation/addFormation")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_ASSISTANT')")
+    public FormationDto addNewFormation(@RequestBody FormationDto formation) throws ParseException {
+        return service.addFormation(formation);
+    }
+    @PostMapping("addFormation/image")
+    //@PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_ASSISTANT')")
+    public FormationDto addFormation(
+            @RequestParam String nom,
+            @RequestParam Long nombreHeur,
+            @RequestParam Long cout,
+            @RequestParam String objectifs,
+            @RequestParam String programme,
+            @RequestParam String categorie,
+            @RequestParam String ville,
+            @RequestParam MultipartFile image
+    )throws IllegalStateException, IOException {
+        return service.addFormationim(nom, nombreHeur, cout, objectifs, programme, categorie, ville, image);
+    }
 
 
     @DeleteMapping("formation/deleteFormation/{id}")
@@ -85,5 +78,7 @@ public class FormationController {
     public List<FormationDto> getallFormation(){
         return service.getAllFormations();
     }
+
+
 
 }
