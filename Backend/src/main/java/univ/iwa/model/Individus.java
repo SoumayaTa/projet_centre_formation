@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
-
+import java.util.List;
 
 @Entity
 @NoArgsConstructor @AllArgsConstructor
@@ -19,4 +19,7 @@ public class Individus {
     private String ville;
     private String email;
     private String telephone;
+
+    @OneToMany(mappedBy = "individus")
+    private List<Inscription> inscriptions;
 }
