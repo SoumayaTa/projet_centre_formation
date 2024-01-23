@@ -2,12 +2,16 @@ package univ.iwa.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import univ.iwa.dto.FormationDto;
 import univ.iwa.model.Formation;
 import univ.iwa.service.FormationService;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.List;
@@ -20,11 +24,33 @@ public class FormationController {
     @Autowired
     FormationService service;
 
-    @PostMapping("formation/addFormation")
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_ASSISTANT')")
-    public FormationDto addNewFormation(@RequestBody FormationDto formation) throws ParseException {
-        return service.addFormation(formation);
-    }
+//    @PostMapping("formation/addFormation")
+//    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_ASSISTANT')")
+//    public FormationDto addNewFormation(@RequestBody FormationDto formation) throws ParseException {
+//        return service.addFormation(formation);
+//    }
+
+//    @PostMapping(value ={"/formation/addFormation"},consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+//    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_ASSISTANT')")
+//    public FormationDto addFormation(
+//            @RequestPart("formationDto") FormationDto formationDto,
+//            @RequestParam("imageUrl") MultipartFile image
+//    ) throws IOException {
+//        return service.addFormation(formationDto, image);
+//    }
+
+
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
+    @PostMapping(value = "formation/addFormation", consumes = {"multipart/form-data"})
+    public ResponseEntity<FormationDto> addFormation(
+            @RequestPart(value = "formationDto") FormationDto formationDto,
+            @RequestPart(value = "image") MultipartFile image
+    ) throws IOException {
+        FormationDto result = service.addFormation(formationDto, image);
+        return ResponseEntity.ok(result);
+}
+
+
 
     @DeleteMapping("formation/deleteFormation/{id}")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_ASSISTANT')")

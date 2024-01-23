@@ -3,10 +3,13 @@ package univ.iwa.service;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import univ.iwa.dto.FormationDto;
 import univ.iwa.model.Formation;
 import univ.iwa.repository.FormationRepository;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.List;
@@ -20,12 +23,46 @@ public class FormationService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public FormationDto addFormation(FormationDto form) {
+//    public FormationDto addFormation(FormationDto form) {
+//        Formation formationEntity = modelMapper.map(form, Formation.class);
+//        formationEntity.setDate(LocalDate.now());
+//        Formation savedFormation = repository.save(formationEntity);
+//        return modelMapper.map(savedFormation, FormationDto.class);
+//    }
+
+
+    public FormationDto addFormation(FormationDto form, MultipartFile image) throws IOException {
         Formation formationEntity = modelMapper.map(form, Formation.class);
         formationEntity.setDate(LocalDate.now());
+
+
+        String pathImage = "src/main/resources/static/images/" + formationEntity.getId() + ".png";
+
+        image.transferTo(new File(pathImage));
+
+        String imageUrl = "http://localhost:8080/images/" + formationEntity.getId() + ".png";
+        formationEntity.setImageUrl(imageUrl);
+
         Formation savedFormation = repository.save(formationEntity);
+
         return modelMapper.map(savedFormation, FormationDto.class);
     }
+
+
+//    public FormationDto addFormation(FormationDto form, MultipartFile image) throws IOException {
+//        Formation formationEntity = modelMapper.map(form, Formation.class);
+//        formationEntity.setDate(LocalDate.now());
+//
+//        String pathImage = "src/main/resources/static/images/" + formationEntity.getId() + ".png";
+//        image.transferTo(new File(pathImage));
+//
+//        String imageUrl = "http://localhost:8080/images/" + formationEntity.getId() + ".png";
+//        formationEntity.setImageUrl(imageUrl);
+//
+//        Formation savedFormation = repository.save(formationEntity);
+//        return modelMapper.map(savedFormation, FormationDto.class);
+//    }
+
 
     public String deleteFormation(Long id) {
         Optional<Formation> existingForm = repository.findById(id);
