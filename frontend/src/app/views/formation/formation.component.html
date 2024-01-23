@@ -1,62 +1,69 @@
+<!-- formation.component.html -->
+
 <div class="container mt-5">
-    <div class="card p-4">
-      <form [formGroup]="formationForm" (ngSubmit)="addFormation()" novalidate>
-  
+  <div class="card p-4">
+    <form [formGroup]="formationForm" (ngSubmit)="addFormation()" novalidate>
+
+      <div class="form-group">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Nom de la formation</mat-label>
+          <input matInput placeholder="Nom" formControlName="nom"
+            [ngClass]="{'error-field': formationForm.get('nom')?.invalid && formationForm.get('nom')?.touched }">
+          <div *ngIf="formationForm.get('nom')?.hasError('required')" class="error-message">
+            Le nom de la formation est requis.
+          </div>
+        </mat-form-field>
+      </div>
+
+      <div class="form-group">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Nombre d'heures</mat-label>
+          <input matInput placeholder="Nombre d'heures" formControlName="nombreHeur"
+            [ngClass]="{'error-field': formationForm.get('nombreHeur')?.invalid && formationForm.get('nombreHeur')?.touched }">
+          <div *ngIf="formationForm.get('nombreHeur')?.hasError('required')" class="error-message">
+            Le nombre d'heures est requis.
+          </div>
+        </mat-form-field>
+      </div>
+
+      <div class="form-group">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Coût</mat-label>
+          <input matInput placeholder="Coût" formControlName="cout"
+            [ngClass]="{'error-field': formationForm.get('cout')?.invalid && formationForm.get('cout')?.touched }">
+          <div *ngIf="formationForm.get('cout')?.hasError('required')" class="error-message">
+            Le coût est requis.
+          </div>
+        </mat-form-field>
+      </div>
+
+      <div class="form-group">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Objectifs</mat-label>
+          <textarea matInput placeholder="Objectifs" formControlName="objectifs"
+            [ngClass]="{'error-field': formationForm.get('objectifs')?.invalid && formationForm.get('objectifs')?.touched }"></textarea>
+          <div *ngIf="formationForm.get('objectifs')?.hasError('required')" class="error-message">
+            Les objectifs sont requis.
+          </div>
+        </mat-form-field>
+      </div>
+
+      
+      <div class="form-group">
         <div class="form-group">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Nom de la formation</mat-label>
-            <input matInput placeholder="Nom" formControlName="nom"
-              [ngClass]="{'error-field': formationForm.get('nom')?.invalid && formationForm.get('nom')?.touched }">
-            <div *ngIf="formationForm.get('nom')?.hasError('required')" class="error-message">
-              Le nom de la formation est requis.
-            </div>
-          </mat-form-field>
+          <input type="file" (change)="onImageSelected($event)" formControlName="image">
         </div>
-  
-        <div class="form-group">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Nombre d'heures</mat-label>
-            <input matInput placeholder="Nombre d'heures" formControlName="nombreHeur"
-              [ngClass]="{'error-field': formationForm.get('nombreHeur')?.invalid && formationForm.get('nombreHeur')?.touched }">
-            <div *ngIf="formationForm.get('nombreHeur')?.hasError('required')" class="error-message">
-              Le nombre d'heures est requis.
-            </div>
-          </mat-form-field>
-        </div>
-  
-        <div class="form-group">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Coût</mat-label>
-            <input matInput placeholder="Coût" formControlName="cout"
-              [ngClass]="{'error-field': formationForm.get('cout')?.invalid && formationForm.get('cout')?.touched }">
-            <div *ngIf="formationForm.get('cout')?.hasError('required')" class="error-message">
-              Le coût est requis.
-            </div>
-          </mat-form-field>
-        </div>
-  
-        <div class="form-group">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Objectifs</mat-label>
-            <textarea matInput placeholder="Objectifs" formControlName="objectifs"
-              [ngClass]="{'error-field': formationForm.get('objectifs')?.invalid && formationForm.get('objectifs')?.touched }"></textarea>
-            <div *ngIf="formationForm.get('objectifs')?.hasError('required')" class="error-message">
-              Les objectifs sont requis.
-            </div>
-          </mat-form-field>
-        </div>
-  
-        <!-- Ajoutez d'autres champs de formulaire ici -->
-  
-        <div class="form-group" align="end">
-          <button mat-stroked-button color="warn" type="button" (click)="formationForm.reset()">
-            Effacer
-          </button>
-          <button mat-stroked-button color="primary" type="submit">
-            Ajouter la formation
-          </button>
-        </div>
-      </form>
-    </div>
+      </div>
+      
+
+      <div class="button-group" align="end">
+        <button mat-stroked-button color="warn" type="button" (click)="formationForm.reset()">
+          Effacer
+        </button>
+        <button mat-stroked-button color="primary" type="submit">
+          Ajouter la formation
+        </button>
+      </div>
+    </form>
   </div>
-  
+</div>
