@@ -23,9 +23,11 @@ export class EditFprnateurComponent implements OnInit {
     });
   }
 
-  saveChanges() {
-    // Enregistrez les modifications ici, par exemple, envoyez les données mises à jour au backend
-    this.dialogRef.close(this.form.value);
+  save(): void {
+    if (this.form.valid) {
+      // Émettez les données du formulaire lorsque le bouton "Save" est cliqué
+      this.dialogRef.close(this.form.value);
+    }
   }
 
   closeDialog() {

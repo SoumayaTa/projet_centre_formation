@@ -34,6 +34,20 @@ public class FormationService {
 //    }
 
 
+    //wiam's version
+    public FormationDto addFormation(FormationDto form, MultipartFile image) throws IOException {
+        Formation formationEntity = modelMapper.map(form, Formation.class);
+         formationEntity.setDate(LocalDate.now());
+         String pathImage = "src/main/resources/static/images/"+formationEntity.getId() + ".png";
+         image.transferTo(new File(pathImage));
+         String imageUrl = "src/main/resources/static/images/"+formationEntity.getId() + ".png";
+         formationEntity.setPhotos(imageUrl);
+         Formation savedFormation = repository.save(formationEntity);
+         return modelMapper.map(savedFormation, FormationDto.class);
+     }
+
+
+
 
     public String deleteFormation(Long id) {
         Optional<Formation> existingForm = repository.findById(id);
@@ -117,9 +131,9 @@ public class FormationService {
                     ), Formation.class);
             formationEntity.setDate(LocalDate.now());
             formationEntity = repository.save(formationEntity);
-            String pathImage = "src/main/resources/static/";
+            String pathImage = "src/main/resources/static/images";
             Files.createDirectories(Paths.get(pathImage));
-            String imagePath = pathImage + formationEntity.getId() + ".png";
+            String imagePath = pathImage+"/"+ formationEntity.getId() + ".png";
             image.transferTo(Paths.get(imagePath));
             String imageUrl = "http://localhost:8080/images/" + formationEntity.getId() + ".png";
             formationEntity.setPhotos(imageUrl);

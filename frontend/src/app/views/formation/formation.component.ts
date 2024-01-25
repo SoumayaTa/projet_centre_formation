@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Formation } from 'src/app/model/formation.model';
 import { FormationService } from 'src/app/shared/services/formation.service';
 import { ToastrService } from 'ngx-toastr';
+
 @Component({
   selector: 'app-formation',
   templateUrl: './formation.component.html',
@@ -10,8 +11,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class FormationComponent {
   formationForm: FormGroup;
-  formation: Formation ={
-    id: 0,  
+  formation: Formation = {
+    id: 0,
     nom: '',
     nombreHeur: 0,
     cout: 0,
@@ -19,14 +20,18 @@ export class FormationComponent {
     programme: '',
     categorie: '',
     ville: '',
-    date:new Date()
+    date: new Date(),
+    photos: ''
   };
-  
+  selectedImage: File | null;
 
-  constructor(private formBuilder: FormBuilder, private formationService: FormationService, private toastr: ToastrService) {
-
+  constructor(
+    private formBuilder: FormBuilder,
+    private formationService: FormationService,
+    private toastr: ToastrService
+  ) {
+    this.selectedImage = null; 
     this.formationForm = this.formBuilder.group({
-      
       nom: ['', [Validators.required, Validators.minLength(3)]],
       nombreHeur: [0, Validators.required],
       cout: [0, Validators.required],
@@ -35,29 +40,34 @@ export class FormationComponent {
       categorie: ['', Validators.required],
       ville: ['', Validators.required],
       date: ['', Validators.required],
+      imageUrl: ['', Validators.required], 
+      image: [null, Validators.required]
     });
   }
 
   addFormation() {
     const formateurData = this.prepareFormData(this.formationForm);
     console.log(formateurData);
-    console.log("hywiam")
-      console.log("anahona")
-      const formationData: Formation = this.formationForm.value;
-      
-      this.formationService.addFormation(formationData).subscribe(
+    console.log('hywiam');
+    console.log('anahona');
+    const formationData: Formation = this.formationForm.value;
+    console.log('ysf');
+    if (this.selectedImage) {
+      this.formationService.addFormation(formationData, this.selectedImage).subscribe(
         (response) => {
           console.log('Formation ajoutée avec succès :', response);
           this.formationForm.reset();
-          this.toastr.success('formation a été ajouté avec succès.', 'Ajout réussi');
-          
+          this.toastr.success('Formation a été ajoutée avec succès.', 'Ajout réussi');
         },
         (error) => {
           console.error('Erreur lors de l\'ajout de la formation :', error);
         }
       );
+    } else {
+      console.error("Image non sélectionnée.");
+    }
   }
-  
+
   prepareFormData(formationBuilder: any): Formation {
     this.formation.nom = formationBuilder.value.nom;
     this.formation.nombreHeur = formationBuilder.value.nombreHeur;
@@ -67,8 +77,14 @@ export class FormationComponent {
     this.formation.categorie = formationBuilder.value.categorie;
     this.formation.ville = formationBuilder.value.ville;
     this.formation.date = formationBuilder.value.date;
-    
-    return { ...this.formation }; // Retourner une copie pour éviter des effets de bord inattendus
+
+    return { ...this.formation };
+  }
+
+  onImageSelected(event: any) {
+    console.log('Image sélectionnée !');
+    const file: File = event.target.files[0];
+    this.selectedImage = file;
   }
   
 

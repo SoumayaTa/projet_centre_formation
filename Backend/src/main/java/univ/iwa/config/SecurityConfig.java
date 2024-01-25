@@ -35,7 +35,7 @@ public class SecurityConfig {
 		http
 				.cors(cors->cors.configurationSource(request -> new CorsConfiguration(corsFilter())))
 				.authorizeHttpRequests((auth)->auth
-			.requestMatchers("/auth/welcome", "/auth/addNewUser", "/auth/generateToken", "/form/getByDate/**", "/form/getByVille/**", "/form/getByCategorie/**","/form/getall ","/form/addFormation/image").permitAll()
+			.requestMatchers("/auth/welcome","/images/**", "/auth/addNewUser","/auth/getFormateurById/**","/auth/generateToken", "/form/getByDate/**", "/form/getByVille/**", "/form/getByCategorie/**","/form/getall","/form/addFormation/image").permitAll()
 			.requestMatchers("/auth/assistant/**").authenticated()
 			.requestMatchers("/auth/admin/**").authenticated()
 								.requestMatchers("/auth/updateUser/**").authenticated()
@@ -45,6 +45,8 @@ public class SecurityConfig {
 								.requestMatchers("/calendrier/**").authenticated()
 								.requestMatchers("/auth/allFormateur").authenticated()
 								.requestMatchers("/auth/deleteFormateur/**").authenticated()
+								
+								
 
 				).csrf(csrf->csrf.disable())
 			.authenticationProvider(authenticationProvider())
@@ -76,5 +78,6 @@ public class SecurityConfig {
 		config.addAllowedMethod("*");
 		return config;
 	}
+	
 
 }

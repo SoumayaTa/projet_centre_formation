@@ -20,6 +20,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { FormateurDetailsComponent } from './views/formateur-details/formateur-details.component';
 import { ConfirmationDialogComponent } from './views/confirmation-dialog/confirmation-dialog.component';
 import { FormationComponent } from './views/formation/formation.component';
+import { FormateurEditDialogComponent } from './views/formateur-edit-dialog/formateur-edit-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,6 +34,8 @@ import { FormationComponent } from './views/formation/formation.component';
     FormateurDetailsComponent,
     ConfirmationDialogComponent,
     FormationComponent,
+    FormateurEditDialogComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -45,6 +48,7 @@ import { FormationComponent } from './views/formation/formation.component';
     FormsModule,
     ReactiveFormsModule,
     AgrupaMaterialModule,
+ 
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-top-right',

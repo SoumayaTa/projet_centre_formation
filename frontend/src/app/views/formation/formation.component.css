@@ -1,0 +1,60 @@
+/* Ajoutez ces styles dans un fichier CSS séparé */
+
+.container {
+  background: url('../../../assets/images/login.jpg') no-repeat center center fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.card {
+  width: 400px;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+mat-label {
+  color: #333;
+}
+
+input.mat-input {
+  font-size: 16px;
+  margin-top: 8px; /* Ajout d'un espacement en haut des champs d'entrée */
+}
+
+textarea.mat-input {
+  font-size: 16px;
+  margin-top: 8px; /* Ajout d'un espacement en haut des zones de texte */
+}
+
+.error-field {
+  border-color: #e53935;
+}
+
+.error-message {
+  color: #e53935;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+button {
+  margin-right: 8px;
+}
+/* formation.component.css */
+
+.selected-image {
+  max-width: 100%; /* Ajustez la largeur maximale selon vos besoins */
+  margin-top: 10px;
+}
+
+

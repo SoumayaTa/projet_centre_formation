@@ -24,11 +24,7 @@ public class FormationController {
     @Autowired
     FormationService service;
 
-    @PostMapping("formation/addFormation")
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_ASSISTANT')")
-    public FormationDto addNewFormation(@RequestBody FormationDto formation) throws ParseException {
-        return service.addFormation(formation);
-    }
+    
     @PostMapping("addFormation/image")
     //@PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_ASSISTANT')")
     public FormationDto addFormation(
