@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
-
+import java.util.List;
 
 @Entity
 @NoArgsConstructor @AllArgsConstructor
@@ -19,4 +19,13 @@ public class Individus {
     private String ville;
     private String email;
     private String telephone;
+    //private Long groupe;
+
+    @ManyToOne
+    @JoinColumn(name = "groupe_id")
+    private Groupe groupe;
+
+    @ManyToOne
+    @JoinColumn(name = "formation_id")
+    private Formation formation;
 }

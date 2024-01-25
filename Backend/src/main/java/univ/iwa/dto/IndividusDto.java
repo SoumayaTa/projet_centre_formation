@@ -20,16 +20,5 @@ public class IndividusDto {
     private String ville;
     private String email;
     private String telephone;
-
-    public static IndividusDto toDto(Individus individus){
-        return IndividusDto.builder()
-                .id(individus.getId())
-                .nom(individus.getNom())
-                .prenom(individus.getPrenom())
-                .date_de_naissance(individus.getDate_de_naissance())
-                .email(individus.getEmail())
-                .ville(individus.getVille())
-                .telephone(individus.getTelephone())
-                .build();
-    }
+    //private Long groupe;
 }

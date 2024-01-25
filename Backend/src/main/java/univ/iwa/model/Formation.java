@@ -1,9 +1,6 @@
 package univ.iwa.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,6 +9,8 @@ import univ.iwa.dto.FormationDto;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
+
 @Builder
 @Entity
 @Data @NoArgsConstructor @AllArgsConstructor
@@ -28,6 +27,12 @@ public class Formation {
     private String ville;
     private LocalDate date;
     private  String photos;
-	
+    private Long groupe_seuil;
+
+    @OneToMany(mappedBy = "formation")
+    private List<Individus> inscrits;
+
+    @OneToMany(mappedBy = "formation")
+    private List<Groupe> groupes;
 
 }

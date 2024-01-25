@@ -28,4 +28,7 @@ public class Calendrier {
     @JoinColumn(name = "entreprise_id", nullable = false)
     Entreprise entreprise;
 
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "groupe_id", nullable = false)
+    Groupe groupe;
 }
