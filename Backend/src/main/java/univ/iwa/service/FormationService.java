@@ -8,12 +8,9 @@ import univ.iwa.dto.FormationDto;
 import univ.iwa.model.Formation;
 import univ.iwa.repository.FormationRepository;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -32,8 +29,6 @@ public class FormationService {
         Formation savedFormation = repository.save(formationEntity);
         return modelMapper.map(savedFormation, FormationDto.class);
     }
-
-
 
     public String deleteFormation(Long id) {
         Optional<Formation> existingForm = repository.findById(id);
@@ -94,8 +89,6 @@ public class FormationService {
 //        savedFormation = repository.save(savedFormation);
 //        return modelMapper.map(savedFormation, FormationDto.class);
 //    }
-
-
     public FormationDto addFormationim(
                 String nom,
                 Long nombreHeur,
@@ -104,6 +97,7 @@ public class FormationService {
                 String programme,
                 String categorie,
                 String ville,
+                int groupe_seuil,
                 MultipartFile image
         ) throws IllegalStateException, IOException {
             Formation formationEntity = modelMapper.map(new FormationDto(
@@ -113,7 +107,8 @@ public class FormationService {
                     objectifs,
                     programme,
                     categorie,
-                    ville
+                    ville,
+                    groupe_seuil
                     ), Formation.class);
             formationEntity.setDate(LocalDate.now());
             formationEntity = repository.save(formationEntity);

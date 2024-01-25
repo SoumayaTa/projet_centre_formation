@@ -18,15 +18,15 @@ public class Inscription {
     private Date date;
     private boolean status;
 
-    @ManyToOne
-    @JoinColumn(name = "individus_id")
-    private Individus individus;
-
-    @ManyToOne
-    @JoinColumn(name = "formation_id")
-    private Formation formation;
-
-    @ManyToOne
-    @JoinColumn(name = "groupe_id")
-    private Groupe groupe;
+//    @ManyToOne
+//    @JoinColumn(name = "individus_id")
+//    private Individus individus;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "formation_id")
+//    private Formation formation;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "groupe_id")
+//    private Groupe groupe;
 }

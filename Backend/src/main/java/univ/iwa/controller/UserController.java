@@ -82,6 +82,16 @@ public class UserController {
         userInfoService.deleteFormateur(id);
     }
 
+    @GetMapping("getFormateurById/{id}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    public ResponseEntity<UserInfoDto> getFormateurById(@PathVariable("id") int id) {
+        try {
+            UserInfoDto formateur = userInfoService.getFormateurById(id);
+            return ResponseEntity.ok(formateur);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
     @PostMapping("/generateToken")
     public ResponseEntity<String> authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));

@@ -27,8 +27,12 @@ public class Formation {
     private String ville;
     private LocalDate date;
     private  String photos;
+    private int groupe_seuil;
 
     @OneToMany(mappedBy = "formation")
-    private List<Inscription> inscriptions;
+    private List<Individus> inscrits;
+
+    @OneToMany(mappedBy = "formation")
+    private List<Groupe> groupes;
 
 }

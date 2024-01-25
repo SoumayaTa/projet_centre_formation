@@ -24,11 +24,11 @@ public class FormationController {
     @Autowired
     FormationService service;
 
-    @PostMapping("formation/addFormation")
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_ASSISTANT')")
-    public FormationDto addNewFormation(@RequestBody FormationDto formation) throws ParseException {
-        return service.addFormation(formation);
-    }
+//    @PostMapping("formation/addFormation")
+//    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_ASSISTANT')")
+//    public FormationDto addNewFormation(@RequestBody FormationDto formation) throws ParseException {
+//        return service.addFormation(formation);
+//    }
     @PostMapping("addFormation/image")
     //@PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_ASSISTANT')")
     public FormationDto addFormation(
@@ -39,11 +39,15 @@ public class FormationController {
             @RequestParam String programme,
             @RequestParam String categorie,
             @RequestParam String ville,
+            @RequestParam int groupe_seuil,
             @RequestParam MultipartFile image
     )throws IllegalStateException, IOException {
-        return service.addFormationim(nom, nombreHeur, cout, objectifs, programme, categorie, ville, image);
+        return service.addFormationim(nom, nombreHeur, cout, objectifs, programme, categorie, ville,groupe_seuil, image);
     }
-
+//    @GetMapping("/getgroupe")
+//    public List<Long> getgroupe(){
+//
+//    }
 
     @DeleteMapping("formation/deleteFormation/{id}")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_ASSISTANT')")
@@ -78,7 +82,4 @@ public class FormationController {
     public List<FormationDto> getallFormation(){
         return service.getAllFormations();
     }
-
-
-
 }

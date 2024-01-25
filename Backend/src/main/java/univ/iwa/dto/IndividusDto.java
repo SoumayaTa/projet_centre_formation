@@ -20,5 +20,5 @@ public class IndividusDto {
     private String ville;
     private String email;
     private String telephone;
-
+    //private Long groupe;
 }

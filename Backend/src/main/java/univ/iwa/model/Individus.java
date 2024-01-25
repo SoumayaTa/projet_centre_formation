@@ -19,7 +19,13 @@ public class Individus {
     private String ville;
     private String email;
     private String telephone;
+    //private Long groupe;
 
-    @OneToMany(mappedBy = "individus")
-    private List<Inscription> inscriptions;
+    @ManyToOne
+    @JoinColumn(name = "groupe_id")
+    private Groupe groupe;
+
+    @ManyToOne
+    @JoinColumn(name = "formation_id")
+    private Formation formation;
 }

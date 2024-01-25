@@ -1,10 +1,8 @@
 package univ.iwa.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import univ.iwa.model.Formation;
-
 import java.time.LocalDate;
 import java.util.List;
 
