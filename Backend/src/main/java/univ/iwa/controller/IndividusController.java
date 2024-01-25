@@ -14,10 +14,9 @@ public class IndividusController {
     IndividusService service;
 
     //il faut passer l'id de la formation selectionnee
-//    @PostMapping("/inscription/{formationId}")
-//    public ResponseEntity<IndividusDto> inscription(@RequestBody IndividusDto individuDto,
-//                                                    @PathVariable long formationId) {
-//        IndividusDto result = service.inscription(individuDto, formationId);
-//        return new ResponseEntity<>(result, HttpStatus.CREATED);
-//    }
+  @PostMapping("/inscription/{formationId}")
+   public IndividusDto inscription(@RequestBody IndividusDto individuDto,
+                                   @PathVariable Long formationId ) {
+        return service.inscription(individuDto, formationId);
+    }
 }

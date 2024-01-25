@@ -3,26 +3,58 @@ package univ.iwa.service;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import univ.iwa.dto.FormationDto;
 import univ.iwa.dto.IndividusDto;
 import univ.iwa.model.Formation;
+import univ.iwa.model.Groupe;
 import univ.iwa.model.Individus;
 import univ.iwa.repository.FormationRepository;
+import univ.iwa.repository.GroupeRepository;
 import univ.iwa.repository.IndividusRepository;
+
+import java.util.List;
 
 @Service
 public class IndividusService {
-    @Autowired
-    IndividusRepository repository;
-    @Autowired
-    FormationRepository frepo;
-    @Autowired
-    ModelMapper modelMapper;
 
-//    public IndividusDto inscription(IndividusDto individu, long formationId){
-//        Formation formation = frepo.findById(formationId).get();
-//        Individus individus = modelMapper.map(individu, Individus.class);
-//        individus.setGroupe(formation);
-//        return modelMapper.map(repository.save(individus), IndividusDto.class);
-//    }
+    @Autowired
+    private IndividusRepository individusRepository;
+
+    @Autowired
+    private GroupeRepository groupeRepository;
+
+    @Autowired
+    private FormationRepository formationRepository;
+
+    @Autowired
+    private ModelMapper modelMapper;
+
+    public IndividusDto inscription(IndividusDto individuDto, Long formationId) {
+        Formation formation = formationRepository.findById(formationId).orElseThrow(() -> new IllegalArgumentException("Formation not found"));
+        Groupe groupe = getOrCreateGroupe(formation);
+        Individus individus = modelMapper.map(individuDto, Individus.class);
+        individus.setGroupe(groupe);
+        individus.setFormation(formation);
+        Individus savedIndividu = individusRepository.save(individus);
+        return modelMapper.map(savedIndividu, IndividusDto.class);
+    }
+
+    private Groupe getOrCreateGroupe(Formation formation) {
+        List<Groupe> existingGroupes = formation.getGroupes();
+
+        if (existingGroupes == null || existingGroupes.isEmpty()) {
+            return createNewGroupe(formation);
+        }
+        Groupe currentGroup = existingGroupes.get(existingGroupes.size() - 1);
+        if (currentGroup.getInscrits().size() >= formation.getGroupe_seuil()) {
+            return createNewGroupe(formation);
+        }
+
+        return currentGroup;
+    }
+
+    private Groupe createNewGroupe(Formation formation) {
+        Groupe newGroupe = new Groupe();
+        newGroupe.setFormation(formation);
+        return groupeRepository.save(newGroupe);
+    }
 }
