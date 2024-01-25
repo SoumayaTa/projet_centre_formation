@@ -21,6 +21,9 @@ import { FormateurDetailsComponent } from './views/formateur-details/formateur-d
 import { ConfirmationDialogComponent } from './views/confirmation-dialog/confirmation-dialog.component';
 import { FormationComponent } from './views/formation/formation.component';
 import { FormateurEditDialogComponent } from './views/formateur-edit-dialog/formateur-edit-dialog.component';
+import { CommonModule } from '@angular/common';
+import { FormationdetailsComponent } from './views/formationdetails/formationdetails.component';
+import { InscriptionFormComponent } from './views/inscription-form/inscription-form.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,6 +38,8 @@ import { FormateurEditDialogComponent } from './views/formateur-edit-dialog/form
     ConfirmationDialogComponent,
     FormationComponent,
     FormateurEditDialogComponent,
+    FormationdetailsComponent,
+    InscriptionFormComponent
     
   ],
   imports: [
@@ -48,7 +53,7 @@ import { FormateurEditDialogComponent } from './views/formateur-edit-dialog/form
     FormsModule,
     ReactiveFormsModule,
     AgrupaMaterialModule,
- 
+    CommonModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-top-right',

@@ -1,0 +1,11 @@
+<div *ngIf="formationId !== undefined">
+    <h2>Details de la formation</h2>
+    <p>ID de la formation : {{ formationId }}</p>
+  
+    <!-- Ajouter d'autres détails de la formation ici -->
+  
+    <button mat-raised-button color="primary" (click)="openInscriptionForm()">Inscrire</button>
+    <button mat-raised-button color="accent">Devenir formateur</button>
+  
+    <!-- Afficher le formulaire d'inscription si showInscriptionForm est true -->
+    
