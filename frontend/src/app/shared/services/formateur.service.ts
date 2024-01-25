@@ -46,8 +46,6 @@ export class FormateurService {
 
         'Content-Type': 'application/json'
       });
-      
-      
       return this.httpClient.get<Formateur[]>(`${this.API_BASE_URL}/allFormateur`, { headers });
     }else{
       console.log('Token JWT non disponible');
