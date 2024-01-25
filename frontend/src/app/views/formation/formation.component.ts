@@ -21,6 +21,7 @@ export class FormationComponent {
     categorie: '',
     ville: '',
     date: new Date(),
+    groupe_seuil: 0,
     photos: ''
   };
   selectedImage: File | null;
@@ -40,6 +41,7 @@ export class FormationComponent {
       categorie: ['', Validators.required],
       ville: ['', Validators.required],
       date: ['', Validators.required],
+      groupe_seuil: [0, Validators.required],
       imageUrl: ['', Validators.required], 
       image: [null, Validators.required]
     });
@@ -76,6 +78,7 @@ export class FormationComponent {
     this.formation.programme = formationBuilder.value.programme;
     this.formation.categorie = formationBuilder.value.categorie;
     this.formation.ville = formationBuilder.value.ville;
+    this.formation.groupe_seuil = formationBuilder.value.groupe_seuil;
     this.formation.date = formationBuilder.value.date;
 
     return { ...this.formation };

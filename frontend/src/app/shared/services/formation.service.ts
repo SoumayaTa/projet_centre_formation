@@ -25,6 +25,7 @@ export class FormationService {
       formData.append('programme', formation.programme);
       formData.append('categorie', formation.categorie);
       formData.append('ville', formation.ville);
+      formData.append('groupe_seuil', formation.groupe_seuil.toString());
       formData.append('image', imageFile);
   
       const headers = new HttpHeaders({

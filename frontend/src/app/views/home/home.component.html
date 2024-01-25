@@ -18,7 +18,7 @@
 <mat-dialog-content *ngIf="selectedFormation">
   <!-- Affichez les détails de la formation sélectionnée ici -->
   <h2>{{ selectedFormation.nom }}</h2>
-  <img src="http://localhost:8080/images/{{selectedFormation.id}}" alt="{{ selectedFormation.nom }} Image" class="formation-image">
+  <img src="http://localhost:8080/images/{{selectedFormation.id}}.png" alt="{{ selectedFormation.nom }} Image" class="formation-image">
   <p>Durée : {{ selectedFormation.nombreHeur }} heures</p>
   <p>Date : {{ selectedFormation.date }}</p>
   <p>Ville : {{ selectedFormation.ville }}</p>
