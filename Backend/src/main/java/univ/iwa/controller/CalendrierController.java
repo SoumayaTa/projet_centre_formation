@@ -9,6 +9,7 @@ import univ.iwa.service.CalendrierService;
 
 @RestController
 @RequestMapping("/calendrier")
+@CrossOrigin(origins = "*")
 public class CalendrierController {
     @Autowired
     CalendrierService service;

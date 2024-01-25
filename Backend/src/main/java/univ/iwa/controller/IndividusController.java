@@ -9,6 +9,7 @@ import univ.iwa.service.IndividusService;
 
 @RestController
 @RequestMapping("/individus")
+@CrossOrigin(origins = "*")
 public class IndividusController {
     @Autowired
     IndividusService service;

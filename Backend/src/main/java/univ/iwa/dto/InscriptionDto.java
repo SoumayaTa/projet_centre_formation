@@ -13,8 +13,15 @@ import java.util.Date;
 @NoArgsConstructor
 public class InscriptionDto {
     private Long id;
-    private Long individusId;
-    private Long formationId;
     private Date date;
-    private boolean confirme;
+    private String name;
+    private String email;
+    private String mots_cles;
+    private boolean status;
+
+    public InscriptionDto(String name, String email,String motsCles) {
+        this.name = name;
+        this.email=email;
+        this.mots_cles=motsCles;
+    }
 }

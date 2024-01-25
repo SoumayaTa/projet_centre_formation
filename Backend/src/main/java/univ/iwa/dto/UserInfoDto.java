@@ -12,4 +12,5 @@ public class UserInfoDto {
     private String name;
     private String email;
     private String password;
+    private String mots_cles;
 }
