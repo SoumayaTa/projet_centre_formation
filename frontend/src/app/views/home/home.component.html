@@ -1,1 +1,26 @@
-<p>home works!</p>
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Rechercher par nom, date, ou ville" name="search" [(ngModel)]="search">
+  </mat-form-field>
+</form>
+
+<div class="formation-container">
+  <div class="formation-card" *ngFor="let formation of filteredFormations" (click)="showDetails(formation)">
+    <!-- Affichez les détails de la formation ici -->
+    <h2>{{ formation.nom }}</h2>
+    <img [src]="formation.photos" alt="{{ formation.nom }} Image" class="formation-image">
+    <p>Durée : {{ formation.nombreHeur }} heures</p>
+    <p>Date : {{ formation.date }}</p>
+    <p>Ville : {{ formation.ville }}</p>
+  </div>
+</div>
+
+<mat-dialog-content *ngIf="selectedFormation">
+  <!-- Affichez les détails de la formation sélectionnée ici -->
+  <h2>{{ selectedFormation.nom }}</h2>
+  <img src="http://localhost:8080/images/{{selectedFormation.id}}" alt="{{ selectedFormation.nom }} Image" class="formation-image">
+  <p>Durée : {{ selectedFormation.nombreHeur }} heures</p>
+  <p>Date : {{ selectedFormation.date }}</p>
+  <p>Ville : {{ selectedFormation.ville }}</p>
+  <button mat-raised-button color="warn" (click)="closeDetails()">Fermer</button>
+</mat-dialog-content>

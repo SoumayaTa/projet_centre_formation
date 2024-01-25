@@ -50,6 +50,9 @@ public class UserController {
     @PutMapping("/updateUser/{id}")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public UserInfoDto updateUser(@RequestBody UserInfoDto userdto, @PathVariable int id){
+    	System.out.println("==================================================");
+    	System.out.println("id"+id);
+    	System.out.println("userdto"+userdto);
         return userInfoService.updateUser(userdto,id);
     }
     @GetMapping("/allFormateur")
@@ -80,6 +83,16 @@ public class UserController {
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public void deleteFormateur(@PathVariable("id") long id) {
         userInfoService.deleteFormateur(id);
+    }
+    @GetMapping("getFormateurById/{id}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    public ResponseEntity<UserInfoDto> getFormateurById(@PathVariable("id") int id) {
+        try {
+            UserInfoDto formateur = userInfoService.getFormateurById(id);
+            return ResponseEntity.ok(formateur);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PostMapping("/generateToken")

@@ -28,5 +28,6 @@ public class Formation {
     private String ville;
     private LocalDate date;
     private  String photos;
+	
 
 }

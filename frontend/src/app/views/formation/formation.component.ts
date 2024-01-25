@@ -21,7 +21,7 @@ export class FormationComponent {
     categorie: '',
     ville: '',
     date: new Date(),
-    imageUrl: ''
+    photos: ''
   };
   selectedImage: File | null;
 
