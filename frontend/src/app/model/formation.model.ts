@@ -8,6 +8,6 @@ export interface Formation {
   categorie: string;
   ville: string;
   date: Date;
-  imageUrl?: string;  
+  photos?: string;  
 }
   

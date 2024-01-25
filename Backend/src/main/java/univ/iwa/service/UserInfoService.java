@@ -103,5 +103,15 @@ public class UserInfoService implements UserDetailsService {
 				.map(user -> modelMapper.map(user, UserInfoDto.class))
 				.collect(Collectors.toList());
 	}
+	public UserInfoDto getFormateurById(int id) {
+        Optional<UserInfo> formateurOptional = repository.findById(id);
+
+        if (formateurOptional.isPresent()) {
+            UserInfo formateur = formateurOptional.get();
+            return modelMapper.map(formateur, UserInfoDto.class);
+        } else {
+            throw new RuntimeException("Formateur not found with id: " + id);
+        }
+    }
 
 } 

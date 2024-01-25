@@ -72,9 +72,28 @@ export class FormateurService {
     }
     return new Observable<any>();
   }
+  public getFormateurById(id: number): Observable<Formateur> {
+    const jwtToken = this.userAuthService.getToken();
+    if (jwtToken) {
+      const headers = new HttpHeaders({
+        'Authorization': 'Bearer ' + jwtToken,
+
+        'Content-Type': 'application/json'
+      });
+      console.log(jwtToken);
+      return this.httpClient.get<Formateur>(`${this.API_BASE_URL}/getFormateurById/${id}`, { headers });
+    }else {
+      
+      console.log('Token JWT non disponible');
+      
+    }
+    return new Observable<any>();
+    
+    
+  }
 
   public updateFormateur(idfor:number,formateur:Formateur){
-    return this.httpClient.put("http://localhost:8080/auth/updateUser"+idfor,formateur)
+    return this.httpClient.put(`${this.API_BASE_URL}/updateUser/`+idfor,formateur)
   }
 
 

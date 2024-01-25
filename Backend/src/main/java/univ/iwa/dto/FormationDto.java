@@ -23,8 +23,7 @@ public class FormationDto {
     private String categorie;
     private String ville;
     private LocalDate date;
-git
-    private String imageUrl;
+    private String photos;
 
 
     public FormationDto(String nom, Long nombreHeur, Long cout, String objectifs, String programme, String categorie, String ville) {

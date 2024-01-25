@@ -13,24 +13,6 @@ export class FormationService {
   constructor(private httpClient: HttpClient, private userAuthService: UserAuthService) { }
 
   requestHeader = new HttpHeaders({ 'NO-AUTH': 'True' });
-
-  // addFormation(formation: Formation): Observable<Formation> {
-  //   const jwtToken = this.userAuthService.getToken();
-    
-  //   if (jwtToken) {
-  //     const headers = new HttpHeaders({
-  //       'Authorization': 'Bearer ' + jwtToken,
-  //       'Content-Type': 'application/json'
-  //     });
-      
-  //     return this.httpClient.post<Formation>(`${this.apiUrl}/formation/addFormation`, formation, { headers });
-  //   } else {
-  //     console.log('Token JWT non disponible');
-  //   }
-    
-  //   return new Observable<Formation>();
-  // }
-
   addFormation(formation: Formation, imageFile: File): Observable<Formation> {
     const jwtToken = this.userAuthService.getToken();
   
@@ -49,12 +31,14 @@ export class FormationService {
         'Authorization': 'Bearer ' + jwtToken
       });
   
-      return this.httpClient.post<Formation>(`${this.apiUrl}/formation/addFormation/image`, formData, { headers });
+      return this.httpClient.post<Formation>(`${this.apiUrl}/addFormation/image`, formData, { headers });
     } else {
       console.log('Token JWT non disponible');
     }
   
     return new Observable<Formation>();
   }
-  
+  getFormations(): Observable<Formation[]> {
+    return this.httpClient.get<Formation[]>(`${this.apiUrl}/getall`);
+  }
 }
