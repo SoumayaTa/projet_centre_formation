@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Formateur } from 'src/app/model/Formateur.model';
 import { FormateurService } from 'src/app/shared/services/formateur.service';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
@@ -15,11 +16,12 @@ import { SelectionModel } from '@angular/cdk/collections';
 export class FormateurDetailsComponent implements OnInit {
   FormateurDetails :Formateur []=[];
   displayedColumns:String[] = ['id', 'name', 'email','Actions']
-  selectedRow: Formateur | undefined;
-  selection = new SelectionModel<Formateur>(true, []);
+  selectedFormateurId: number | null = null;
 
 
-  constructor(private formateurService: FormateurService, private dialog: MatDialog) { }
+  constructor(private formateurService: FormateurService, private dialog: MatDialog,
+    private router:Router
+    ) { }
   ngOnInit(): void {
    this.showFormateur();
   }
