@@ -49,7 +49,7 @@ export class FormationComponent implements OnInit {
       ville: ['', Validators.required],
       date: ['', Validators.required],
       groupe_seuil: [0, Validators.required],
-      imageUrl: ['', Validators.required], 
+      photos: ['', Validators.required], 
       image: [null, Validators.required]
     });
   }
@@ -104,6 +104,8 @@ export class FormationComponent implements OnInit {
       }
     } else {
       if (this.selectedImage) {
+        console.log("ysf rrrrrr");
+        
         this.formationService.addFormation(formateurData, this.selectedImage).subscribe(
           (response) => {
             console.log('Formation ajoutée avec succès :', response);

@@ -48,15 +48,14 @@ export class ShowFormationComponent implements OnInit {
     this.selectedFormationId = id;
     this.router.navigate(['/addformation'], { queryParams: { id: id } });
   }
-  viewImage(id: number, imageUrl: string) {
-    console.log('URL de l\'image :', imageUrl);
+  viewImage(id: number, photos: string) {
+    console.log('URL de l\'image :', photos);
   
-    // Assurez-vous que l'ID est défini
     if (id) {
       this.formationService.getFormationById(id).subscribe(
         (formation: Formation) => {
           this.dialog.open(ImageDialogComponent, {
-            data: { imageUrl: formation.imageUrl },
+            data: { imageUrl: formation.photos },
             width: '50%',
           });
         },

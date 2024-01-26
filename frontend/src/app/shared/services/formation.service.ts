@@ -32,7 +32,7 @@ export class FormationService {
   
       return this.httpClient.post<Formation>(`${this.apiUrl}/formation/addFormation/image`, formData);
    
-  
+     
   }
 
   editFormationWithoutImage(id: number, formation: Formation): Observable<Formation> {
@@ -75,6 +75,10 @@ editFormation(id: number, formation: Formation, imageFile: File): Observable<For
   }
    public getFormationById(id:number){
       return this.httpClient.get<Formation>(`${this.apiUrl}/formation/getFormationById/`+id)
+   }
+
+   getFormations():Observable<Formation[]>{
+    return this.httpClient.get<Formation[]>(`${this.apiUrl}/getall`);
    }
   
 }

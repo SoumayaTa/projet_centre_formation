@@ -23,13 +23,8 @@ public class FormationDto {
     private String categorie;
     private String ville;
     private LocalDate date;
-<<<<<<< HEAD
     private String photos;
     private Long groupe_seuil;
-=======
-    private String imageUrl;
->>>>>>> DEV04
-
     public FormationDto(String nom, Long nombreHeur, Long cout, String objectifs, String programme, String categorie, String ville,Long groupe_seuil) {
         this.nom = nom;
         this.nombreHeur = nombreHeur;

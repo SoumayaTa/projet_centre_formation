@@ -2,17 +2,14 @@ package univ.iwa.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import univ.iwa.dto.FormationDto;
-import univ.iwa.model.Formation;
 import univ.iwa.service.FormationService;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -24,20 +21,9 @@ public class FormationController {
     @Autowired
     FormationService service;
 
-<<<<<<< HEAD
-//    @PostMapping("formation/addFormation")
-//    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_ASSISTANT')")
-//    public FormationDto addNewFormation(@RequestBody FormationDto formation) throws ParseException {
-//        return service.addFormation(formation);
-//    }
-
-    @PostMapping("addFormation/image")
-    //@PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_ASSISTANT')")
-=======
 
     @PostMapping("formation/addFormation/image")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_ASSISTANT')")
->>>>>>> DEV04
     public FormationDto addFormation(
             @RequestParam String nom,
             @RequestParam Long nombreHeur,
@@ -51,13 +37,6 @@ public class FormationController {
     )throws IllegalStateException, IOException {
         return service.addFormationim(nom, nombreHeur, cout, objectifs, programme, categorie, ville,groupe_seuil, image);
     }
-<<<<<<< HEAD
-//    @GetMapping("/getgroupe")
-//    public List<Long> getgroupe(){
-//
-//    }
-=======
->>>>>>> DEV04
 
     @DeleteMapping("formation/deleteFormation/{id}")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_ASSISTANT')")
@@ -132,8 +111,6 @@ public class FormationController {
     public List<FormationDto> getallFormation(){
         return service.getAllFormations();
     }
-<<<<<<< HEAD
-=======
 
 
     @GetMapping("formation/getFormationById/{id}")
@@ -154,5 +131,4 @@ public class FormationController {
 
 
 
->>>>>>> DEV04
 }

@@ -12,6 +12,6 @@ public class WebConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/images/**")
                 .addResourceLocations("file:src/main/resources/static/images/")
-                .setCachePeriod(0);  // désactiver le cache pour le développement
+                .setCachePeriod(0);
     }
 }

@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { Formateur } from 'src/app/model/Formateur.model';
 import { FormateurService } from 'src/app/shared/services/formateur.service';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
-import { FormateurEditDialogComponent } from '../formateur-edit-dialog/formateur-edit-dialog.component';
 import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
@@ -93,29 +92,7 @@ export class FormateurDetailsComponent implements OnInit {
     });
 }
 public editFormateurDetails(idFormateur: number): void {
-  console.log("gggg");
-  this.formateurService.getFormateurById(idFormateur).subscribe(
-    (formateur: Formateur) => {
-      console.log('Informations du formateur :', formateur);
-      const dialogRef = this.dialog.open<FormateurEditDialogComponent, Formateur>(FormateurEditDialogComponent, {
-        width: '400px',
-        data: formateur,
-      });
-      dialogRef.afterClosed().subscribe(result => {
-        if (result) {
-          console.log('Données modifiées du formateur :', result);
-          this.updatformatuer(idFormateur,formateur);
-          // Mettez à jour la liste des formateurs ou effectuez d'autres opérations nécessaires
-          // ...
-        }
-      });
-    },
-    (error) => {
-      console.error('Erreur lors de la récupération du formateur :', error);
-      // Gérer l'erreur
-    }
-  );
-      
+  
   
 }
 
