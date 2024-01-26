@@ -23,7 +23,6 @@ public class FormationDto {
     private String categorie;
     private String ville;
     private LocalDate date;
-git
     private String imageUrl;
 
 

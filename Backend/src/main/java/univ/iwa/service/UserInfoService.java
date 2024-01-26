@@ -104,4 +104,21 @@ public class UserInfoService implements UserDetailsService {
 				.collect(Collectors.toList());
 	}
 
+
+	public UserInfoDto updateFormateur(UserInfoDto formateurDto, int id) {
+		Optional<UserInfo> optionalFormateur = repository.findById(id);
+		UserInfo formateurEntity = optionalFormateur.orElseThrow(() -> new RuntimeException("Formateur not found with id: " + id));
+
+		String oldPassword = formateurEntity.getPassword();
+
+		modelMapper.map(formateurDto, formateurEntity);
+
+		if (formateurDto.getPassword() != null && !formateurDto.getPassword().isEmpty()) {
+			formateurEntity.setPassword(encoder.encode(formateurDto.getPassword()));
+		} else {
+			formateurEntity.setPassword(oldPassword);
+		}
+
+		return modelMapper.map(repository.save(formateurEntity), UserInfoDto.class);
+	}
 } 
