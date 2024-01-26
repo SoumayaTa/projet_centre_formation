@@ -14,27 +14,9 @@ export class FormationService {
 
   requestHeader = new HttpHeaders({ 'NO-AUTH': 'True' });
 
-  // addFormation(formation: Formation): Observable<Formation> {
-  //   const jwtToken = this.userAuthService.getToken();
-    
-  //   if (jwtToken) {
-  //     const headers = new HttpHeaders({
-  //       'Authorization': 'Bearer ' + jwtToken,
-  //       'Content-Type': 'application/json'
-  //     });
-      
-  //     return this.httpClient.post<Formation>(`${this.apiUrl}/formation/addFormation`, formation, { headers });
-  //   } else {
-  //     console.log('Token JWT non disponible');
-  //   }
-    
-  //   return new Observable<Formation>();
-  // }
 
   addFormation(formation: Formation, imageFile: File): Observable<Formation> {
-    const jwtToken = this.userAuthService.getToken();
-  
-    if (jwtToken) {
+    
       const formData = new FormData();
       formData.append('nom', formation.nom);
       formData.append('nombreHeur', formation.nombreHeur.toString());
@@ -45,16 +27,53 @@ export class FormationService {
       formData.append('ville', formation.ville);
       formData.append('image', imageFile);
   
-      const headers = new HttpHeaders({
-        'Authorization': 'Bearer ' + jwtToken
-      });
+     
   
-      return this.httpClient.post<Formation>(`${this.apiUrl}/formation/addFormation/image`, formData, { headers });
-    } else {
-      console.log('Token JWT non disponible');
-    }
+      return this.httpClient.post<Formation>(`${this.apiUrl}/formation/addFormation/image`, formData);
+   
   
-    return new Observable<Formation>();
   }
+
+  editFormationWithoutImage(id: number, formation: Formation): Observable<Formation> {
+   
+  
+      return this.httpClient.put<Formation>(`${this.apiUrl}/formation/editFormationWithoutImage/${id}`, formation);
+  
+  
+  }
+editFormation(id: number, formation: Formation, imageFile: File): Observable<Formation> {
+  
+    const formData = new FormData();
+    formData.append('nom', formation.nom);
+    formData.append('nombreHeur', formation.nombreHeur.toString());
+    formData.append('cout', formation.cout.toString());
+    formData.append('objectifs', formation.objectifs);
+    formData.append('programme', formation.programme);
+    formData.append('categorie', formation.categorie);
+    formData.append('ville', formation.ville);
+    formData.append('image', imageFile);
+  
+    if (imageFile) {
+      formData.append('image', imageFile);
+    }
+
+
+    return this.httpClient.put<Formation>(`${this.apiUrl}/formation/updateFormation/${id}`, formData);
+ 
+
+}
+
+  showFormation(): Observable<Formation[]> {
+    return this.httpClient.get<Formation[]>(`${this.apiUrl}/getall`);
+  }
+
+  public deleteFormation(id:number): Observable<any>{
+  
+    return this.httpClient.delete(`${this.apiUrl}/formation/deleteFormation/`+id)
+ 
+  }
+   public getFormationById(id:number){
+      return this.httpClient.get<Formation>(`${this.apiUrl}/formation/getFormationById/`+id)
+   }
   
 }

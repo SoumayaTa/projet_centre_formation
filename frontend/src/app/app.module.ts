@@ -20,6 +20,13 @@ import { ToastrModule } from 'ngx-toastr';
 import { FormateurDetailsComponent } from './views/formateur-details/formateur-details.component';
 import { ConfirmationDialogComponent } from './views/confirmation-dialog/confirmation-dialog.component';
 import { FormationComponent } from './views/formation/formation.component';
+import { ShowFormationComponent } from './views/show-formation/show-formation.component';
+import { AuthGuard } from './auth.guard';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './auth.interceptor';
+import { UserService } from './shared/services/user.service';
+import { ImageDialogComponent } from './views/image-dialog/image-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,6 +40,8 @@ import { FormationComponent } from './views/formation/formation.component';
     FormateurDetailsComponent,
     ConfirmationDialogComponent,
     FormationComponent,
+    ShowFormationComponent,
+    ImageDialogComponent,
     
   ],
   imports: [
@@ -46,7 +55,7 @@ import { FormationComponent } from './views/formation/formation.component';
     FormsModule,
     ReactiveFormsModule,
     AgrupaMaterialModule,
- 
+    MatDialogModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-top-right',
@@ -55,7 +64,11 @@ import { FormationComponent } from './views/formation/formation.component';
    
 
   ],
-  providers: [],
+  providers: [AuthGuard,{
+    provide:HTTP_INTERCEPTORS,
+    useClass:AuthInterceptor,
+    multi:true
+  },UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

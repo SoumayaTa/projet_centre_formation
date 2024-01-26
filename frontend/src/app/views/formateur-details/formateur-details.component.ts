@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Formateur } from 'src/app/model/Formateur.model';
 import { FormateurService } from 'src/app/shared/services/formateur.service';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
@@ -13,9 +14,12 @@ import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation
 export class FormateurDetailsComponent implements OnInit {
   FormateurDetails :Formateur []=[];
   displayedColumns:String[] = ['id', 'name', 'email','Actions']
- 
+  selectedFormateurId: number | null = null;
 
-  constructor(private formateurService: FormateurService, private dialog: MatDialog) { }
+
+  constructor(private formateurService: FormateurService, private dialog: MatDialog,
+    private router:Router
+    ) { }
   ngOnInit(): void {
    this.showFormateur();
   }
@@ -25,7 +29,7 @@ export class FormateurDetailsComponent implements OnInit {
     console.log("gggg");
   this.formateurService.showFormateurs().subscribe(
     (resp:Formateur[])=>{
-      console.log("hhhh");
+     
       
       this.FormateurDetails = resp;
       console.log(this.FormateurDetails);
@@ -37,8 +41,8 @@ export class FormateurDetailsComponent implements OnInit {
   }
 
   public editFormateurDetails(id:number){
-     
-    
+    this.selectedFormateurId = id;
+    this.router.navigate(['/addFormateur'], { queryParams: { id: id } });
   }
 
   public deleteFormateur(id:number){

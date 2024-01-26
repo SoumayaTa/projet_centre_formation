@@ -23,6 +23,10 @@
     Show Formateurs
 </button>
 <button *ngIf="isAdmin()" class="home-button" mat-raised-button color="primary" routerLink="/addformation">
-    Add formation
+  Add formation
+</button>
+
+<button *ngIf="isAdmin()" class="home-button" mat-raised-button color="primary" routerLink="/showFormation">
+  Show Formation
 </button>
 </mat-toolbar>
