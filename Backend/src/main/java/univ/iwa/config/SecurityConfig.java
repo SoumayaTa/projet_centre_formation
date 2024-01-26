@@ -36,14 +36,17 @@ public class SecurityConfig {
 		http
 				.cors(cors->cors.configurationSource(request -> new CorsConfiguration(corsFilter())))
 				.authorizeHttpRequests((auth)->auth
-<<<<<<< HEAD
+
 			.requestMatchers("/auth/welcome","/images/**","/externe/**", "/auth/addNewUser","/auth/getFormateurById/**","/auth/generateToken", "/form/getByDate/**", "/form/getByVille/**", "/form/getByCategorie/**","/form/getall","/form/addFormation/image","/individus/**").permitAll()
+
+			.requestMatchers("/auth/welcome","/images/**","/externe/**", "/auth/addNewUser","/auth/getFormateurById/**","/auth/generateToken", "/form/getByDate/**", "/form/getByVille/**", "/form/getByCategorie/**","/form/getall","/form/addFormation/image","/individus/**","/externe/inscription/**").permitAll()
+
 			.requestMatchers("/auth/assistant/**").authenticated()
-=======
+
 								.requestMatchers("/images/**").permitAll()
 								.requestMatchers("/auth/welcome", "/auth/addNewUser", "/auth/generateToken", "/form/getByDate/**", "/form/getByVille/**", "/form/getByCategorie/**","/form/getall").permitAll()
 								.requestMatchers("/auth/assistant/**").authenticated()
->>>>>>> DEV04
+
 			.requestMatchers("/auth/admin/**").authenticated()
 								.requestMatchers("/auth/updateUser/**").authenticated()
 								.requestMatchers("/auth/format/**").authenticated()
