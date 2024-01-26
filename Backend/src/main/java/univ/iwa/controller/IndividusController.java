@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import univ.iwa.dto.IndividusDto;
+import univ.iwa.model.Groupe;
 import univ.iwa.service.IndividusService;
 
 @RestController
@@ -20,4 +21,5 @@ public class IndividusController {
                                    @PathVariable Long formationId ) {
         return service.inscription(individuDto, formationId);
     }
+ 
 }

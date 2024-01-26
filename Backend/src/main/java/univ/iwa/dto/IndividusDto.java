@@ -16,7 +16,7 @@ public class IndividusDto {
     private Long id;
     private String nom;
     private String prenom;
-    private Date date_de_naissance;
+    private Date dateNaissance;
     private String ville;
     private String email;
     private String telephone;

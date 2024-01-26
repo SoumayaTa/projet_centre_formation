@@ -9,6 +9,5 @@ export interface Formation {
   ville: string;
   date: Date;
   groupe_seuil: number;
-  photos?: string;  
+  photos?: string;
 }
-  

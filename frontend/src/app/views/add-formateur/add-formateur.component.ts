@@ -16,7 +16,8 @@ export class AddFormateurComponent implements OnInit {
     id: 0,
     name: '',
     password: '',
-    email: ''
+    email: '',
+    mots_cles:''
   }
 
   constructor(private formBuilder: FormBuilder, private formateurService: FormateurService,
