@@ -16,17 +16,9 @@ public class Inscription {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Date date;
+    private String name;
+    private String email;
+    private String mots_cles;
     private boolean status;
 
-//    @ManyToOne
-//    @JoinColumn(name = "individus_id")
-//    private Individus individus;
-//
-//    @ManyToOne
-//    @JoinColumn(name = "formation_id")
-//    private Formation formation;
-//
-//    @ManyToOne
-//    @JoinColumn(name = "groupe_id")
-//    private Groupe groupe;
 }
