@@ -24,6 +24,7 @@ import { FormateurEditDialogComponent } from './views/formateur-edit-dialog/form
 import { CommonModule } from '@angular/common';
 import { FormationdetailsComponent } from './views/formationdetails/formationdetails.component';
 import { InscriptionFormComponent } from './views/inscription-form/inscription-form.component';
+import { InscriptionformateurexeterneComponent } from './views/inscriptionformateurexeterne/inscriptionformateurexeterne.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +40,8 @@ import { InscriptionFormComponent } from './views/inscription-form/inscription-f
     FormationComponent,
     FormateurEditDialogComponent,
     FormationdetailsComponent,
-    InscriptionFormComponent
+    InscriptionFormComponent,
+    InscriptionformateurexeterneComponent
     
   ],
   imports: [

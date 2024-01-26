@@ -3,4 +3,5 @@ export interface Formateur {
     name: string;
     password: string;
     email: string;
+    mots_cles:string;
   }

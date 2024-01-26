@@ -9,7 +9,8 @@ import { UserAuthService } from './user-auth.service';
 })
 export class FormateurService {
   private API_BASE_URL = "http://localhost:8080/auth";
-  constructor(private httpClient: HttpClient,
+  private baseUrl = 'http://localhost:8080';
+  constructor(private httpClient: HttpClient, 
     private userAuthService: UserAuthService) { }
 
   requestHeader = new HttpHeaders(
@@ -94,5 +95,8 @@ export class FormateurService {
     return this.httpClient.put(`${this.API_BASE_URL}/updateUser/`+idfor,formateur)
   }
 
-
+  inscriptionFormateurExtern(name: string, email: string, motsCles: string): Observable<any> {
+    const url = `${this.baseUrl}/inscription/${name}/${email}/${motsCles}`;
+    return this.httpClient.post<any>(url, null);
+  }
 }
