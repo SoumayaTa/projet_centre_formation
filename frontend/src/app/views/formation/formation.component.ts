@@ -108,7 +108,8 @@ export class FormationComponent implements OnInit {
         
         this.formationService.addFormation(formateurData, this.selectedImage).subscribe(
           (response) => {
-            console.log('Formation ajoutée avec succès :', response);
+
+            console.log('ysf a ajoute Formation ajoutée avec succès :', response);
             this.formationForm.reset();
             this.toastr.success('Formation a été ajoutée avec succès.', 'Ajout réussi');
           },
