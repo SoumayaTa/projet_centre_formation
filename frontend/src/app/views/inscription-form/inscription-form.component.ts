@@ -15,15 +15,24 @@ export class InscriptionFormComponent implements OnInit {
     private fb: FormBuilder
   ) {
     this.inscriptionForm = this.fb.group({
-      // ... définissez les champs du formulaire avec les validateurs nécessaires
+      nom: ['', [Validators.required, Validators.minLength(2)]],
+      prenom: ['', [Validators.required, Validators.minLength(2)]],
+      email: ['', [Validators.required, Validators.email]],
+      ville: ['', [Validators.required, Validators.minLength(2)]],
+      telephone: ['', [Validators.required, Validators.minLength(2)]],
+      dateNaissance: [null, Validators.required],
     });
   }
   ngOnInit(): void {}
   submitInscription(): void {
-   
-    this.dialogRef.close(/* envoyer un résultat si nécessaire */);
+    console.log("valeur recuprer de la formulaire ",this.inscriptionForm.value);
+    const formValues = this.inscriptionForm.value;
+
+    // Mettre à jour l'objet individu avec les valeurs du formulaire
+    this.dialogRef.close(formValues);
   }
   cancel(): void {
     this.dialogRef.close();
   }
+
 }
