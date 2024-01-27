@@ -65,4 +65,11 @@ export class FormationService {
 
     return this.httpClient.get<Formation[]>(`${this.apiUrl}/getByFilters`, { headers, params });
   }
+  getCategories(): Observable<string[]> {
+    return this.httpClient.get<string[]>(`${this.apiUrl}/categories`);
+  }
+  
+  getVilles(): Observable<string[]> {
+    return this.httpClient.get<string[]>(`${this.apiUrl}/villes`);
+  }
 }
