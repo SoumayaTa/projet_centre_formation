@@ -74,6 +74,7 @@ export class ShowFormationComponent implements OnInit {
 
   public delete(id: number) {
     console.log('starting deleting ...');
+    console.log('Testing Mar1 ...');
 
     this.formationService.deleteFormation(id).subscribe(
       () => {
