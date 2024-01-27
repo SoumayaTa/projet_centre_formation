@@ -128,7 +128,7 @@ public class FormationService {
         ), Formation.class);
         formationEntity.setDate(LocalDate.now());
    System.out.println("yousseeeeef");
-        String pathImage = "src/main/resources/static/images/"+formationEntity.getId() + ".png";
+        String pathImage = "src/main/resources/static/images"+formationEntity.getId() + ".png";
         image.transferTo(new File(pathImage));
 
         String imagePath = pathImage+"/"+ formationEntity.getId() + ".png";
