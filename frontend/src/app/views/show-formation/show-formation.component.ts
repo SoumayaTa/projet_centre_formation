@@ -51,11 +51,12 @@ export class ShowFormationComponent implements OnInit {
   viewImage(id: number, photos: string) {
     console.log('URL de l\'image :', photos);
   
+    // Assurez-vous que l'ID est défini
     if (id) {
       this.formationService.getFormationById(id).subscribe(
         (formation: Formation) => {
           this.dialog.open(ImageDialogComponent, {
-            data: { imageUrl:photos },
+            data: { imageUrl: photos },
             width: '50%',
           });
         },

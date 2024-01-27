@@ -20,11 +20,14 @@ import { ToastrModule } from 'ngx-toastr';
 import { FormateurDetailsComponent } from './views/formateur-details/formateur-details.component';
 import { ConfirmationDialogComponent } from './views/confirmation-dialog/confirmation-dialog.component';
 import { FormationComponent } from './views/formation/formation.component';
-import { FormateurEditDialogComponent } from './views/formateur-edit-dialog/formateur-edit-dialog.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthGuard } from './auth.guard';
 import { AuthInterceptor } from './auth.interceptor';
 import { UserService } from './shared/services/user.service';
+import { MatIconModule } from '@angular/material/icon';
+import { ShowFormationComponent } from './views/show-formation/show-formation.component';
+import { InscriptionFormComponent } from './views/inscription-form/inscription-form.component';
+import { InscriptionformateurexeterneComponent } from './views/inscriptionformateurexeterne/inscriptionformateurexeterne.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,8 +41,9 @@ import { UserService } from './shared/services/user.service';
     FormateurDetailsComponent,
     ConfirmationDialogComponent,
     FormationComponent,
-    FormateurEditDialogComponent,
-    
+    ShowFormationComponent,
+    InscriptionFormComponent,
+    InscriptionformateurexeterneComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +56,7 @@ import { UserService } from './shared/services/user.service';
     FormsModule,
     ReactiveFormsModule,
     AgrupaMaterialModule,
- 
+    MatIconModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-top-right',
