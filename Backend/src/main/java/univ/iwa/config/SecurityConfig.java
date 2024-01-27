@@ -38,6 +38,9 @@ public class SecurityConfig {
 				.authorizeHttpRequests((auth)->auth
 
 			.requestMatchers("/auth/welcome","/images/**","/externe/**", "/auth/addNewUser","/auth/getFormateurById/**","/auth/generateToken", "/form/getByDate/**", "/form/getByVille/**", "/form/getByCategorie/**","/form/getall","/form/addFormation/image","/individus/**").permitAll()
+
+			.requestMatchers("/auth/welcome","/images/**","/externe/**", "/auth/addNewUser","/auth/getFormateurById/**","/auth/generateToken", "/form/getByDate/**", "/form/getByVille/**", "/form/getByCategorie/**","/form/getall","/form/addFormation/image","/individus/**","/externe/inscription/**").permitAll()
+
 			.requestMatchers("/auth/assistant/**").authenticated()
 
 								.requestMatchers("/images/**").permitAll()

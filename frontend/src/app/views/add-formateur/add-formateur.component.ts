@@ -17,7 +17,8 @@ export class AddFormateurComponent implements OnInit {
     id: 0,
     name: '',
     password: '',
-    email: ''
+    email: '',
+    mots_cles:''
   }
   editingFormateurId: number | null = null;
   isNewFormateur= true;

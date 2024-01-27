@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Formation } from 'src/app/model/formation.model';
 import { FormationService } from 'src/app/shared/services/formation.service';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
   selectedFormation: Formation | null = null;
   filteredFormations: Formation[] = [];
   search: string = '';
+  router: any;
 
   constructor(private dialog: MatDialog, private formationService: FormationService) {}
 
@@ -48,4 +49,10 @@ export class HomeComponent implements OnInit {
       formation.ville.toLowerCase().includes(this.search.toLowerCase())
     );
   }
+  navigateToDetailsPage(formation: Formation): void {
+    if (formation && formation.id !== undefined) {
+      this.router.navigate(['/formation-details', formation.id]);
+    }
+  }
+  
 }

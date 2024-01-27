@@ -15,16 +15,13 @@ public class Individus {
     private Long id;
     private String nom;
     private String prenom;
-    private Date date_de_naissance;
+    private Date dateNaissance;
     private String ville;
     private String email;
     private String telephone;
-    //private Long groupe;
-
     @ManyToOne
     @JoinColumn(name = "groupe_id")
     private Groupe groupe;
-
     @ManyToOne
     @JoinColumn(name = "formation_id")
     private Formation formation;

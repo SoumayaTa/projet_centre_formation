@@ -10,6 +10,7 @@ import { HomeComponent } from './views/home/home.component';
 import { LoginComponent } from './views/login/login.component';
 import { FormationComponent } from './views/formation/formation.component';
 import { ShowFormationComponent } from './views/show-formation/show-formation.component';
+import { FormationdetailsComponent } from './views/formationdetails/formationdetails.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent},
@@ -23,7 +24,6 @@ const routes: Routes = [
   { path: 'showFormation', component: ShowFormationComponent,canActivate:[AuthGuard],data:{roles:['ROLE_ADMIN']}},
   { path: '**', redirectTo: 'home'}    
 ];
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
