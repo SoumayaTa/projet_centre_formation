@@ -66,9 +66,17 @@ editFormation(id: number, formation: Formation, imageFile: File): Observable<For
 
 }
 
-  showFormation(): Observable<Formation[]> {
-    return this.httpClient.get<Formation[]>(`${this.apiUrl}/getall`);
-  }
+public showFormation(pageNumber: number, searchKey: string = ""): Observable<Formation[]> {
+  const url = `${this.apiUrl}/getall?pageNumber=${pageNumber}&searchKey=${searchKey}`;
+  return this.httpClient.get<Formation[]>(url);
+}
+// showFormation(pageNumber: number, searchKey: string): Observable<{ content: Formation[], totalElements: number }> {
+//   const params = new HttpParams()
+//     .set('pageNumber', pageNumber.toString())
+//     .set('searchKey', searchKey);
+
+//   return this.httpClient.get<{ content: Formation[], totalElements: number }>('your-api-endpoint', { params });
+// }
 
   public deleteFormation(id:number): Observable<any>{
   
