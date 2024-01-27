@@ -55,7 +55,7 @@ export class ShowFormationComponent implements OnInit {
       this.formationService.getFormationById(id).subscribe(
         (formation: Formation) => {
           this.dialog.open(ImageDialogComponent, {
-            data: { imageUrl: formation.photos },
+            data: { imageUrl:photos },
             width: '50%',
           });
         },
