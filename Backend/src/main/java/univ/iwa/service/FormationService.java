@@ -180,6 +180,9 @@ public class FormationService {
         } else {
             throw new FormationNotFoundException("Formation with id " + id + " not found");
         }
+
+    public List<String> getAllVilles() {
+        return repository.getDistinctVilles();
     }
 
     public FormationDto updateFormationWithoutImage(

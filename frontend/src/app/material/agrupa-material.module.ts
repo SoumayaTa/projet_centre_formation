@@ -43,10 +43,11 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
 // import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
+
 
 @NgModule({
   exports: [
@@ -107,7 +108,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   declarations: [
 
 
-  ],
+  ],providers: [DatePipe],
   imports:[CommonModule]
 })
 

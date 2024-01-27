@@ -1,9 +1,36 @@
-<form class="example-form">
-  <mat-form-field class="example-full-width">
-    <input matInput placeholder="Rechercher par nom, date, ou ville" name="search" [(ngModel)]="search">
-  </mat-form-field>
-</form>
-
+<div class="centered-container">
+  <form [formGroup]="filterForm" (ngSubmit)="filterFormations()">
+    <!-- Autres champs de formulaire ici -->
+    
+    <div class="horizontal-form-group">
+      <div class="form-group">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Categorie</mat-label>
+          <input matInput placeholder="Categorie" formControlName="categorie">
+        </mat-form-field>
+      </div>
+    
+      <div class="form-group">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Ville</mat-label>
+          <input matInput placeholder="Ville" formControlName="ville">
+        </mat-form-field>
+      </div>
+    
+      <div class="form-group">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Date</mat-label>
+          <input matInput [matDatepicker]="picker" placeholder="Choisir une date" formControlName="date">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+    
+      <button mat-stroked-button color="primary" type="submit">
+        Filtrer les formations
+      </button>
+    </div>
+  </form>  
 <div class="formation-container">
   <div class="formation-card" *ngFor="let formation of filteredFormations" (click)="showDetails(formation)">
     <!-- Affichez les détails de la formation ici -->
@@ -25,3 +52,4 @@
   <p>Ville : {{ selectedFormation.ville }}</p>
   <button mat-raised-button color="warn" (click)="closeDetails()">Fermer</button>
 </mat-dialog-content>
+</div>

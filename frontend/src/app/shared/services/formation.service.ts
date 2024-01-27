@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Formation } from 'src/app/model/formation.model';
 import { UserAuthService } from './user-auth.service';
+import { HttpParams } from '@angular/common/http';
+
 
 @Injectable({
   providedIn: 'root'
@@ -81,4 +83,24 @@ editFormation(id: number, formation: Formation, imageFile: File): Observable<For
     return this.httpClient.get<Formation[]>(`${this.apiUrl}/getall`);
    }
   
+  getByFilters(categorie: string, ville: string, date: string|null): Observable<Formation[]> {
+    const jwtToken = this.userAuthService.getToken();
+
+    let params = new HttpParams();
+    if (categorie) {
+      params = params.set('categorie', categorie);
+    }
+    if (ville) {
+      params = params.set('ville', ville);
+    }
+    if (date) {
+      params = params.set('date', date);
+    }
+
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + jwtToken
+    });
+
+    return this.httpClient.get<Formation[]>(`${this.apiUrl}/getByFilters`, { headers, params });
+  }
 }

@@ -93,20 +93,38 @@ public class FormationController {
         return service.findByCategorie(categorie);
     }
 
-    @GetMapping("/getByVille/{ville}")
-    public List<FormationDto> getByVille(@PathVariable String ville) {
-        return  service.findByVille(ville);
-    }
-    @GetMapping("/getByDate")
-    public List<FormationDto> getByDate(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
-        try {
-            return service.findByDate(date);
-        } catch (Exception e) {
-            e.printStackTrace();
+    @GetMapping("/getByFilters")
+    public List<FormationDto> findByFilters(
+            @RequestParam(required = false) String categorie,
+            @RequestParam(required = false) String ville,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+
+        if (categorie != null) {
+            return service.findByCategorie(categorie);
+        } else if (ville != null) {
+            return service.findByVille(ville);
+        } else if (date != null) {
+            try {
+                return service.findByDate(date);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+        } else {
             return null;
         }
     }
 
+    @GetMapping("/categories")
+    public ResponseEntity<List<String>> getCategories() {
+        List<String> categories = service.getAllCategories();
+        return new ResponseEntity<>(categories, HttpStatus.OK);
+    }
+    @GetMapping("/villes")
+    public ResponseEntity<List<String>> getVilles() {
+        List<String> villes = service.getAllVilles();
+        return new ResponseEntity<>(villes, HttpStatus.OK);
+    }
     @GetMapping("/getall")
     public List<FormationDto> getallFormation(){
         return service.getAllFormations();
