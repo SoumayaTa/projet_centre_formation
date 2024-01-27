@@ -1,13 +1,13 @@
 // show-formation.component.ts
-
-import { HttpErrorResponse } from '@angular/common/http';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Formation } from 'src/app/model/formation.model';
 import { FormationService } from 'src/app/shared/services/formation.service';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { ImageDialogComponent } from '../image-dialog/image-dialog.component';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-show-formation',
@@ -16,27 +16,51 @@ import { ImageDialogComponent } from '../image-dialog/image-dialog.component';
 })
 export class ShowFormationComponent implements OnInit {
   formationDetails: Formation[] = [];
-  displayedColumns: String[] = ['id', 'nom', 'nombreHeur', 'cout', 'objectifs', 'Actions'];
+  displayedColumns: string[] = ['id', 'nom', 'nombreHeur', 'cout', 'objectifs', 'Actions'];
   selectedFormationId: number | null = null;
-
-  constructor(private formationService: FormationService, private dialog: MatDialog,
-    private router: Router
-    ) {}
+  showTable = false;
+  showMoreFormation = false;
+  pageNumber = 0;
    
+
+  totalItems = 0;
+  itemsPerPage = 5; // Définissez la valeur par défaut de votre choix
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+
+  constructor(
+    private formationService: FormationService,
+    private dialog: MatDialog,
+    private router: Router
+  ) {}
+
   ngOnInit(): void {
     this.showFormations();
   }
 
-  public showFormations() {
-    console.log("starting...");
-    this.formationService.showFormation().subscribe(
-      (resp : Formation[])=> {
+  public searchByKeyWord(searchKey: string) {
+    console.log(searchKey);
+    this.pageNumber = 0;
+    this.formationDetails = [];
+    this.showFormations(searchKey);
+  }
 
+  public showFormations(searchKey: string = "") {
+    console.log("starting...");
+    this.showTable = false;
+    this.formationService.showFormation(this.pageNumber, searchKey).subscribe(
+      (resp: Formation[]) => {
         console.log("loading formations");
-        
         this.formationDetails = resp;
+        this.showTable = true;
+
+        if (resp.length === 7) {
+          this.showMoreFormation = true;
+        } else {
+          this.showMoreFormation = false;
+        }
+
         console.log(this.formationDetails);
-        
       },
       (err: HttpErrorResponse) => {
         console.log(err);
@@ -48,10 +72,10 @@ export class ShowFormationComponent implements OnInit {
     this.selectedFormationId = id;
     this.router.navigate(['/addformation'], { queryParams: { id: id } });
   }
+
   viewImage(id: number, photos: string) {
     console.log('URL de l\'image :', photos);
-  
-    // Assurez-vous que l'ID est défini
+
     if (id) {
       this.formationService.getFormationById(id).subscribe(
         (formation: Formation) => {
@@ -68,9 +92,6 @@ export class ShowFormationComponent implements OnInit {
       console.error('ID non défini.');
     }
   }
-  
-  
-  
 
   public delete(id: number) {
     console.log('starting deleting ...');
@@ -82,13 +103,12 @@ export class ShowFormationComponent implements OnInit {
         this.ngOnInit();
         console.log('Formation supprimé avec succès.');
         console.log(this.formationDetails);
-      },(err:HttpErrorResponse)=>{
+      }, (err: HttpErrorResponse) => {
         console.log(err);
       }
-      );
-      this.ngOnInit();
+    );
+    this.ngOnInit();
   }
-  
 
   ouvrirBoiteConfirmation(idFormation: number): void {
     const dialogRef = this.dialog.open<ConfirmationDialogComponent, { message: string }>(ConfirmationDialogComponent, {
@@ -100,8 +120,15 @@ export class ShowFormationComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result: any) => {
       if (result) {
         this.delete(idFormation);
-        
+
       }
     });
   }
+
+  public loadMoreFormation() {
+    console.log('loadMoreFormation clicked');
+   this.pageNumber = this.pageNumber + 1;
+    this.showFormations();
+  }
+
 }

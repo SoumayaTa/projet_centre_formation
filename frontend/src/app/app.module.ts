@@ -29,6 +29,8 @@ import { ShowFormationComponent } from './views/show-formation/show-formation.co
 import { InscriptionFormComponent } from './views/inscription-form/inscription-form.component';
 import { InscriptionformateurexeterneComponent } from './views/inscriptionformateurexeterne/inscriptionformateurexeterne.component';
 import { FormationdetailsComponent } from './views/formationdetails/formationdetails.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { TestCompenentComponent } from './views/test-compenent/test-compenent.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +47,8 @@ import { FormationdetailsComponent } from './views/formationdetails/formationdet
     ShowFormationComponent,
     InscriptionFormComponent,
     InscriptionformateurexeterneComponent,
-    FormationdetailsComponent
+    FormationdetailsComponent,
+    TestCompenentComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +67,7 @@ import { FormationdetailsComponent } from './views/formationdetails/formationdet
       positionClass: 'toast-top-right',
       preventDuplicates: true,
     }),
-   
+    MatPaginatorModule
 
   ],
   providers: [AuthGuard,{

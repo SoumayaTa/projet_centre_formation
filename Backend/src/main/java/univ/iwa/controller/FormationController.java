@@ -127,8 +127,13 @@ public class FormationController {
         return new ResponseEntity<>(villes, HttpStatus.OK);
     }
     @GetMapping("/getall")
-    public List<FormationDto> getallFormation(){
-        return service.getAllFormations();
+    public List<FormationDto> getallFormation(
+            @RequestParam(defaultValue = "0") int pageNumber,
+            @RequestParam(defaultValue = "") String searchKey
+    ) {
+        List<FormationDto> result = service.getAllFormations(pageNumber, searchKey);
+        System.out.println("Result size is " + result.size());
+        return result;
     }
 
 
