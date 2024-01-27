@@ -37,9 +37,9 @@ public class FormationService {
     public FormationDto addFormation(FormationDto form, MultipartFile image) throws IOException {
         Formation formationEntity = modelMapper.map(form, Formation.class);
         formationEntity.setDate(LocalDate.now());
-        String pathImage = "src/main/resources/static/images/"+formationEntity.getId() + ".png";
+        String pathImage = "src/main/resources/static/images/" + formationEntity.getId() + ".png";
         image.transferTo(new File(pathImage));
-        String imageUrl = "src/main/resources/static/images/"+formationEntity.getId() + ".png";
+        String imageUrl = "src/main/resources/static/images/" + formationEntity.getId() + ".png";
         formationEntity.setPhotos(imageUrl);
         Formation savedFormation = repository.save(formationEntity);
         return modelMapper.map(savedFormation, FormationDto.class);
@@ -127,18 +127,19 @@ public class FormationService {
                 groupe_seuil
         ), Formation.class);
         formationEntity.setDate(LocalDate.now());
-   System.out.println("yousseeeeef");
-        String pathImage = "src/main/resources/static/images"+formationEntity.getId() + ".png";
+        System.out.println("yousseeeeef");
+        String pathImage = "src/main/resources/static/images" + formationEntity.getId() + ".png";
         image.transferTo(new File(pathImage));
 
-        String imagePath = pathImage+"/"+ formationEntity.getId() + ".png";
+        String imagePath = pathImage + "/" + formationEntity.getId() + ".png";
         image.transferTo(Paths.get(imagePath));
-        String imageUrl = "src/main/resources/static/images/"+formationEntity.getId() + ".png";
+        String imageUrl = "src/main/resources/static/images/" + formationEntity.getId() + ".png";
         formationEntity.setPhotos(imageUrl);
 
         repository.save(formationEntity);
         return modelMapper.map(formationEntity, FormationDto.class);
     }
+
     public FormationDto updateFormation(
             Long id,
             String nom,
@@ -180,53 +181,57 @@ public class FormationService {
         } else {
             throw new FormationNotFoundException("Formation with id " + id + " not found");
         }
-
-    public List<String> getAllVilles() {
-        return repository.getDistinctVilles();
     }
-
-    public FormationDto updateFormationWithoutImage(
-            Long id,
-            String nom,
-            Long nombreHeur,
-            Long cout,
-            String objectifs,
-            String programme,
-            String categorie,
-            String ville
-    ) {
-        Optional<Formation> optionalFormation = repository.findById(id);
-
-        if (optionalFormation.isPresent()) {
-            Formation existingFormation = optionalFormation.get();
-
-            // Mettez à jour les champs nécessaires
-            existingFormation.setNom(nom);
-            existingFormation.setNombreHeur(nombreHeur);
-            existingFormation.setCout(cout);
-            existingFormation.setObjectifs(objectifs);
-            existingFormation.setProgramme(programme);
-            existingFormation.setCategorie(categorie);
-            existingFormation.setVille(ville);
-
-            existingFormation = repository.save(existingFormation);
-
-            return modelMapper.map(existingFormation, FormationDto.class);
-        } else {
-            throw new FormationNotFoundException("Formation with id " + id + " not found");
+        public List<String> getAllVilles () {
+            return repository.getDistinctVilles();
         }
-    }
 
+        public FormationDto updateFormationWithoutImage (
+                Long id,
+                String nom,
+                Long nombreHeur,
+                Long cout,
+                String objectifs,
+                String programme,
+                String categorie,
+                String ville
+    ){
+            Optional<Formation> optionalFormation = repository.findById(id);
 
-    public FormationDto getFormationById(Long id) {
-        Optional<Formation> optionalFormation = repository.findById(id);
+            if (optionalFormation.isPresent()) {
+                Formation existingFormation = optionalFormation.get();
 
-        if (optionalFormation.isPresent()) {
-            Formation formation = optionalFormation.get();
-            return modelMapper.map(formation, FormationDto.class);
-        } else {
-            throw new FormationNotFoundException("Formation with id " + id + " not found");
+                // Mettez à jour les champs nécessaires
+                existingFormation.setNom(nom);
+                existingFormation.setNombreHeur(nombreHeur);
+                existingFormation.setCout(cout);
+                existingFormation.setObjectifs(objectifs);
+                existingFormation.setProgramme(programme);
+                existingFormation.setCategorie(categorie);
+                existingFormation.setVille(ville);
+
+                existingFormation = repository.save(existingFormation);
+
+                return modelMapper.map(existingFormation, FormationDto.class);
+            } else {
+                throw new FormationNotFoundException("Formation with id " + id + " not found");
+            }
         }
+
+
+        public FormationDto getFormationById (Long id){
+            Optional<Formation> optionalFormation = repository.findById(id);
+
+            if (optionalFormation.isPresent()) {
+                Formation formation = optionalFormation.get();
+                return modelMapper.map(formation, FormationDto.class);
+            } else {
+                throw new FormationNotFoundException("Formation with id " + id + " not found");
+            }
+        }
+
+    public List<String> getAllCategories() {
+        return repository.getDistinctCategories();
     }
-}
+    }
 

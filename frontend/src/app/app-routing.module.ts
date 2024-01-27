@@ -22,6 +22,7 @@ const routes: Routes = [
   { path: 'allFormateur', component: FormateurDetailsComponent,canActivate:[AuthGuard],data:{roles:['ROLE_ADMIN']}},
   { path: 'addformation', component: FormationComponent, canActivate:[AuthGuard], data:{roles:['ROLE_ADMIN']}},
   { path: 'showFormation', component: ShowFormationComponent,canActivate:[AuthGuard],data:{roles:['ROLE_ADMIN']}},
+  { path: 'formationdetails', component: FormationdetailsComponent},
   { path: '**', redirectTo: 'home'}    
 ];
 @NgModule({

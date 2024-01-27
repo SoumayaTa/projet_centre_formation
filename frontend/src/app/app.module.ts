@@ -28,6 +28,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ShowFormationComponent } from './views/show-formation/show-formation.component';
 import { InscriptionFormComponent } from './views/inscription-form/inscription-form.component';
 import { InscriptionformateurexeterneComponent } from './views/inscriptionformateurexeterne/inscriptionformateurexeterne.component';
+import { FormationdetailsComponent } from './views/formationdetails/formationdetails.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +44,8 @@ import { InscriptionformateurexeterneComponent } from './views/inscriptionformat
     FormationComponent,
     ShowFormationComponent,
     InscriptionFormComponent,
-    InscriptionformateurexeterneComponent
+    InscriptionformateurexeterneComponent,
+    FormationdetailsComponent
   ],
   imports: [
     BrowserModule,
