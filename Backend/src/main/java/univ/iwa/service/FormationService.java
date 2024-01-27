@@ -136,5 +136,13 @@ public class FormationService {
             repository.save(formationEntity);
             return modelMapper.map(formationEntity, FormationDto.class);
         }
+
+    public List<String> getAllVilles() {
+        return repository.getDistinctVilles();
     }
+
+    public List<String> getAllCategories() {
+        return repository.getDistinctCategories();
+    }
+}
 

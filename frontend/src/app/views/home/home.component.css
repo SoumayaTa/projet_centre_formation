@@ -54,3 +54,15 @@ body {
     height: 80px;
     margin-top: 10px; /* Espacement entre l'image et les autres détails */
   }
+  .centered-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px; /* Ajustez la valeur selon vos besoins */
+  }
+  
+  .horizontal-form-group {
+    display: flex;
+    gap: 10px;
+  }
+  
