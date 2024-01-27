@@ -1,29 +1,70 @@
-.space-buttons{
-    flex: 1 1 auto;
+#menuTitle {
+  font-size: medium;
+  margin-right: 20px;
+}
+.mat-sidenav {
+  background-color: #3F51B5;
+  width: 200px;
+}
+.side-nav-items {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+}
+.side-menu-item {
+  display: flex;
+  margin-top: 20px;
+  justify-content: start;
+  color: #fff;
+  text-decoration: none;
+  padding: 10px;
+  transition: background-color 0.3s ease;
+  /* Ajout de flex-direction pour aligner verticalement */
+  text-align: start;  /* Transition pour le changement de couleur au survol */
+}
+.side-menu-item:hover {
+  background-color: #ddd; /* Couleur de fond au survol des éléments du menu latéral */
+}
+.main-content {
+  margin: 20px;
+}
+.side-menu-item mat-icon {
+  margin-right: 8px; /* Marge à droite de l'icône pour séparation */
+}
+/* Styles pour la barre de navigation */
+.mat-toolbar.main-toolbar {
+  background-color: #3F51B5; /* Couleur de fond de la barre de navigation */
+  color: #fff; /* Couleur du texte dans la barre de navigation */
+}
+
+.menu-item-text {
+  margin-left: 10px; /* Ajustez la marge selon vos préférences */
+   /* Empêche le texte de retourner à la ligne */
+}
+/* Styles pour le menu latéral */
+.mat-sidenav.side-nav-items {
+  background-color: #f5f5f5; /* Couleur de fond du menu latéral */
+}
+
+/* Styles pour l'espaceur du menu */
+.menu-spacer {
+  flex: 1; /* Espaceur flexible pour pousser les éléments à droite de la barre de navigation */
+}
+
+/* Autres styles personnalisés au besoin */
+
+@media (min-width: 900px) {
+  #menuIcon {
+      display: none;
   }
 
-.home-button {
-  margin-right: 10px; 
+  .mat-sidenav {
+      display: none;
+  }
 }
 
-/* Style pour les boutons d'icônes */
-.mat-icon-button {
-  margin-left: 8px; /* Espace entre les boutons */
-}
-
-/* Style pour les icônes */
-.mat-icon {
-  font-size: 24px; /* Taille de la police de l'icône */
-}
-
-/* Style pour le bouton de connexion */
-.mat-toolbar[ngIf="!isLoggedIn()"] button[color="accent"] {
-  background-color: #2196f3; /* Couleur de fond pour le bouton de connexion */
-  color: white; /* Couleur du texte pour le bouton de connexion */
-}
-
-/* Style pour le bouton de déconnexion */
-.mat-toolbar[ngIf="isLoggedIn()"] button[color="warn"] {
-  background-color: #ff7043; /* Couleur de fond pour le bouton de déconnexion */
-  color: white; /* Couleur du texte pour le bouton de déconnexion */
+@media (max-width: 900px) {
+  .top-menu-item {
+      display: none;
+  }
 }

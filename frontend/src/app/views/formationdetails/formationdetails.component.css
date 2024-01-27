@@ -1,34 +1,17 @@
-.inscription-form {
-    margin-top: 20px;
-    border: 1px solid #ccc;
-    padding: 15px;
-    max-width: 400px;
-    margin: 0 auto; /* Centrez le formulaire horizontalement */
-    margin-left: 0; /* Réinitialise la marge gauche à zéro */
-  }
-  
-  .inscription-form-container {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .inscription-form-field {
-    width: 100%;
-    margin-bottom: 15px;
-  }
-  
-  /* Augmentez la marge inférieure du dernier champ */
-  .inscription-form-field:last-child {
-    margin-bottom: 30px; /* Ajustez selon vos besoins */
-  }
-  
-  /* Vous pouvez ajuster la largeur spécifique pour chaque champ d'entrée si nécessaire */
-  .inscription-form-field input {
-    width: calc(100% - 20px);
-  }
-  
-  .inscription-form-buttons {
-    display: flex;
-    justify-content: space-between;
-  }
-  
+.formation-details-container {
+ 
+ 
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.button-container {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* Ajoutez d'autres styles personnalisés au besoin */

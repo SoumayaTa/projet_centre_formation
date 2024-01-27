@@ -9,12 +9,15 @@ import { InscriptionformateurexeterneComponent } from '../inscriptionformateurex
 import { FormateurService } from 'src/app/shared/services/formateur.service';
 import { InscriptionformateurexternService } from 'src/app/shared/services/inscriptionformateurextern.service';
 import { Inscription } from 'src/app/model/inscription.model';
+import { FormationService } from 'src/app/shared/services/formation.service';
+import { Formation } from 'src/app/model/formation.model';
 @Component({
   selector: 'app-formationdetails',
   templateUrl: './formationdetails.component.html',
   styleUrls: ['./formationdetails.component.css']
 })
 export class FormationdetailsComponent implements OnInit {
+  formations: Formation[] = [];
   formationId: number | undefined;
   showInscriptionForm: boolean = false;
   inscriptionFormateur:FormGroup;
@@ -54,14 +57,15 @@ export class FormationdetailsComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.formationId = params['id'];
+      
+      
     });
   }
-
+  
   toggleInscriptionForm(): void {
     this.showInscriptionForm = !this.showInscriptionForm;
   }
 
-  
   inscription(formationId: number): void {
     console.log('Date de naissance avant l\'appel au service:', this.individu);
     const seuilTotalIndividusParGroupe = 3;
@@ -109,7 +113,7 @@ inscriotionformateurexterne(formationId:number):void {
 }
 openInscriptionFormateur(formationId: number): void {
   const dialogRef = this.dialog.open(InscriptionformateurexeterneComponent, {
-    width: '400px', 
+    
   });
 
   // Vous pouvez ajouter des gestionnaires d'événements ici, par exemple, pour traiter le résultat après la fermeture de la popup.

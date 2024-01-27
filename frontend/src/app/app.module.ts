@@ -25,6 +25,7 @@ import { CommonModule } from '@angular/common';
 import { FormationdetailsComponent } from './views/formationdetails/formationdetails.component';
 import { InscriptionFormComponent } from './views/inscription-form/inscription-form.component';
 import { InscriptionformateurexeterneComponent } from './views/inscriptionformateurexeterne/inscriptionformateurexeterne.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,6 +57,7 @@ import { InscriptionformateurexeterneComponent } from './views/inscriptionformat
     ReactiveFormsModule,
     AgrupaMaterialModule,
     CommonModule,
+    FlexLayoutModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-top-right',

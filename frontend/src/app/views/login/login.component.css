@@ -1,5 +1,5 @@
 .login-container {
-    background: url('../../../assets/images/login.jpg') no-repeat center center fixed;
+  background: url('../../../assets/images/login.jpg') no-repeat center center fixed;
     background-size: cover;
     height: 100vh;
     display: flex;
@@ -14,13 +14,12 @@
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   }
-  
   .text-center {
     text-align: center;
   }
   
   .card h2 {
-    margin-bottom: 20px;
+    margin-bottom: 40px;
   }
   
   .mat-form-field {
