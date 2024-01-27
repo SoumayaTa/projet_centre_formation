@@ -60,8 +60,11 @@
         <button mat-stroked-button color="warn" type="button" (click)="formationForm.reset()">
           Effacer
         </button>
-        <button mat-stroked-button color="primary" type="submit">
+        <button mat-stroked-button color="primary" type="submit" *ngIf="isNewFormation">
           Ajouter la formation
+        </button>
+        <button mat-stroked-button color="primary" type="submit" *ngIf="! isNewFormation">
+          modifier la formation
         </button>
       </div>
     </form>

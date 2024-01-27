@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import univ.iwa.dto.FormationDto;
+import univ.iwa.exception.FormationNotFoundException;
 import univ.iwa.model.Formation;
 import univ.iwa.repository.FormationRepository;
 
@@ -35,14 +36,14 @@ public class FormationService {
     //wiam's version
     public FormationDto addFormation(FormationDto form, MultipartFile image) throws IOException {
         Formation formationEntity = modelMapper.map(form, Formation.class);
-         formationEntity.setDate(LocalDate.now());
-         String pathImage = "src/main/resources/static/images/"+formationEntity.getId() + ".png";
-         image.transferTo(new File(pathImage));
-         String imageUrl = "src/main/resources/static/images/"+formationEntity.getId() + ".png";
-         formationEntity.setPhotos(imageUrl);
-         Formation savedFormation = repository.save(formationEntity);
-         return modelMapper.map(savedFormation, FormationDto.class);
-     }
+        formationEntity.setDate(LocalDate.now());
+        String pathImage = "src/main/resources/static/images/" + formationEntity.getId() + ".png";
+        image.transferTo(new File(pathImage));
+        String imageUrl = "src/main/resources/static/images/" + formationEntity.getId() + ".png";
+        formationEntity.setPhotos(imageUrl);
+        Formation savedFormation = repository.save(formationEntity);
+        return modelMapper.map(savedFormation, FormationDto.class);
+    }
 
 
     public String deleteFormation(Long id) {
@@ -56,14 +57,14 @@ public class FormationService {
         }
     }
 
-    public FormationDto updateFormation(Long id, FormationDto newForm) {
-        Optional<Formation> existingFormOptional = repository.findById(id);
-        Formation existingForm = existingFormOptional.get();
-        //la date a modifie f front
-        modelMapper.map(newForm, existingForm);
-        repository.save(existingForm);
-        return modelMapper.map(existingForm, FormationDto.class);
-    }
+//    public FormationDto updateFormation(Long id, FormationDto newForm) {
+//        Optional<Formation> existingFormOptional = repository.findById(id);
+//        Formation existingForm = existingFormOptional.get();
+//        //la date a modifie f front
+//        modelMapper.map(newForm, existingForm);
+//        repository.save(existingForm);
+//        return modelMapper.map(existingForm, FormationDto.class);
+//    }
 
     public List<FormationDto> findByCategorie(String categorie) {
         List<Formation> formations = repository.findByCategorie(categorie);
@@ -93,7 +94,7 @@ public class FormationService {
                 .collect(Collectors.toList());
     }
 
-//    public FormationDto addFormationim(FormationDto form, MultipartFile image) throws IOException {
+    //    public FormationDto addFormationim(FormationDto form, MultipartFile image) throws IOException {
 //        Formation formationEntity = modelMapper.map(form, Formation.class);
 //        formationEntity.setDate(LocalDate.now());
 //        Formation savedFormation = repository.save(formationEntity);
@@ -105,44 +106,132 @@ public class FormationService {
 //        return modelMapper.map(savedFormation, FormationDto.class);
 //    }
     public FormationDto addFormationim(
+            String nom,
+            Long nombreHeur,
+            Long cout,
+            String objectifs,
+            String programme,
+            String categorie,
+            String ville,
+            Long groupe_seuil,
+            MultipartFile image
+    ) throws IllegalStateException, IOException {
+        Formation formationEntity = modelMapper.map(new FormationDto(
+                nom,
+                nombreHeur,
+                cout,
+                objectifs,
+                programme,
+                categorie,
+                ville,
+                groupe_seuil
+        ), Formation.class);
+        formationEntity.setDate(LocalDate.now());
+        System.out.println("yousseeeeef");
+        String pathImage = "src/main/resources/static/images" + formationEntity.getId() + ".png";
+        image.transferTo(new File(pathImage));
+
+        String imagePath = pathImage + "/" + formationEntity.getId() + ".png";
+        image.transferTo(Paths.get(imagePath));
+        String imageUrl = "src/main/resources/static/images/" + formationEntity.getId() + ".png";
+        formationEntity.setPhotos(imageUrl);
+
+        repository.save(formationEntity);
+        return modelMapper.map(formationEntity, FormationDto.class);
+    }
+
+    public FormationDto updateFormation(
+            Long id,
+            String nom,
+            Long nombreHeur,
+            Long cout,
+            String objectifs,
+            String programme,
+            String categorie,
+            String ville,
+            MultipartFile image
+    ) throws IllegalStateException, IOException {
+        Optional<Formation> optionalFormation = repository.findById(id);
+
+        if (optionalFormation.isPresent()) {
+            Formation existingFormation = optionalFormation.get();
+
+            // Mettez à jour les champs nécessaires
+            existingFormation.setNom(nom);
+            existingFormation.setNombreHeur(nombreHeur);
+            existingFormation.setCout(cout);
+            existingFormation.setObjectifs(objectifs);
+            existingFormation.setProgramme(programme);
+            existingFormation.setCategorie(categorie);
+            existingFormation.setVille(ville);
+
+            if (image != null) {
+                // Mettez à jour l'image seulement si elle est fournie
+                String pathImage = "src/main/resources/static/images/";
+                Files.createDirectories(Paths.get(pathImage));
+                String imagePath = pathImage + existingFormation.getId() + ".png";
+                image.transferTo(Paths.get(imagePath));
+                String imageUrl = "http://localhost:8080/images/" + existingFormation.getId() + ".png";
+                existingFormation.setPhotos(imageUrl);
+            }
+
+            existingFormation = repository.save(existingFormation);
+
+            return modelMapper.map(existingFormation, FormationDto.class);
+        } else {
+            throw new FormationNotFoundException("Formation with id " + id + " not found");
+        }
+    }
+        public List<String> getAllVilles () {
+            return repository.getDistinctVilles();
+        }
+
+        public FormationDto updateFormationWithoutImage (
+                Long id,
                 String nom,
                 Long nombreHeur,
                 Long cout,
                 String objectifs,
                 String programme,
                 String categorie,
-                String ville,
-                Long groupe_seuil,
-                MultipartFile image
-        ) throws IllegalStateException, IOException {
-            Formation formationEntity = modelMapper.map(new FormationDto(
-                    nom,
-                    nombreHeur,
-                    cout,
-                    objectifs,
-                    programme,
-                    categorie,
-                    ville,
-                    groupe_seuil
-                    ), Formation.class);
-            formationEntity.setDate(LocalDate.now());
-            formationEntity = repository.save(formationEntity);
-            String pathImage = "src/main/resources/static/images";
-            Files.createDirectories(Paths.get(pathImage));
-            String imagePath = pathImage+"/"+ formationEntity.getId() + ".png";
-            image.transferTo(Paths.get(imagePath));
-            String imageUrl = "http://localhost:8080/images/" + formationEntity.getId() + ".png";
-            formationEntity.setPhotos(imageUrl);
-            repository.save(formationEntity);
-            return modelMapper.map(formationEntity, FormationDto.class);
+                String ville
+    ){
+            Optional<Formation> optionalFormation = repository.findById(id);
+
+            if (optionalFormation.isPresent()) {
+                Formation existingFormation = optionalFormation.get();
+
+                // Mettez à jour les champs nécessaires
+                existingFormation.setNom(nom);
+                existingFormation.setNombreHeur(nombreHeur);
+                existingFormation.setCout(cout);
+                existingFormation.setObjectifs(objectifs);
+                existingFormation.setProgramme(programme);
+                existingFormation.setCategorie(categorie);
+                existingFormation.setVille(ville);
+
+                existingFormation = repository.save(existingFormation);
+
+                return modelMapper.map(existingFormation, FormationDto.class);
+            } else {
+                throw new FormationNotFoundException("Formation with id " + id + " not found");
+            }
         }
 
-    public List<String> getAllVilles() {
-        return repository.getDistinctVilles();
-    }
+
+        public FormationDto getFormationById (Long id){
+            Optional<Formation> optionalFormation = repository.findById(id);
+
+            if (optionalFormation.isPresent()) {
+                Formation formation = optionalFormation.get();
+                return modelMapper.map(formation, FormationDto.class);
+            } else {
+                throw new FormationNotFoundException("Formation with id " + id + " not found");
+            }
+        }
 
     public List<String> getAllCategories() {
         return repository.getDistinctCategories();
     }
-}
+    }
 

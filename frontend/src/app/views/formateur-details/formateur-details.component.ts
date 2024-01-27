@@ -1,10 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Formateur } from 'src/app/model/Formateur.model';
 import { FormateurService } from 'src/app/shared/services/formateur.service';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
-import { FormateurEditDialogComponent } from '../formateur-edit-dialog/formateur-edit-dialog.component';
 import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
@@ -15,11 +15,12 @@ import { SelectionModel } from '@angular/cdk/collections';
 export class FormateurDetailsComponent implements OnInit {
   FormateurDetails :Formateur []=[];
   displayedColumns:String[] = ['id', 'name', 'email','Actions']
-  selectedRow: Formateur | undefined;
-  selection = new SelectionModel<Formateur>(true, []);
+  selectedFormateurId: number | null = null;
 
 
-  constructor(private formateurService: FormateurService, private dialog: MatDialog) { }
+  constructor(private formateurService: FormateurService, private dialog: MatDialog,
+    private router:Router
+    ) { }
   ngOnInit(): void {
    this.showFormateur();
   }
@@ -90,30 +91,9 @@ export class FormateurDetailsComponent implements OnInit {
       }
     });
 }
-public editFormateurDetails(idFormateur: number): void {
-  console.log("gggg");
-  this.formateurService.getFormateurById(idFormateur).subscribe(
-    (formateur: Formateur) => {
-      console.log('Informations du formateur :', formateur);
-      const dialogRef = this.dialog.open<FormateurEditDialogComponent, Formateur>(FormateurEditDialogComponent, {
-        width: '400px',
-        data: formateur,
-      });
-      dialogRef.afterClosed().subscribe(result => {
-        if (result) {
-          console.log('Données modifiées du formateur :', result);
-          this.updatformatuer(idFormateur,formateur);
-          // Mettez à jour la liste des formateurs ou effectuez d'autres opérations nécessaires
-          // ...
-        }
-      });
-    },
-    (error) => {
-      console.error('Erreur lors de la récupération du formateur :', error);
-      // Gérer l'erreur
-    }
-  );
-      
+public editFormateurDetails(id: number): void {
+  this.selectedFormateurId = id;
+  this.router.navigate(['/addFormateur'], { queryParams: { id: id } });
   
 }
 

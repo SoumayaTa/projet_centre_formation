@@ -25,7 +25,6 @@ public class FormationDto {
     private LocalDate date;
     private String photos;
     private Long groupe_seuil;
-
     public FormationDto(String nom, Long nombreHeur, Long cout, String objectifs, String programme, String categorie, String ville,Long groupe_seuil) {
         this.nom = nom;
         this.nombreHeur = nombreHeur;

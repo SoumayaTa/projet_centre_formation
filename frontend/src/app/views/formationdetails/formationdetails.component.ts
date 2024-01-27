@@ -15,7 +15,7 @@ import { Inscription } from 'src/app/model/inscription.model';
   styleUrls: ['./formationdetails.component.css']
 })
 export class FormationdetailsComponent implements OnInit {
-  formationId: number | undefined;
+  formationId!: number;
   showInscriptionForm: boolean = false;
   inscriptionFormateur:FormGroup;
   inscriptionForm: FormGroup;

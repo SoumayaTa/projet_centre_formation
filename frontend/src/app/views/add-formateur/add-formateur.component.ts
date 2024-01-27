@@ -5,6 +5,7 @@ import { FormateurService } from 'src/app/shared/services/formateur.service';
 import { Formateur } from 'src/app/model/Formateur.model';
 import { UserAuthService } from 'src/app/shared/services/user-auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-add-formateur',
   templateUrl: './add-formateur.component.html',
@@ -19,10 +20,12 @@ export class AddFormateurComponent implements OnInit {
     email: '',
     mots_cles:''
   }
-
+  editingFormateurId: number | null = null;
+  isNewFormateur= true;
   constructor(private formBuilder: FormBuilder, private formateurService: FormateurService,
     private userAuthService: UserAuthService,
     private toastr: ToastrService,
+    private route:ActivatedRoute
     ) {
     this.formateurForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
@@ -31,7 +34,26 @@ export class AddFormateurComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      const formationId = params['id'];
+      if (formationId) {
+        this.loadFormationDetails(formationId);
+        this.editingFormateurId = formationId;
+        this.isNewFormateur = false;
+      }
+    });
+  }
+  loadFormationDetails(formateurId: number) {
+    this.formateurService.getFormateurById(formateurId).subscribe(
+      (formateur) => {
+        this.formateurForm.patchValue(formateur);
+      },
+      (error) => {
+        console.error('Erreur lors du chargement des détails de la formation :', error);
+      }
+    );
+  }
 
   addFormateur() {
     const formateurData = this.prepareFormData(this.formateurForm);

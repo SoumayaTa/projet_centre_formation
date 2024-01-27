@@ -16,10 +16,11 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import univ.iwa.filters.JwtAuthFilter;
 import univ.iwa.service.UserInfoService;
 
-import static org.springframework.security.config.Customizer.withDefaults;
+
 
 @Configuration
 @EnableWebSecurity
@@ -37,6 +38,11 @@ public class SecurityConfig {
 				.authorizeHttpRequests((auth)->auth
 			.requestMatchers("/auth/welcome","/images/**","/externe/**", "/auth/addNewUser","/auth/getFormateurById/**","/auth/generateToken","/form/categories","/form/villes", "/form/getByFilters","/form/getall","/form/addFormation/image","/individus/**").permitAll()
 			.requestMatchers("/auth/assistant/**").authenticated()
+
+								.requestMatchers("/images/**").permitAll()
+								.requestMatchers("/auth/welcome", "/auth/addNewUser", "/auth/generateToken", "/form/getByDate/**", "/form/getByVille/**", "/form/getByCategorie/**","/form/getall").permitAll()
+								.requestMatchers("/auth/assistant/**").authenticated()
+
 			.requestMatchers("/auth/admin/**").authenticated()
 								.requestMatchers("/auth/updateUser/**").authenticated()
 								.requestMatchers("/auth/format/**").authenticated()
@@ -47,6 +53,7 @@ public class SecurityConfig {
 								.requestMatchers("/auth/deleteFormateur/**").authenticated()
 								
 								
+
 
 				).csrf(csrf->csrf.disable())
 			.authenticationProvider(authenticationProvider())
@@ -76,6 +83,9 @@ public class SecurityConfig {
 		config.addAllowedOrigin("http://localhost:4200");
 		config.addAllowedHeader("*");
 		config.addAllowedMethod("*");
+		// Ajoutez ce bloc pour permettre CORS pour /images/**
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/images/**", config);
 		return config;
 	}
 	

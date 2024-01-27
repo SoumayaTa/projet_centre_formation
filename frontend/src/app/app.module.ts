@@ -20,11 +20,15 @@ import { ToastrModule } from 'ngx-toastr';
 import { FormateurDetailsComponent } from './views/formateur-details/formateur-details.component';
 import { ConfirmationDialogComponent } from './views/confirmation-dialog/confirmation-dialog.component';
 import { FormationComponent } from './views/formation/formation.component';
-import { FormateurEditDialogComponent } from './views/formateur-edit-dialog/formateur-edit-dialog.component';
-import { CommonModule } from '@angular/common';
-import { FormationdetailsComponent } from './views/formationdetails/formationdetails.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthGuard } from './auth.guard';
+import { AuthInterceptor } from './auth.interceptor';
+import { UserService } from './shared/services/user.service';
+import { MatIconModule } from '@angular/material/icon';
+import { ShowFormationComponent } from './views/show-formation/show-formation.component';
 import { InscriptionFormComponent } from './views/inscription-form/inscription-form.component';
 import { InscriptionformateurexeterneComponent } from './views/inscriptionformateurexeterne/inscriptionformateurexeterne.component';
+import { FormationdetailsComponent } from './views/formationdetails/formationdetails.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,11 +42,10 @@ import { InscriptionformateurexeterneComponent } from './views/inscriptionformat
     FormateurDetailsComponent,
     ConfirmationDialogComponent,
     FormationComponent,
-    FormateurEditDialogComponent,
-    FormationdetailsComponent,
+    ShowFormationComponent,
     InscriptionFormComponent,
-    InscriptionformateurexeterneComponent
-    
+    InscriptionformateurexeterneComponent,
+    FormationdetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +58,7 @@ import { InscriptionformateurexeterneComponent } from './views/inscriptionformat
     FormsModule,
     ReactiveFormsModule,
     AgrupaMaterialModule,
-    CommonModule,
+    MatIconModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-top-right',
@@ -64,7 +67,11 @@ import { InscriptionformateurexeterneComponent } from './views/inscriptionformat
    
 
   ],
-  providers: [],
+  providers: [AuthGuard,{
+    provide:HTTP_INTERCEPTORS,
+    useClass:AuthInterceptor,
+    multi:true
+  },UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

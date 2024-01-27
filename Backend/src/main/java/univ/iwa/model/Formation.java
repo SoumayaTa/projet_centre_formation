@@ -26,6 +26,7 @@ public class Formation {
     private String categorie;
     private String ville;
     private LocalDate date;
+
     private  String photos;
     private Long groupe_seuil;
 
@@ -34,5 +35,8 @@ public class Formation {
 
     @OneToMany(mappedBy = "formation")
     private List<Groupe> groupes;
+
+
+
 
 }

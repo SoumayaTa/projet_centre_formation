@@ -78,7 +78,11 @@ public class UserController {
     public String formatProfile() {
         return "Welcome to Instructor Profile";
     }
-
+    @PutMapping("/format/updateFormateur/{id}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    public UserInfoDto updateFormateur(@RequestBody UserInfoDto formateurDto, @PathVariable int id) {
+        return userInfoService.updateFormateur(formateurDto, id);
+    }
     @DeleteMapping("/deleteFormateur/{id}")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public void deleteFormateur(@PathVariable("id") long id) {
@@ -108,4 +112,6 @@ public class UserController {
             throw new UsernameNotFoundException("Invalid user request!");
         }
     }
+
+
 }
