@@ -32,6 +32,7 @@ import { FormationdetailsComponent } from './views/formationdetails/formationdet
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { TestCompenentComponent } from './views/test-compenent/test-compenent.component';
 import { AjouterEntrepriseComponent } from './views/ajouter-entreprise/ajouter-entreprise.component';
+import { MatChipsModule } from '@angular/material/chips';
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,6 +65,7 @@ import { AjouterEntrepriseComponent } from './views/ajouter-entreprise/ajouter-e
     ReactiveFormsModule,
     AgrupaMaterialModule,
     MatIconModule,
+    MatChipsModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-top-right',
