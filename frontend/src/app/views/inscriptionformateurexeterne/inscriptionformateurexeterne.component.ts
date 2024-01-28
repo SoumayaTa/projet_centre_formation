@@ -1,32 +1,58 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
+import { Inscription } from 'src/app/model/inscription.model';
+import { InscriptionformateurexternService } from 'src/app/shared/services/inscriptionformateurextern.service';
 
 @Component({
-  selector: 'app-inscriptionformateurexeterne',
+  selector: 'app-inscriptionformateurexterne',
   templateUrl: './inscriptionformateurexeterne.component.html',
   styleUrls: ['./inscriptionformateurexeterne.component.css']
 })
-export class InscriptionformateurexeterneComponent {
+export class InscriptionformateurexeterneComponent implements OnInit {
+  formateurexterne: Inscription = {
+    name: '',
+    email: '',
+    mots_cles: '',
+    date: new Date()
+  };
   inscriptionFormateur: FormGroup;
+
   constructor(
-    private dialogRef: MatDialogRef<InscriptionformateurexeterneComponent>,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private toastr: ToastrService,
+    private inscriptionforservice: InscriptionformateurexternService,
+   
   ) {
     this.inscriptionFormateur = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email]],
       mots_cles: ['', [Validators.required, Validators.minLength(2)]],
-     
     });
   }
+
   ngOnInit(): void {}
-  submitInscription(): void {
-    console.log("valeur recuprer de la formulaire ",this.inscriptionFormateur.value);
-    const formValues = this.inscriptionFormateur.value;
-    this.dialogRef.close(formValues);
+
+  inscriotionformateurexterne(): void {
+    if (this.inscriptionFormateur.valid) {
+      const { name, email, mots_cles } = this.inscriptionFormateur.value;
+      this.inscriptionforservice.inscriptionFormateurExtern(name, email, mots_cles)
+        .subscribe(
+          (result) => {
+            // Traitement du résultat si nécessaire
+            console.log('Inscription réussie:', result);
+            this.toastr.success('Inscription réussie', 'Inscription réussie');
+            // Fermer la boîte de dialogue ou effectuer une autre action après inscription réussie
+           
+          },
+          (error) => {
+            // Traitement de l'erreur si nécessaire
+            console.error('Erreur lors de l\'inscription:', error);
+          }
+        );
+    }
   }
-  cancel(): void {
-    this.dialogRef.close();
-  }
+
+ 
 }

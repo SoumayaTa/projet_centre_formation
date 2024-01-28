@@ -1,11 +1,20 @@
-<div *ngIf="formationId !== undefined">
+<div *ngIf="formationId !== undefined" class="formation-details-container">
     <h2>Details de la formation</h2>
+    <img src="http://localhost:8080/images/{{ formationId }}.png" alt="{{ formationId }} Image" class="formation-image">
     <p>ID de la formation : {{ formationId }}</p>
+    <p>ville de la formation: {{ ville }}</p>
+    <p> date: {{ date }}</p>
   
     <!-- Ajouter d'autres détails de la formation ici -->
+    <!-- Exemple de champ supplémentaire -->
+    
   
-    <button mat-raised-button color="primary" (click)="openInscriptionForm(formationId)">Inscrire</button>
-    <button mat-raised-button color="accent" (click)="openInscriptionFormateur(formationId)">Devenir formateur</button>
+    <div class="button-container">
+      <button mat-raised-button color="primary" (click)="openInscriptionForm(formationId)">Inscrire</button>
+    </div>
   
     <!-- Afficher le formulaire d'inscription si showInscriptionForm est true -->
     
+    </div>
+  
+  
