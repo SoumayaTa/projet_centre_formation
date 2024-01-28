@@ -43,7 +43,7 @@
     <button mat-raised-button color="primary" [routerLink]="['/formationdetails']" [queryParams]="{ id: formation.id }">Voir plus de détails</button>
   </div>
 </div>
-
+</div>
 <mat-dialog-content *ngIf="selectedFormation">
   <!-- Affichez les détails de la formation sélectionnée ici -->
   <h2>{{ selectedFormation.nom }}</h2>
@@ -53,4 +53,3 @@
   <p>Ville : {{ selectedFormation.ville }}</p>
   <button mat-raised-button color="warn" (click)="closeDetails()">Fermer</button>
 </mat-dialog-content>
-</div>

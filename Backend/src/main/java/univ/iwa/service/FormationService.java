@@ -37,7 +37,7 @@ public class FormationService {
     public FormationDto addFormation(FormationDto form, MultipartFile image) throws IOException {
         Formation formationEntity = modelMapper.map(form, Formation.class);
         formationEntity.setDate(LocalDate.now());
-        String pathImage = "src/main/resources/static/images/" + formationEntity.getId() + ".png";
+        String pathImage = "src/main/resources/static/" + formationEntity.getId() + ".png";
         image.transferTo(new File(pathImage));
         String imageUrl = "src/main/resources/static/images/" + formationEntity.getId() + ".png";
         formationEntity.setPhotos(imageUrl);
@@ -105,6 +105,40 @@ public class FormationService {
 //        savedFormation = repository.save(savedFormation);
 //        return modelMapper.map(savedFormation, FormationDto.class);
 //    }
+//    public FormationDto addFormationim(
+//            String nom,
+//            Long nombreHeur,
+//            Long cout,
+//            String objectifs,
+//            String programme,
+//            String categorie,
+//            String ville,
+//            Long groupe_seuil,
+//            MultipartFile image
+//    ) throws IllegalStateException, IOException {
+//        Formation formationEntity = modelMapper.map(new FormationDto(
+//                nom,
+//                nombreHeur,
+//                cout,
+//                objectifs,
+//                programme,
+//                categorie,
+//                ville,
+//                groupe_seuil
+//        ), Formation.class);
+//        formationEntity.setDate(LocalDate.now());
+//        System.out.println("yousseeeeef");
+//        String pathImage = "src/main/resources/static/images" + formationEntity.getId() + ".png";
+//        image.transferTo(new File(pathImage));
+//
+//        String imagePath = pathImage + "/" + formationEntity.getId() + ".png";
+//        image.transferTo(Paths.get(imagePath));
+//        String imageUrl = "src/main/resources/static/images/" + formationEntity.getId() + ".png";
+//        formationEntity.setPhotos(imageUrl);
+//
+//        repository.save(formationEntity);
+//        return modelMapper.map(formationEntity, FormationDto.class);
+//    }
     public FormationDto addFormationim(
             String nom,
             Long nombreHeur,
@@ -127,15 +161,13 @@ public class FormationService {
                 groupe_seuil
         ), Formation.class);
         formationEntity.setDate(LocalDate.now());
-        System.out.println("yousseeeeef");
-        String pathImage = "src/main/resources/static/images" + formationEntity.getId() + ".png";
-        image.transferTo(new File(pathImage));
-
-        String imagePath = pathImage + "/" + formationEntity.getId() + ".png";
+        formationEntity = repository.save(formationEntity);
+        String pathImage = "src/main/resources/static/images/";
+        Files.createDirectories(Paths.get(pathImage));
+        String imagePath = pathImage + formationEntity.getId() + ".png";
         image.transferTo(Paths.get(imagePath));
-        String imageUrl = "src/main/resources/static/images/" + formationEntity.getId() + ".png";
+        String imageUrl = "http://localhost:8080/images/" + formationEntity.getId() + ".png";
         formationEntity.setPhotos(imageUrl);
-
         repository.save(formationEntity);
         return modelMapper.map(formationEntity, FormationDto.class);
     }
