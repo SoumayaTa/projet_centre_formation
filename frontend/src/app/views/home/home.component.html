@@ -1,35 +1,37 @@
 <div class="centered-container">
   <form [formGroup]="filterForm" (ngSubmit)="filterFormations()">
-    
     <div class="horizontal-form-group">
       <div class="form-group">
         <mat-form-field appearance="outline" class="w-100">
           <mat-label>Categorie</mat-label>
-          <input matInput placeholder="Categorie" formControlName="categorie">
+          <mat-select formControlName="categorie" placeholder="Categorie">
+            <mat-option *ngFor="let category of categories" [value]="category">{{ category }}</mat-option>
+          </mat-select>
         </mat-form-field>
       </div>
-    
+  
       <div class="form-group">
         <mat-form-field appearance="outline" class="w-100">
           <mat-label>Ville</mat-label>
-          <input matInput placeholder="Ville" formControlName="ville">
+          <mat-select formControlName="ville" placeholder="Ville">
+            <mat-option *ngFor="let city of villes" [value]="city">{{ city }}</mat-option>
+          </mat-select>
         </mat-form-field>
       </div>
-    
-      <!-- <div class="form-group">
+  
+      <div class="form-group">
         <mat-form-field appearance="outline" class="w-100">
           <mat-label>Date</mat-label>
           <input matInput [matDatepicker]="picker" placeholder="Choisir une date" formControlName="date">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
-      </div> -->
-    
-      <button mat-stroked-button color="primary" type="submit">
-        Filtrer les formations
-      </button>
+      </div>
+  
+      <button mat-stroked-button color="primary" type="submit">Filtrer les formations</button>
     </div>
-  </form>  
+  </form>
+  
 <div class="formation-container">
   <div class="formation-card" *ngFor="let formation of filteredFormations" (click)="showDetails(formation)">
     <h2>{{ formation.nom }}</h2>
@@ -40,7 +42,7 @@
     <button mat-raised-button color="primary" [routerLink]="['/formationdetails']" [queryParams]="{ id: formation.id }">Voir plus de détails</button>
   </div>
 </div>
-
+</div>
 <mat-dialog-content *ngIf="selectedFormation">
   <!-- Affichez les détails de la formation sélectionnée ici -->
   <h2>{{ selectedFormation.nom }}</h2>
@@ -55,4 +57,4 @@
 <div>
 
 </div>
-</div>
+
