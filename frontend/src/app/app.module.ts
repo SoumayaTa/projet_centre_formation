@@ -31,6 +31,7 @@ import { InscriptionformateurexeterneComponent } from './views/inscriptionformat
 import { FormationdetailsComponent } from './views/formationdetails/formationdetails.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { TestCompenentComponent } from './views/test-compenent/test-compenent.component';
+import { AjouterEntrepriseComponent } from './views/ajouter-entreprise/ajouter-entreprise.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +49,8 @@ import { TestCompenentComponent } from './views/test-compenent/test-compenent.co
     InscriptionFormComponent,
     InscriptionformateurexeterneComponent,
     FormationdetailsComponent,
-    TestCompenentComponent
+    TestCompenentComponent,
+    AjouterEntrepriseComponent
   ],
   imports: [
     BrowserModule,

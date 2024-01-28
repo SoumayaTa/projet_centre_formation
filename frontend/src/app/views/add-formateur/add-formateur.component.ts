@@ -75,11 +75,7 @@ export class AddFormateurComponent implements OnInit {
   
 
   prepareFormData(formateurBuilder: any): Formateur {
-    // formateur: Formateur = {
-    //   name: '',
-    //   password: '',
-    //   email: ''
-    // };
+   
     this.formateur.name = formateurBuilder.value.name;
     this.formateur.email = formateurBuilder.value.email;
     this.formateur.password = formateurBuilder.value.password;
