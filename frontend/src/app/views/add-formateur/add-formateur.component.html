@@ -35,10 +35,10 @@
             <mat-label>Email</mat-label>
             <input matInput placeholder="Email" formControlName="email"
               [ngClass]="{'error-field': formateurForm.get('email')?.invalid && formateurForm.get('email')?.touched }">
-            <div *ngIf="formateurForm.get('email')?.hasError('required')" class="error-message">
+            <div *ngIf="formateurForm.get('email')?.hasError('required') && formateurForm.get('email')?.touched" class="error-message">
               L'email est requis.
             </div>
-            <div *ngIf="formateurForm.get('email')?.hasError('email')" class="error-message">
+            <div *ngIf="formateurForm.get('email')?.hasError('email') && formateurForm.get('email')?.touched" class="error-message">
               L'email doit être une adresse email valide.
             </div>
           </mat-form-field>
