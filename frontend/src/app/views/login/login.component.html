@@ -10,10 +10,10 @@
           <input matInput placeholder="Enter your username" type="text" formControlName="username"
             [ngClass]="{'error-field': loginForm?.get('username')?.invalid && loginForm?.get('username')?.touched }"
           >
-          <div *ngIf="loginForm?.get('username')?.hasError('required')" class="error-message">
+          <div *ngIf="loginForm?.get('username')?.hasError('required')  && loginForm?.get('username')?.touched" class="error-message">
             Le nom d'utilisateur est requis.
           </div>
-          <div *ngIf="loginForm?.get('username')?.hasError('minlength')" class="error-message">
+          <div *ngIf="loginForm?.get('username')?.hasError('minlength')  && loginForm?.get('username')?.touched" class="error-message">
             Le nom d'utilisateur doit contenir au moins 3 caractères.
           </div>
         </mat-form-field>
@@ -25,13 +25,13 @@
           <input matInput placeholder="Enter your password" [type]="showPassword ? 'password' : 'text'" formControlName="password"
             [ngClass]="{'error-field-password': loginForm?.get('password')?.invalid && loginForm?.get('password')?.touched }"
           >
-          <div *ngIf="loginForm?.get('password')?.hasError('required')" class="error-message-password">
+          <div *ngIf="loginForm?.get('password')?.hasError('required') && loginForm?.get('password')?.touched" class="error-message-password">
             Le mot de passe est requis.
           </div>
-          <div *ngIf="loginForm?.get('password')?.hasError('maxlength')" class="error-message-password">
+          <div *ngIf="loginForm?.get('password')?.hasError('maxlength') && loginForm?.get('password')?.touched" class="error-message-password">
             Le mot de passe doit contenir moins de 15 caractères.
           </div>
-          <div *ngIf="loginForm?.get('password')?.hasError('minlength')" class="error-message-password">
+          <div *ngIf="loginForm?.get('password')?.hasError('minlength') && loginForm?.get('password')?.touched" class="error-message-password">
             Le mot de passe doit contenir au moins 6 caractères.
           </div>
         </mat-form-field>

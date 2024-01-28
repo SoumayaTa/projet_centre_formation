@@ -3,14 +3,13 @@
     <mat-icon>school</mat-icon>
     <h2 class="form-title">Formulaire de Formation</h2>
     <form [formGroup]="formationForm" (ngSubmit)="addFormation()" novalidate>
-
       <div class="form-columns">
         <div class="form-group left-column">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Nom de la formation</mat-label>
             <input matInput placeholder="Nom" formControlName="nom"
               [ngClass]="{'error-field': formationForm.get('nom')?.invalid && formationForm.get('nom')?.touched }">
-            <div *ngIf="formationForm.get('nom')?.hasError('required')" class="error-message">
+            <div *ngIf="formationForm.get('nom')?.hasError('required') && formationForm.get('nom')?.touched" class="error-message">
               Le nom de la formation est requis.
             </div>
           </mat-form-field>
@@ -19,7 +18,7 @@
             <mat-label>Nombre d'heures</mat-label>
             <input matInput placeholder="Nombre d'heures" formControlName="nombreHeur"
               [ngClass]="{'error-field': formationForm.get('nombreHeur')?.invalid && formationForm.get('nombreHeur')?.touched }">
-            <div *ngIf="formationForm.get('nombreHeur')?.hasError('required')" class="error-message">
+            <div *ngIf="formationForm.get('nombreHeur')?.hasError('required') $$ formationForm.get('nombreHeur')?.touched " class="error-message">
               Le nombre d'heures est requis.
             </div>
           </mat-form-field>
@@ -32,7 +31,7 @@
             <mat-label>Coût</mat-label>
             <input matInput placeholder="Coût" formControlName="cout"
               [ngClass]="{'error-field': formationForm.get('cout')?.invalid && formationForm.get('cout')?.touched }">
-            <div *ngIf="formationForm.get('cout')?.hasError('required')" class="error-message">
+            <div *ngIf="formationForm.get('cout')?.hasError('required') && formationForm.get('cout')?.touched" class="error-message">
               Le coût est requis.
             </div>
           </mat-form-field>
@@ -41,7 +40,7 @@
             <mat-label>programme</mat-label>
             <input matInput placeholder="programme" formControlName="programme"
               [ngClass]="{'error-field': formationForm.get('programme')?.invalid && formationForm.get('programme')?.touched }">
-            <div *ngIf="formationForm.get('programme')?.hasError('required')" class="error-message">
+            <div *ngIf="formationForm.get('programme')?.hasError('required') && formationForm.get('programme')?.touched" class="error-message">
               Le programme est requis.
             </div>
           </mat-form-field>
@@ -56,7 +55,7 @@
             <mat-label>categorie</mat-label>
             <input matInput placeholder="categorie" formControlName="categorie"
               [ngClass]="{'error-field': formationForm.get('categorie')?.invalid && formationForm.get('categorie')?.touched }">
-            <div *ngIf="formationForm.get('categorie')?.hasError('required')" class="error-message">
+            <div *ngIf="formationForm.get('categorie')?.hasError('required') && formationForm.get('categorie')?.touched" class="error-message">
               Le categorie est requis.
             </div>
           </mat-form-field>
@@ -69,7 +68,7 @@
             <mat-label>ville</mat-label>
             <input matInput placeholder="ville" formControlName="ville"
               [ngClass]="{'error-field': formationForm.get('ville')?.invalid && formationForm.get('ville')?.touched }">
-            <div *ngIf="formationForm.get('ville')?.hasError('required')" class="error-message">
+            <div *ngIf="formationForm.get('ville')?.hasError('required') && formationForm.get('ville')?.touched" class="error-message">
               Le ville est requis.
             </div>
           </mat-form-field>
@@ -84,7 +83,7 @@
             <mat-label>Objectifs</mat-label>
             <textarea matInput placeholder="Objectifs" formControlName="objectifs"
               [ngClass]="{'error-field': formationForm.get('objectifs')?.invalid && formationForm.get('objectifs')?.touched }"></textarea>
-            <div *ngIf="formationForm.get('objectifs')?.hasError('required')" class="error-message">
+            <div *ngIf="formationForm.get('objectifs')?.hasError('required') && formationForm.get('objectifs')?.touched" class="error-message">
               Les objectifs sont requis.
             </div>
           </mat-form-field>
