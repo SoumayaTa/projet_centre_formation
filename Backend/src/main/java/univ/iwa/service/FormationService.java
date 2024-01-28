@@ -2,6 +2,9 @@ package univ.iwa.service;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import univ.iwa.dto.FormationDto;
@@ -87,58 +90,23 @@ public class FormationService {
                 .collect(Collectors.toList());
     }
 
-    public List<FormationDto> getAllFormations() {
-        List<Formation> formations = repository.findAll();
-        return formations.stream()
-                .map(formation -> modelMapper.map(formation, FormationDto.class))
-                .collect(Collectors.toList());
-    }
+        public List<FormationDto> getAllFormations(int pageNumber, String searchKey) {
+            Pageable pageable = PageRequest.of(pageNumber, 7);
 
-    //    public FormationDto addFormationim(FormationDto form, MultipartFile image) throws IOException {
-//        Formation formationEntity = modelMapper.map(form, Formation.class);
-//        formationEntity.setDate(LocalDate.now());
-//        Formation savedFormation = repository.save(formationEntity);
-//        String pathImage = "src/main/resources/static/" + savedFormation.getId() + ".png";
-//        image.transferTo(new File(pathImage));
-//        String imageUrl = "http://localhost:8080/images/" + savedFormation.getId() + ".png";
-//        savedFormation.setPhotos(imageUrl);
-//        savedFormation = repository.save(savedFormation);
-//        return modelMapper.map(savedFormation, FormationDto.class);
-//    }
-//    public FormationDto addFormationim(
-//            String nom,
-//            Long nombreHeur,
-//            Long cout,
-//            String objectifs,
-//            String programme,
-//            String categorie,
-//            String ville,
-//            Long groupe_seuil,
-//            MultipartFile image
-//    ) throws IllegalStateException, IOException {
-//        Formation formationEntity = modelMapper.map(new FormationDto(
-//                nom,
-//                nombreHeur,
-//                cout,
-//                objectifs,
-//                programme,
-//                categorie,
-//                ville,
-//                groupe_seuil
-//        ), Formation.class);
-//        formationEntity.setDate(LocalDate.now());
-//        System.out.println("yousseeeeef");
-//        String pathImage = "src/main/resources/static/images" + formationEntity.getId() + ".png";
-//        image.transferTo(new File(pathImage));
-//
-//        String imagePath = pathImage + "/" + formationEntity.getId() + ".png";
-//        image.transferTo(Paths.get(imagePath));
-//        String imageUrl = "src/main/resources/static/images/" + formationEntity.getId() + ".png";
-//        formationEntity.setPhotos(imageUrl);
-//
-//        repository.save(formationEntity);
-//        return modelMapper.map(formationEntity, FormationDto.class);
-//    }
+            Page<Formation> page;
+            if (searchKey.equals("")) {
+                page = repository.findAll(pageable);
+            } else {
+                page = repository.findByNomContainingIgnoreCaseOrVilleContainingIgnoreCase(
+                        searchKey, searchKey, pageable
+                );
+            }
+
+            return page.getContent().stream()
+                    .map(formation -> modelMapper.map(formation, FormationDto.class))
+                    .collect(Collectors.toList());
+        }
+
     public FormationDto addFormationim(
             String nom,
             Long nombreHeur,
@@ -171,7 +139,6 @@ public class FormationService {
         repository.save(formationEntity);
         return modelMapper.map(formationEntity, FormationDto.class);
     }
-
     public FormationDto updateFormation(
             Long id,
             String nom,

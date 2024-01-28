@@ -31,20 +31,15 @@ public class IndividusService {
     public IndividusDto inscription(IndividusDto individuDto, Long formationId) {
         Formation formation = formationRepository.findById(formationId).orElseThrow(() -> new IllegalArgumentException("Formation not found"));
         Groupe groupe = getOrCreateGroupe(formation);
-        
         Individus individus = modelMapper.map(individuDto, Individus.class);
         individus.setGroupe(groupe);
         individus.setFormation(formation);
-       
         Individus savedIndividu = individusRepository.save(individus);
-       
-
         return modelMapper.map(savedIndividu, IndividusDto.class);
     }
 
     private Groupe getOrCreateGroupe(Formation formation) {
         List<Groupe> existingGroupes = formation.getGroupes();
-
         if (existingGroupes == null || existingGroupes.isEmpty()) {
             return createNewGroupe(formation);
         }
@@ -52,7 +47,6 @@ public class IndividusService {
         if (currentGroup.getInscrits().size() >= formation.getGroupe_seuil()) {
             return createNewGroupe(formation);
         }
-
         return currentGroup;
     }
 
