@@ -31,6 +31,7 @@ import { InscriptionformateurexeterneComponent } from './views/inscriptionformat
 import { FormationdetailsComponent } from './views/formationdetails/formationdetails.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { TestCompenentComponent } from './views/test-compenent/test-compenent.component';
+import { MatChipsModule } from '@angular/material/chips';
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,6 +63,7 @@ import { TestCompenentComponent } from './views/test-compenent/test-compenent.co
     ReactiveFormsModule,
     AgrupaMaterialModule,
     MatIconModule,
+    MatChipsModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-top-right',
