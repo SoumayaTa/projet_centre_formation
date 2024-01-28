@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 import { Inscription } from 'src/app/model/inscription.model';
 import { InscriptionformateurexternService } from 'src/app/shared/services/inscriptionformateurextern.service';
 
@@ -20,6 +21,7 @@ export class InscriptionformateurexeterneComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private toastr: ToastrService,
     private inscriptionforservice: InscriptionformateurexternService,
    
   ) {
@@ -40,6 +42,7 @@ export class InscriptionformateurexeterneComponent implements OnInit {
           (result) => {
             // Traitement du résultat si nécessaire
             console.log('Inscription réussie:', result);
+            this.toastr.success('Inscription réussie', 'Inscription réussie');
             // Fermer la boîte de dialogue ou effectuer une autre action après inscription réussie
            
           },
