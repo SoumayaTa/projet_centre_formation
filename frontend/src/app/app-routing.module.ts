@@ -13,6 +13,7 @@ import { ShowFormationComponent } from './views/show-formation/show-formation.co
 import { FormationdetailsComponent } from './views/formationdetails/formationdetails.component';
 import { TestCompenentComponent } from './views/test-compenent/test-compenent.component';
 import { InscriptionformateurexeterneComponent } from './views/inscriptionformateurexeterne/inscriptionformateurexeterne.component';
+import { AjouterEntrepriseComponent } from './views/ajouter-entreprise/ajouter-entreprise.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent},
@@ -24,6 +25,12 @@ const routes: Routes = [
   { path: 'allFormateur', component: FormateurDetailsComponent,canActivate:[AuthGuard],data:{roles:['ROLE_ADMIN']}},
   { path: 'addformation', component: FormationComponent, canActivate:[AuthGuard], data:{roles:['ROLE_ADMIN']}},
   { path: 'showFormation', component: ShowFormationComponent,canActivate:[AuthGuard],data:{roles:['ROLE_ADMIN']}},
+  { 
+    path: 'addEntreprise', 
+    component: AjouterEntrepriseComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['ROLE_ADMIN', 'ROLE_ASSISTANT'] }
+  },
   { path: 'formationdetails', component: FormationdetailsComponent},
   { path: 'testCompenent', component: TestCompenentComponent},
   { path: "joinus", component:InscriptionformateurexeterneComponent},

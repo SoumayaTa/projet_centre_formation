@@ -28,4 +28,7 @@ export class HeaderComponent implements OnInit {
     return this.userAuthService.isAdmin();
   }
   
+  public isAssistant(){
+    return this.userAuthService.isAssistant();
+  }
 }

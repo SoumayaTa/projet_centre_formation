@@ -31,6 +31,7 @@ import { InscriptionformateurexeterneComponent } from './views/inscriptionformat
 import { FormationdetailsComponent } from './views/formationdetails/formationdetails.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { TestCompenentComponent } from './views/test-compenent/test-compenent.component';
+import { AjouterEntrepriseComponent } from './views/ajouter-entreprise/ajouter-entreprise.component';
 import { MatChipsModule } from '@angular/material/chips';
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { MatChipsModule } from '@angular/material/chips';
     InscriptionFormComponent,
     InscriptionformateurexeterneComponent,
     FormationdetailsComponent,
-    TestCompenentComponent
+    TestCompenentComponent,
+    AjouterEntrepriseComponent
   ],
   imports: [
     BrowserModule,
