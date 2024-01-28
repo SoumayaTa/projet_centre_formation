@@ -35,6 +35,8 @@ export class ShowFormationComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    console.log("ysf");
+    
     this.showFormations();
   }
 
