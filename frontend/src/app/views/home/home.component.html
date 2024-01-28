@@ -40,7 +40,7 @@
     <p>Durée : {{ formation.nombreHeur }} heures</p>
     <p>Date : {{ formation.date }}</p>
     <p>Ville : {{ formation.ville }}</p>
-    <button mat-raised-button color="primary" [routerLink]="['/formationdetails']" [queryParams]="{ id: formation.id }">Voir plus de détails</button>
+    <button mat-raised-button color="primary" [routerLink]="['/formationdetails']" [queryParams]="{ id: formation.id,nombreHeur:formation.nombreHeur,cout: formation.cout,objectifs:formation.objectifs, ville:formation.ville,date:formation.date, photos:formation.photos,}">Voir plus de détails</button>
   </div>
 </div>
 

@@ -12,6 +12,7 @@ import { FormationComponent } from './views/formation/formation.component';
 import { ShowFormationComponent } from './views/show-formation/show-formation.component';
 import { FormationdetailsComponent } from './views/formationdetails/formationdetails.component';
 import { TestCompenentComponent } from './views/test-compenent/test-compenent.component';
+import { InscriptionformateurexeterneComponent } from './views/inscriptionformateurexeterne/inscriptionformateurexeterne.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent},
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'showFormation', component: ShowFormationComponent,canActivate:[AuthGuard],data:{roles:['ROLE_ADMIN']}},
   { path: 'formationdetails', component: FormationdetailsComponent},
   { path: 'testCompenent', component: TestCompenentComponent},
+  { path: "joinus", component:InscriptionformateurexeterneComponent},
   { path: '**', redirectTo: 'home'}    
 ];
 @NgModule({

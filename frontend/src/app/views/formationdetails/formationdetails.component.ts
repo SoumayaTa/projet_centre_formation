@@ -16,6 +16,15 @@ import { Inscription } from 'src/app/model/inscription.model';
 })
 export class FormationdetailsComponent implements OnInit {
   formationId!: number;
+  nom: string | undefined;
+  nombreHeur: number | undefined;
+  cout: number | undefined;
+  objectifs: string | undefined;
+  programme: string | undefined;
+  categorie?: string;
+  ville?: string;
+  date?: Date;
+  photos?: string;
   showInscriptionForm: boolean = false;
   inscriptionFormateur:FormGroup;
   inscriptionForm: FormGroup;
@@ -54,6 +63,12 @@ export class FormationdetailsComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.formationId = params['id'];
+      this.nombreHeur=params['nombreHeur'];
+      this.ville=params["ville"];
+      this.date=params['date'];
+      
+
+
     });
   }
 
