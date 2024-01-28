@@ -89,8 +89,8 @@ export class HomeComponent implements OnInit {
     const categorie = this.filterForm.get('categorie')?.value || '';
     const ville = this.filterForm.get('ville')?.value || '';
     const dateControl = this.filterForm.get('date');
-    const date = dateControl?.value ? this.datePipe.transform(dateControl.value, 'yyyy-MM-dd') : '';
-    this.formationService.getByFilters(categorie, ville, date).subscribe(
+    // const date = dateControl ? this.datePipe.transform(dateControl.value, 'yyyy-MM-dd') : '';
+    this.formationService.getByFilters(categorie, ville).subscribe(
       (formations: Formation[]) => {
         this.filteredFormations = formations;
       },

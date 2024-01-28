@@ -91,11 +91,7 @@ export class FormateurDetailsComponent implements OnInit {
       }
     });
 }
-public editFormateurDetails(id: number): void {
-  this.selectedFormateurId = id;
-  this.router.navigate(['/addFormateur'], { queryParams: { id: id } });
-  
-}
+
 
 }
 

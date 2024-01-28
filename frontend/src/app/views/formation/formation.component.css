@@ -9,14 +9,40 @@
 }
 
 .card {
-  width: 400px;
+  width: 90%;
+  max-width: 800px;
   background-color: rgba(255, 255, 255, 0.8);
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.form-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 
 .form-group {
   margin-bottom: 20px;
+}
+
+.form-columns {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.left-column, .right-column {
+  width: calc(48% - 10px);
+}
+
+.column-space {
+  width: 20px;
+}
+
+.row-space {
+  height: 20px;
 }
 
 mat-form-field {
@@ -29,12 +55,12 @@ mat-label {
 
 input.mat-input {
   font-size: 16px;
-  margin-top: 8px; /* Ajout d'un espacement en haut des champs d'entrée */
+  margin-top: 8px;
 }
 
 textarea.mat-input {
   font-size: 16px;
-  margin-top: 8px; /* Ajout d'un espacement en haut des zones de texte */
+  margin-top: 8px;
 }
 
 .error-field {
@@ -50,11 +76,3 @@ textarea.mat-input {
 button {
   margin-right: 8px;
 }
-/* formation.component.css */
-
-.selected-image {
-  max-width: 100%; /* Ajustez la largeur maximale selon vos besoins */
-  margin-top: 10px;
-}
-
-

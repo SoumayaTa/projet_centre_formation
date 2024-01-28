@@ -40,7 +40,7 @@ public class FormationService {
     public FormationDto addFormation(FormationDto form, MultipartFile image) throws IOException {
         Formation formationEntity = modelMapper.map(form, Formation.class);
         formationEntity.setDate(LocalDate.now());
-        String pathImage = "src/main/resources/static/images/" + formationEntity.getId() + ".png";
+        String pathImage = "src/main/resources/static/" + formationEntity.getId() + ".png";
         image.transferTo(new File(pathImage));
         String imageUrl = "src/main/resources/static/images/" + formationEntity.getId() + ".png";
         formationEntity.setPhotos(imageUrl);
@@ -91,7 +91,7 @@ public class FormationService {
     }
 
         public List<FormationDto> getAllFormations(int pageNumber, String searchKey) {
-            Pageable pageable = PageRequest.of(pageNumber, 7);
+            Pageable pageable = PageRequest.of(pageNumber, 6);
 
             Page<Formation> page;
             if (searchKey.equals("")) {
@@ -107,18 +107,6 @@ public class FormationService {
                     .collect(Collectors.toList());
         }
 
-
-    //    public FormationDto addFormationim(FormationDto form, MultipartFile image) throws IOException {
-//        Formation formationEntity = modelMapper.map(form, Formation.class);
-//        formationEntity.setDate(LocalDate.now());
-//        Formation savedFormation = repository.save(formationEntity);
-//        String pathImage = "src/main/resources/static/" + savedFormation.getId() + ".png";
-//        image.transferTo(new File(pathImage));
-//        String imageUrl = "http://localhost:8080/images/" + savedFormation.getId() + ".png";
-//        savedFormation.setPhotos(imageUrl);
-//        savedFormation = repository.save(savedFormation);
-//        return modelMapper.map(savedFormation, FormationDto.class);
-//    }
     public FormationDto addFormationim(
             String nom,
             Long nombreHeur,

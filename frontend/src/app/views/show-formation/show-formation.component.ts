@@ -7,7 +7,7 @@ import { Formation } from 'src/app/model/formation.model';
 import { FormationService } from 'src/app/shared/services/formation.service';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { ImageDialogComponent } from '../image-dialog/image-dialog.component';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-show-formation',
@@ -16,7 +16,7 @@ import { MatPaginator } from '@angular/material/paginator';
 })
 export class ShowFormationComponent implements OnInit {
   formationDetails: Formation[] = [];
-  displayedColumns: string[] = ['id', 'nom', 'nombreHeur', 'cout', 'objectifs', 'Actions'];
+  displayedColumns: string[] = ['id', 'nom', 'nombreHeur', 'cout', 'objectifs','programme','categorie','ville', 'Actions'];
   selectedFormationId: number | null = null;
   showTable = false;
   showMoreFormation = false;
@@ -24,7 +24,7 @@ export class ShowFormationComponent implements OnInit {
    
 
   totalItems = 0;
-  itemsPerPage = 5; // Définissez la valeur par défaut de votre choix
+  itemsPerPage = 5; 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
 
@@ -35,6 +35,8 @@ export class ShowFormationComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    console.log("ysf");
+    
     this.showFormations();
   }
 
@@ -48,18 +50,13 @@ export class ShowFormationComponent implements OnInit {
   public showFormations(searchKey: string = "") {
     console.log("starting...");
     this.showTable = false;
-    this.formationService.showFormation(this.pageNumber, searchKey).subscribe(
-      (resp: Formation[]) => {
+  
+    this.formationService.showFormation(this.pageNumber, this.itemsPerPage, searchKey).subscribe(
+      (resp: any) => {
         console.log("loading formations");
-        this.formationDetails = resp;
+        this.formationDetails = resp;  // Modifier ici
         this.showTable = true;
-
-        if (resp.length === 7) {
-          this.showMoreFormation = true;
-        } else {
-          this.showMoreFormation = false;
-        }
-
+        this.totalItems = resp.length;  // Modifier ici
         console.log(this.formationDetails);
       },
       (err: HttpErrorResponse) => {
@@ -67,6 +64,7 @@ export class ShowFormationComponent implements OnInit {
       }
     );
   }
+  
 
   public editFormationDetails(id: number) {
     this.selectedFormationId = id;
@@ -125,9 +123,9 @@ export class ShowFormationComponent implements OnInit {
     });
   }
 
-  public loadMoreFormation() {
-    console.log('loadMoreFormation clicked');
-   this.pageNumber = this.pageNumber + 1;
+  loadPage(event: PageEvent): void {
+    this.pageNumber = event.pageIndex;
+    this.itemsPerPage = event.pageSize;
     this.showFormations();
   }
 

@@ -66,10 +66,10 @@ editFormation(id: number, formation: Formation, imageFile: File): Observable<For
 
 }
 
-public showFormation(pageNumber: number, searchKey: string = ""): Observable<Formation[]> {
-  const url = `${this.apiUrl}/getall?pageNumber=${pageNumber}&searchKey=${searchKey}`;
-  return this.httpClient.get<Formation[]>(url);
-}
+// public showFormation(pageNumber: number, searchKey: string = ""): Observable<Formation[]> {
+//   const url = `${this.apiUrl}/getall?pageNumber=${pageNumber}&searchKey=${searchKey}`;
+//   return this.httpClient.get<Formation[]>(url);
+// }
 // showFormation(pageNumber: number, searchKey: string): Observable<{ content: Formation[], totalElements: number }> {
 //   const params = new HttpParams()
 //     .set('pageNumber', pageNumber.toString())
@@ -77,7 +77,14 @@ public showFormation(pageNumber: number, searchKey: string = ""): Observable<For
 
 //   return this.httpClient.get<{ content: Formation[], totalElements: number }>('your-api-endpoint', { params });
 // }
+showFormation(page: number, itemsPerPage: number, searchKey: string): Observable<Formation[]> {
+  const params = new HttpParams()
+    .set('pageNumber', page.toString())
+    .set('pageSize', itemsPerPage.toString())
+    .set('searchKey', searchKey);
 
+  return this.httpClient.get<Formation[]>(`${this.apiUrl}/getall`, { params });
+}
   public deleteFormation(id:number): Observable<any>{
   
     return this.httpClient.delete(`${this.apiUrl}/formation/deleteFormation/`+id)
@@ -91,7 +98,7 @@ public showFormation(pageNumber: number, searchKey: string = ""): Observable<For
     return this.httpClient.get<Formation[]>(`${this.apiUrl}/getall`);
    }
   
-  getByFilters(categorie: string, ville: string, date: string|null): Observable<Formation[]> {
+  getByFilters(categorie: string, ville: string): Observable<Formation[]> {
     const jwtToken = this.userAuthService.getToken();
 
     let params = new HttpParams();
@@ -101,10 +108,7 @@ public showFormation(pageNumber: number, searchKey: string = ""): Observable<For
     if (ville) {
       params = params.set('ville', ville);
     }
-    if (date) {
-      params = params.set('date', date);
-    }
-
+   
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + jwtToken
     });

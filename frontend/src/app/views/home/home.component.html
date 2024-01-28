@@ -34,7 +34,6 @@
   
 <div class="formation-container">
   <div class="formation-card" *ngFor="let formation of filteredFormations" (click)="showDetails(formation)">
-    <!-- Affichez les détails de la formation ici -->
     <h2>{{ formation.nom }}</h2>
     <img [src]="formation.photos" alt="{{ formation.nom }} Image" class="formation-image">
     <p>Durée : {{ formation.nombreHeur }} heures</p>
@@ -43,7 +42,7 @@
     <button mat-raised-button color="primary" [routerLink]="['/formationdetails']" [queryParams]="{ id: formation.id,nombreHeur:formation.nombreHeur,cout: formation.cout,objectifs:formation.objectifs, ville:formation.ville,date:formation.date, photos:formation.photos,}">Voir plus de détails</button>
   </div>
 </div>
-
+</div>
 <mat-dialog-content *ngIf="selectedFormation">
   <!-- Affichez les détails de la formation sélectionnée ici -->
   <h2>{{ selectedFormation.nom }}</h2>
@@ -56,8 +55,6 @@
 
 
 <div>
-  <button mat-stroked-button color="primary" type="submit" routerLink="/testCompenent">
-    test
-  </button>
+
 </div>
-</div>
+
