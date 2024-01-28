@@ -97,21 +97,13 @@ public class FormationController {
     @GetMapping("/getByFilters")
     public List<FormationDto> findByFilters(
             @RequestParam(required = false) String categorie,
-            @RequestParam(required = false) String ville,
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+            @RequestParam(required = false) String ville) {
 
         if (categorie != null) {
             return service.findByCategorie(categorie);
         } else if (ville != null) {
             return service.findByVille(ville);
-        } else if (date != null) {
-            try {
-                return service.findByDate(date);
-            } catch (Exception e) {
-                e.printStackTrace();
-                return null;
-            }
-        } else {
+        }  else {
             return null;
         }
     }

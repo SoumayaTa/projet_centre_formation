@@ -98,7 +98,7 @@ showFormation(page: number, itemsPerPage: number, searchKey: string): Observable
     return this.httpClient.get<Formation[]>(`${this.apiUrl}/getall`);
    }
   
-  getByFilters(categorie: string, ville: string, date: string|null): Observable<Formation[]> {
+  getByFilters(categorie: string, ville: string): Observable<Formation[]> {
     const jwtToken = this.userAuthService.getToken();
 
     let params = new HttpParams();
@@ -108,10 +108,7 @@ showFormation(page: number, itemsPerPage: number, searchKey: string): Observable
     if (ville) {
       params = params.set('ville', ville);
     }
-    if (date) {
-      params = params.set('date', date);
-    }
-
+   
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + jwtToken
     });
