@@ -24,7 +24,7 @@ export class ShowFormationComponent implements OnInit {
    
 
   totalItems = 0;
-  itemsPerPage = 5; // Définissez la valeur par défaut de votre choix
+  itemsPerPage = 5; 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
 
