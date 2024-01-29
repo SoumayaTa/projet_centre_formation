@@ -58,8 +58,8 @@ export class AddFormateurComponent implements OnInit {
   }
 
   addFormateur() {
-    const formateurData = this.prepareFormData(this.formateurForm);
-  
+    
+  const formateurData = this.prepareFormData(this.formateurForm);
    console.log(formateurData);
    
    this.toastr.success('Le formateur a été ajouté avec succès.', 'Ajout réussi');
