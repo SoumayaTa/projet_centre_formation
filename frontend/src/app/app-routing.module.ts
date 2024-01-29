@@ -14,6 +14,8 @@ import { FormationdetailsComponent } from './views/formationdetails/formationdet
 import { TestCompenentComponent } from './views/test-compenent/test-compenent.component';
 import { InscriptionformateurexeterneComponent } from './views/inscriptionformateurexeterne/inscriptionformateurexeterne.component';
 import { AjouterEntrepriseComponent } from './views/ajouter-entreprise/ajouter-entreprise.component';
+import { DemandeFormateurComponent } from './views/demande-formateur/demande-formateur.component';
+
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent},
@@ -25,6 +27,7 @@ const routes: Routes = [
   { path: 'allFormateur', component: FormateurDetailsComponent,canActivate:[AuthGuard],data:{roles:['ROLE_ADMIN']}},
   { path: 'addformation', component: FormationComponent, canActivate:[AuthGuard], data:{roles:['ROLE_ADMIN']}},
   { path: 'showFormation', component: ShowFormationComponent,canActivate:[AuthGuard],data:{roles:['ROLE_ADMIN']}},
+  { path:'formateurexeterne',component:DemandeFormateurComponent,canActivate:[AuthGuard],data:{roles:['ROLE_ADMIN']}},
   { 
     path: 'addEntreprise', 
     component: AjouterEntrepriseComponent,

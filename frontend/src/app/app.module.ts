@@ -33,8 +33,10 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { TestCompenentComponent } from './views/test-compenent/test-compenent.component';
 import { AjouterEntrepriseComponent } from './views/ajouter-entreprise/ajouter-entreprise.component';
 import { MatChipsModule } from '@angular/material/chips';
+import { DemandeFormateurComponent } from './views/demande-formateur/demande-formateur.component';
 import { FullCalendarModule } from '@fullcalendar/angular'; 
 import { CommonModule } from '@angular/common';
+
 
 @NgModule({
   declarations: [
@@ -55,7 +57,7 @@ import { CommonModule } from '@angular/common';
     FormationdetailsComponent,
     TestCompenentComponent,
     AjouterEntrepriseComponent,
-    
+    DemandeFormateurComponent,
   ],
   imports: [
     BrowserModule,
