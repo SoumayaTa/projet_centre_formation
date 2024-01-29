@@ -232,5 +232,9 @@ public class FormationService {
     public List<String> getAllCategories() {
         return repository.getDistinctCategories();
     }
+
+    public Optional<Formation> findById(Long formationId) {
+        return repository.findById(formationId);
     }
+}
 
