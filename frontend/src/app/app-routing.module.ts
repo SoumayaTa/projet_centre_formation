@@ -32,6 +32,7 @@ const routes: Routes = [
     data: { roles: ['ROLE_ADMIN', 'ROLE_ASSISTANT'] }
   },
   { path: 'formationdetails', component: FormationdetailsComponent},
+
   { path: 'testCompenent', component: TestCompenentComponent},
   { path: "joinus", component:InscriptionformateurexeterneComponent},
   { path: '**', redirectTo: 'home'}    
