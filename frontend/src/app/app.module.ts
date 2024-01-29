@@ -33,7 +33,6 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { TestCompenentComponent } from './views/test-compenent/test-compenent.component';
 import { AjouterEntrepriseComponent } from './views/ajouter-entreprise/ajouter-entreprise.component';
 import { MatChipsModule } from '@angular/material/chips';
-import { NomDuComposantComponent } from './views/nom-du-composant/nom-du-composant.component';
 import { DemandeFormateurComponent } from './views/demande-formateur/demande-formateur.component';
 
 @NgModule({
