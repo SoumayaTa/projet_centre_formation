@@ -33,6 +33,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { TestCompenentComponent } from './views/test-compenent/test-compenent.component';
 import { AjouterEntrepriseComponent } from './views/ajouter-entreprise/ajouter-entreprise.component';
 import { MatChipsModule } from '@angular/material/chips';
+import { FullCalendarModule } from '@fullcalendar/angular'; 
+import { CommonModule } from '@angular/common';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,7 +54,8 @@ import { MatChipsModule } from '@angular/material/chips';
     InscriptionformateurexeterneComponent,
     FormationdetailsComponent,
     TestCompenentComponent,
-    AjouterEntrepriseComponent
+    AjouterEntrepriseComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -66,13 +70,14 @@ import { MatChipsModule } from '@angular/material/chips';
     AgrupaMaterialModule,
     MatIconModule,
     MatChipsModule,
+    CommonModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-top-right',
       preventDuplicates: true,
     }),
-    MatPaginatorModule
-
+    MatPaginatorModule,
+    FullCalendarModule
   ],
   providers: [AuthGuard,{
     provide:HTTP_INTERCEPTORS,
