@@ -35,6 +35,8 @@ export class AddFormateurComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log("test");
+    
     this.route.queryParams.subscribe(params => {
       const formationId = params['id'];
       if (formationId) {
