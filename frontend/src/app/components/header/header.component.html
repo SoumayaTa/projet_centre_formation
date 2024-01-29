@@ -44,6 +44,9 @@
       <a mat-button routerLink="/addformation" *ngIf="isAdmin()" class="side-menu-item">
         <mat-icon>add_box</mat-icon><span> Ajouter Formation</span>
       </a>
+      <a mat-button routerLink="/formateurexeterne" *ngIf="isAdmin()" class="side-menu-item">
+        <mat-icon>add_box</mat-icon><span> demmande</span>
+      </a>
       <a mat-button routerLink="/joinus"  class="side-menu-item"><mat-icon>how_to_reg</mat-icon>Rejoignez-nous</a>
       <a mat-button routerLink="/login" *ngIf="!isLoggedIn()" class="side-menu-item">
         <mat-icon>account_circle</mat-icon> Connexion
