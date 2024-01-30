@@ -15,7 +15,7 @@ public class Calendrier {
     private Long id;
     private Date datedebut;
     private Date datefin;
-    //title
+    private String title;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "formation_id", nullable = false)

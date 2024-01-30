@@ -35,6 +35,7 @@ import { AjouterEntrepriseComponent } from './views/ajouter-entreprise/ajouter-e
 import { MatChipsModule } from '@angular/material/chips';
 import { FullCalendarModule } from '@fullcalendar/angular'; 
 import { CommonModule } from '@angular/common';
+import { TrainSessionComponent } from './train-session/train-session.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { CommonModule } from '@angular/common';
     FormationdetailsComponent,
     TestCompenentComponent,
     AjouterEntrepriseComponent,
+    TrainSessionComponent,
     
   ],
   imports: [

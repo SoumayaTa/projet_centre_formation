@@ -14,6 +14,8 @@ public class CalendrierDto {
     private Long id;
     private Date datedebut;
     private Date datefin;
+    private String title;
+
 //    private Long formationId;
 //    private int formateurId;
 //    private Long entrepriseId;

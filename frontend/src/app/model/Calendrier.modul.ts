@@ -7,6 +7,7 @@ export interface Calendrier {
   id?: number;
   datedebut: Date;
   datefin: Date;
+  title: string;
   formation: Formation;
   formateur: User;
   entreprise: Entreprise;
