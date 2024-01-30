@@ -6,12 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import univ.iwa.dto.InscriptionDto;
+import univ.iwa.dto.UserInfoDto;
 import univ.iwa.model.Inscription;
 import univ.iwa.model.UserInfo;
 import univ.iwa.repository.InscriptionRepository;
 import univ.iwa.repository.UserInfoRepository;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class InscriptionService {
@@ -56,7 +60,30 @@ public class InscriptionService {
                 "<b>Nom d'utilisateur :</b> " + username + "<br/>" +
                 "<b>Mot de passe :</b> " + password + "<br/><br/>" +
                 "Connectez-vous avec ces informations et commencez à partager votre expertise avec nos apprenants.";
-        String cc = "tayoubsoumaya21@gmail.com";
+        String cc = "wiam.elberrari@etu.uae.ac.ma";
         emailService.sendMail(to, cc, subject, body);
     }
+    public List<InscriptionDto> getAllInscriptions() {
+        List<Inscription> inscriptions = repo.findAll();
+
+        List<InscriptionDto> filteredInscriptions = inscriptions.stream()
+        		.filter(inscription -> !inscription.isStatus())
+                .map(inscription -> modelMapper.map(inscription, InscriptionDto.class))
+                .collect(Collectors.toList());
+
+        return filteredInscriptions;
+    }
+    public void deleteInscription(Long id) {
+    	repo.deleteById(id);
+	}
+   
+	public InscriptionDto getInscriptionById(Long id) {
+		Optional<Inscription> inscriptionOptional = repo.findById(id);
+        if (inscriptionOptional.isPresent()) {
+        	Inscription inscription = inscriptionOptional.get();
+            return modelMapper.map(inscription, InscriptionDto.class);
+        } else {
+            throw new RuntimeException("Formateur not found with id: " + id);
+        }
+	}
 }
