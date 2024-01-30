@@ -40,7 +40,7 @@
     <!-- <p>Date : {{ formation.date }}</p> -->
     <p>Ville : {{ formation.ville }}</p>
     <p>Prix : {{ formation.cout }} dh</p>
-    <button mat-raised-button color="primary" [routerLink]="['/formationdetails']" [queryParams]="{ id: formation.id,nombreHeur:formation.nombreHeur,cout: formation.cout,objectifs:formation.objectifs, ville:formation.ville,date:formation.date, photos:formation.photos,}">Voir plus de détails</button>
+    <button mat-raised-button color="primary" [routerLink]="['/formationdetails']" [queryParams]="{ id: formation.id,nom : formation.nom,nombreHeur:formation.nombreHeur,programme :formation.programme,categorie: formation.categorie, cout: formation.cout,objectifs:formation.objectifs, ville:formation.ville,date:formation.date, photos:formation.photos,}">Voir plus de détails</button>
   </div>
 </div>
 </div>
