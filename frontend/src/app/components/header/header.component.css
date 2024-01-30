@@ -12,18 +12,17 @@
   justify-content: left;
 }
 .side-menu-item {
+  color: #fff;
   display: flex;
   margin-top: 20px;
   justify-content: start;
-  color: #fff;
-  text-decoration: none;
+  text-decoration: none; 
   padding: 10px;
   transition: background-color 0.3s ease;
-  /* Ajout de flex-direction pour aligner verticalement */
-  text-align: start;  /* Transition pour le changement de couleur au survol */
+  text-align: start; 
 }
 .side-menu-item:hover {
-  background-color: #ddd; /* Couleur de fond au survol des éléments du menu latéral */
+  background-color: #e4e2e2; /* Couleur de fond au survol des éléments du menu latéral */
 }
 .main-content {
   margin: 20px;
@@ -50,8 +49,6 @@
 .menu-spacer {
   flex: 1; /* Espaceur flexible pour pousser les éléments à droite de la barre de navigation */
 }
-
-/* Autres styles personnalisés au besoin */
 
 @media (min-width: 900px) {
   #menuIcon {

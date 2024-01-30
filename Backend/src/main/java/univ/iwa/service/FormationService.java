@@ -101,7 +101,6 @@ public class FormationService {
                         searchKey, searchKey, pageable
                 );
             }
-
             return page.getContent().stream()
                     .map(formation -> modelMapper.map(formation, FormationDto.class))
                     .collect(Collectors.toList());

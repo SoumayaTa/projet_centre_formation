@@ -58,12 +58,9 @@ import { TrainSessionComponent } from './train-session/train-session.component';
     FormationdetailsComponent,
     TestCompenentComponent,
     AjouterEntrepriseComponent,
-<<<<<<< HEAD
     TrainSessionComponent,
     
-=======
     DemandeFormateurComponent,
->>>>>>> main
   ],
   imports: [
     BrowserModule,

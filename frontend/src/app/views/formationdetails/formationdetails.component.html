@@ -1,20 +1,25 @@
 <div *ngIf="formationId !== undefined" class="formation-details-container">
-    <h2>Details de la formation</h2>
-    <img src="http://localhost:8080/images/{{ formationId }}.png" alt="{{ formationId }} Image" class="formation-image">
-    <p>ID de la formation : {{ formationId }}</p>
-    <p>ville de la formation: {{ ville }}</p>
-    <p> date: {{ date }}</p>
-  
-    <!-- Ajouter d'autres détails de la formation ici -->
-    <!-- Exemple de champ supplémentaire -->
-    
-  
-    <div class="button-container">
-      <button mat-raised-button color="primary" (click)="openInscriptionForm(formationId)">Inscrire</button>
-    </div>
-  
-    <!-- Afficher le formulaire d'inscription si showInscriptionForm est true -->
-    
-    </div>
-  
-  
+  <h2>Details de la formation</h2>
+  <img src="http://localhost:8080/images/{{ formationId }}.png" alt="{{ formationId }} Image" class="formation-image">
+
+  <!-- Afficher tous les champs disponibles -->
+  <p>Nom de la formation: {{ nom }}</p>
+  <p>Nombre d'heures: {{ nombreHeur }}</p>
+  <p>Ville de la formation: {{ ville }}</p>
+  <p>Date de début: {{ date | date: 'dd/MM/yyyy' }}</p>
+  <p>Objectifs: {{ objectifs }}</p>
+  <p>Programme: {{ programme }}</p>
+  <p>Cout: {{ cout }} DH</p>
+  <p>Categorie: {{ categorie }}</p>
+ 
+  <!-- Ajoutez d'autres champs si nécessaire -->
+
+  <div class="button-container">
+    <button mat-raised-button color="primary" (click)="openInscriptionForm(formationId)">Inscrire</button>
+  </div>
+
+  <!-- Afficher le formulaire d'inscription si showInscriptionForm est true -->
+  <div *ngIf="showInscriptionForm">
+    <!-- Ajoutez ici le formulaire d'inscription -->
+  </div>
+</div>

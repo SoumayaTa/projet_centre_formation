@@ -66,9 +66,11 @@ export class FormationdetailsComponent implements OnInit {
       this.nombreHeur=params['nombreHeur'];
       this.ville=params["ville"];
       this.date=params['date'];
-      
-
-
+      this.objectifs= params['objectifs'];
+      this.categorie=params['categorie'];
+      this.cout=params['cout'];
+      this.programme=params['programme'];
+      this.nom=params['nom'];
     });
   }
 

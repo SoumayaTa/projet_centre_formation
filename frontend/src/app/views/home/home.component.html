@@ -19,14 +19,14 @@
         </mat-form-field>
       </div>
   
-      <div class="form-group">
+      <!-- <div class="form-group">
         <mat-form-field appearance="outline" class="w-100">
           <mat-label>Date</mat-label>
           <input matInput [matDatepicker]="picker" placeholder="Choisir une date" formControlName="date">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
-      </div>
+      </div> -->
     
       <button mat-stroked-button color="primary" type="submit">Filtrer les formations</button>
     </div>
@@ -37,23 +37,13 @@
     <h2>{{ formation.nom }}</h2>
     <img [src]="formation.photos" alt="{{ formation.nom }} Image" class="formation-image">
     <p>Durée : {{ formation.nombreHeur }} heures</p>
-    <p>Date : {{ formation.date }}</p>
+    <!-- <p>Date : {{ formation.date }}</p> -->
     <p>Ville : {{ formation.ville }}</p>
+    <p>Prix : {{ formation.cout }} dh</p>
     <button mat-raised-button color="primary" [routerLink]="['/formationdetails']" [queryParams]="{ id: formation.id,nombreHeur:formation.nombreHeur,cout: formation.cout,objectifs:formation.objectifs, ville:formation.ville,date:formation.date, photos:formation.photos,}">Voir plus de détails</button>
   </div>
 </div>
 </div>
-<mat-dialog-content *ngIf="selectedFormation">
-  <!-- Affichez les détails de la formation sélectionnée ici -->
-  <h2>{{ selectedFormation.nom }}</h2>
-  <img src="http://localhost:8080/images/{{selectedFormation.id}}.png" alt="{{ selectedFormation.nom }} Image" class="formation-image">
-  <p>Durée : {{ selectedFormation.nombreHeur }} heures</p>
-  <p>Date : {{ selectedFormation.date }}</p>
-  <p>Ville : {{ selectedFormation.ville }}</p>
-  <button mat-raised-button color="warn" (click)="closeDetails()">Fermer</button>
-</mat-dialog-content>
-
-
 <div>
 
 </div>
