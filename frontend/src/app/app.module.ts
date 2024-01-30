@@ -36,6 +36,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { DemandeFormateurComponent } from './views/demande-formateur/demande-formateur.component';
 import { FullCalendarModule } from '@fullcalendar/angular'; 
 import { CommonModule } from '@angular/common';
+import { TrainSessionComponent } from './train-session/train-session.component';
 
 
 @NgModule({
@@ -57,7 +58,12 @@ import { CommonModule } from '@angular/common';
     FormationdetailsComponent,
     TestCompenentComponent,
     AjouterEntrepriseComponent,
+<<<<<<< HEAD
+    TrainSessionComponent,
+    
+=======
     DemandeFormateurComponent,
+>>>>>>> main
   ],
   imports: [
     BrowserModule,

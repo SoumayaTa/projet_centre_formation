@@ -14,6 +14,7 @@ import { FormationdetailsComponent } from './views/formationdetails/formationdet
 import { TestCompenentComponent } from './views/test-compenent/test-compenent.component';
 import { InscriptionformateurexeterneComponent } from './views/inscriptionformateurexeterne/inscriptionformateurexeterne.component';
 import { AjouterEntrepriseComponent } from './views/ajouter-entreprise/ajouter-entreprise.component';
+import { TrainSessionComponent } from './train-session/train-session.component';
 import { DemandeFormateurComponent } from './views/demande-formateur/demande-formateur.component';
 
 
@@ -35,7 +36,7 @@ const routes: Routes = [
     data: { roles: ['ROLE_ADMIN', 'ROLE_ASSISTANT'] }
   },
   { path: 'formationdetails', component: FormationdetailsComponent},
-
+  { path: 'testTraine', component: TrainSessionComponent},
   { path: 'testCompenent', component: TestCompenentComponent},
   { path: "joinus", component:InscriptionformateurexeterneComponent},
   { path: '**', redirectTo: 'home'}    

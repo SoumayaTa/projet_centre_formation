@@ -1,19 +1,16 @@
 package univ.iwa.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import univ.iwa.dto.CalendrierDto;
-import univ.iwa.model.Calendrier;
-import univ.iwa.model.Entreprise;
-import univ.iwa.model.Formation;
-import univ.iwa.model.UserInfo;
-import univ.iwa.repository.CalendrierRepository;
-import univ.iwa.repository.EntrepriseRepository;
-import univ.iwa.repository.FormationRepository;
-import univ.iwa.repository.UserInfoRepository;
+import univ.iwa.model.*;
+import univ.iwa.repository.*;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CalendrierService {
@@ -28,7 +25,8 @@ public class CalendrierService {
 
     @Autowired
     private EntrepriseRepository entrepriseRepository;
-
+    @Autowired
+    private GroupeRepository groupeRepository;
     @Autowired
     private ModelMapper modelMapper;
 
@@ -46,16 +44,33 @@ public class CalendrierService {
             return CalendrierDto.toDto( repository.save(entity));
     }*/
 
-    public CalendrierDto addCalendrier(CalendrierDto calendrierDto, Long formationId, int formateurId, Long entrepriseId) {
-        Optional<Formation> formation = formationRepository.findById(formationId);
-        Optional<UserInfo> formateur = userInfoRepository.findById(formateurId);
-        Optional<Entreprise> entreprise = entrepriseRepository.findById(entrepriseId);
+    public CalendrierDto addCalendrier(CalendrierDto calendrierDto, Long formationId, int formateurId, Long entrepriseId, Long groupeId) {
+        Formation formationEntity = formationRepository.findById(formationId)
+                .orElseThrow(() -> new EntityNotFoundException("Formation not found with ID: " + formationId));
+
+        UserInfo formateurEntity = userInfoRepository.findById(formateurId)
+                .orElseThrow(() -> new EntityNotFoundException("Formateur not found with ID: " + formateurId));
+
+        Entreprise entrepriseEntity = entrepriseRepository.findById(entrepriseId)
+                .orElseThrow(() -> new EntityNotFoundException("Entreprise not found with ID: " + entrepriseId));
+
+        Groupe groupeEntity = groupeRepository.findById(groupeId)
+                .orElseThrow(() -> new EntityNotFoundException("Groupe not found with ID: " + groupeId));
 
         Calendrier entity = modelMapper.map(calendrierDto, Calendrier.class);
-        entity.setFormation(formation.orElse(null));
-        entity.setFormateur(formateur.orElse(null));
-        entity.setEntreprise(entreprise.orElse(null));
+        entity.setFormation(formationEntity);
+        entity.setFormateur(formateurEntity);
+        entity.setEntreprise(entrepriseEntity);
+        entity.setGroupe(groupeEntity);
 
         return modelMapper.map(repository.save(entity), CalendrierDto.class);
+    }
+
+
+    public List<CalendrierDto> getEvents() {
+        List<Calendrier> events = repository.findAll();
+        return events.stream()
+                .map(event -> modelMapper.map(event, CalendrierDto.class))
+                .collect(Collectors.toList());
     }
 }
