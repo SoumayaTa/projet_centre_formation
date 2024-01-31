@@ -19,7 +19,7 @@ public class GroupeService {
     @Autowired
     ModelMapper modelMapper;
 
-    public List<GroupeDto> getAllFormations() {
+    public List<GroupeDto> getAllGroupes() {
         List<Groupe> groupes = repository.findAll();
         return groupes.stream()
                 .map(groupe -> modelMapper.map(groupe, GroupeDto.class))

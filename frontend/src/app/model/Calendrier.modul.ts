@@ -1,4 +1,5 @@
 import { Entreprise } from './Entreprise.modul';
+import { Formateur } from './Formateur.model';
 import { Formation } from './formation.model';
 import { Groupe } from './Group.model';
 import { User } from './user.model';
@@ -9,7 +10,7 @@ export interface Calendrier {
   datefin: Date;
   title: string;
   formation: Formation;
-  formateur: User;
+  formateur: Formateur | User;
   entreprise: Entreprise;
   groupe: Groupe;
 }

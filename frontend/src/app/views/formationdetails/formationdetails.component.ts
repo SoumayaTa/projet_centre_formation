@@ -44,7 +44,7 @@ export class FormationdetailsComponent implements OnInit {
 
   };
 
-  constructor(private inscriptionforservice: InscriptionformateurexternService,private route: ActivatedRoute, private individusService: IndividusService,private fb: FormBuilder,private dialog: MatDialog) {
+constructor(private inscriptionforservice: InscriptionformateurexternService,private route: ActivatedRoute, private individusService: IndividusService,private fb: FormBuilder,private dialog: MatDialog) {
     this.inscriptionForm = this.fb.group({
       nom: ['', Validators.required],
       prenom: ['', Validators.required],

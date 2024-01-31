@@ -38,4 +38,27 @@ export class CalendrierService {
         })
       );
   }
+
+  public addTraine(calendrier: Calendrier, formationId: number, formateurId: number, entrepriseId: number, groupeId: number): Observable<Calendrier> {
+    const jwtToken = this.userAuthService.getToken();
+
+    if (!jwtToken) {
+      console.log('Token JWT non disponible');
+      return throwError('Token JWT non disponible');
+    }
+
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + jwtToken,
+      'Content-Type': 'application/json'
+    });
+
+    const url = `${this.API_BASE_URL}/calendrier/addnewCalendar/${formationId}/${formateurId}/${entrepriseId}/${groupeId}`;
+    return this.httpClient.post<Calendrier>(url, calendrier, { headers })
+      .pipe(
+        catchError(error => {
+          console.error('Erreur lors de l\'ajout du calendrier :', error);
+          return throwError('Erreur lors de l\'ajout du calendrier');
+        })
+      );
+  }
 }
