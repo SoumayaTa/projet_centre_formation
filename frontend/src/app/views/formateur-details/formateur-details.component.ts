@@ -93,5 +93,6 @@ export class FormateurDetailsComponent implements OnInit {
 }
 
 
+
 }
 

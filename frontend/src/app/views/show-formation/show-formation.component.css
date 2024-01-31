@@ -18,11 +18,11 @@
   }
   
   .mat-col-actions {
-    width: 120px; /* Adjust the width as needed */
+    width: 120px; 
   }
   
   .mat-col-description {
-    max-width: 300px; /* Adjust the max-width as needed */
+    max-width: 300px; 
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -33,30 +33,22 @@
     justify-content: space-between;
     align-items: center;
   }
-  
-  /* Buttons inside actions cell */
   button {
     margin: 0 5px;
   }
-  
-  /* Styling for hover effect on rows */
   tr.mat-row:hover {
     background-color: #f0f0f0;
     transition: background-color 0.3s;
   }
-  
-  /* Styling for header row */
   tr.mat-header-row {
-    background-color: #2196f3; /* Header background color */
-    color: white; /* Header text color */
+    background-color: #2196f3;
+    color: white; 
   }
-  
-  /* Styling for odd and even rows */
   tr.mat-row:nth-child(odd) {
-    background-color: #f9f9f9; /* Odd row background color */
+    background-color: #f9f9f9;
   }
   
   tr.mat-row:nth-child(even) {
-    background-color: #ffffff; /* Even row background color */
+    background-color: #ffffff;
   }
   

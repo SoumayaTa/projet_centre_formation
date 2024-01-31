@@ -1,12 +1,12 @@
 <div class="login-container">
   <div class="card text-center p-4">
-    <h2 class="mb-4 text-center">Login</h2>
+    <h2 class="mb-4 text-center">Connexion</h2>
 
     <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate class="d-flex flex-column align-items-center">
 
       <div class="mb-3 w-100">
         <mat-form-field appearance="outline" class="w-100">
-          <mat-label>Username</mat-label>
+          <mat-label>Nom d'utilisateur</mat-label>
           <input matInput placeholder="Enter your username" type="text" formControlName="username"
             [ngClass]="{'error-field': loginForm?.get('username')?.invalid && loginForm?.get('username')?.touched }"
           >
@@ -21,7 +21,7 @@
 
       <div class="mb-3 w-100">
         <mat-form-field appearance="outline" class="w-100">
-          <mat-label>Password</mat-label>
+          <mat-label>Mot de passe</mat-label>
           <input matInput placeholder="Enter your password" [type]="showPassword ? 'password' : 'text'" formControlName="password"
             [ngClass]="{'error-field-password': loginForm?.get('password')?.invalid && loginForm?.get('password')?.touched }"
           >
@@ -38,7 +38,7 @@
       </div>
 
       <div class="mb-3 w-100">
-        <button class="btn btn-primary w-100 login-button" mat-raised-button color="primary">Login</button>
+        <button class="btn btn-primary w-100 login-button" mat-raised-button color="primary">Se connecter</button>
       </div>
 
     </form>

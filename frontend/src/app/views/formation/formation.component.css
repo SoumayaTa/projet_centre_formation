@@ -1,10 +1,10 @@
 /* Ajoutez ces styles dans un fichier CSS séparé */
 .container {
-  background: url('../../../assets/images1/login.jpg') no-repeat center center fixed;
+  /* background: url('../../../assets/images1/login.jpg') no-repeat center center fixed; */
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  /* height: 100vh; */
 }
 .card {
   width: 90%;

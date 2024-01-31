@@ -28,12 +28,10 @@ export class HomeComponent implements OnInit {
     private formationService: FormationService,
     private router: Router,
     private formBuilder: FormBuilder,
-    private datePipe: DatePipe
   ) {
     this.filterForm = this.formBuilder.group({
       categorie: [''],
-      ville: [''],
-      date: ['']
+      ville: ['']
     });
   }
 
@@ -56,7 +54,6 @@ export class HomeComponent implements OnInit {
   }
 
   fetchCategoriesAndVilles(): void {
-    // Récupérer les catégories
     this.formationService.getCategories().subscribe(
       (categories: string[]) => {
         this.categories = categories;
@@ -65,8 +62,6 @@ export class HomeComponent implements OnInit {
         console.error('Erreur lors de la récupération des catégories', error);
       }
     );
-
-    // Récupérer les villes
     this.formationService.getVilles().subscribe(
       (villes: string[]) => {
         this.villes = villes;
@@ -88,8 +83,6 @@ export class HomeComponent implements OnInit {
   filterFormations(): void {
     const categorie = this.filterForm.get('categorie')?.value || '';
     const ville = this.filterForm.get('ville')?.value || '';
-    const dateControl = this.filterForm.get('date');
-    // const date = dateControl ? this.datePipe.transform(dateControl.value, 'yyyy-MM-dd') : '';
     this.formationService.getByFilters(categorie, ville).subscribe(
       (formations: Formation[]) => {
         this.filteredFormations = formations;

@@ -1,14 +1,13 @@
 .inscription-container {
-    
-  background-size: cover;
-  height: 100vh;
+  /* background-size: cover; */
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 60px;
 }
 
 .card {
-  width: 400px;
+  width: 450px;
   background-color: rgba(255, 255, 255, 0.8);
   padding: 20px;
   border-radius: 10px;
@@ -37,9 +36,8 @@
   margin-top: 10px;
 }
 
-/* Ajoutez ces styles pour gérer les erreurs de validation */
 .error-field {
-  border-color: #ff0000; /* Couleur de la bordure en cas d'erreur */
+  border-color: #ff0000;
 }
 
 .error-message {
@@ -57,4 +55,3 @@
   font-size: 12px;
   margin-top: 4px;
 }
-

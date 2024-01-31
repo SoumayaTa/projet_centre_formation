@@ -36,7 +36,7 @@ public class SecurityConfig {
 		http
 				.cors(cors->cors.configurationSource(request -> new CorsConfiguration(corsFilter())))
 				.authorizeHttpRequests((auth)->auth
-			.requestMatchers("/auth/welcome","/mail2/**","/mail/**","/images/**","/externe/**","/externe/deleteinscription/**","/externe/deleteAndCreateUserInfo/**", "/auth/addNewUser","/auth/getFormateurById/**","/auth/generateToken","/form/categories","/form/villes", "/form/getByFilters","/form/getall","/form/addFormation/image","/individus/**").permitAll()
+			.requestMatchers("/auth/welcome","/mail2/**","/mail/**","/calendrieraddnewCalendar/**","/images/**","/externe/**","/externe/deleteinscription/**","/externe/deleteAndCreateUserInfo/**", "/auth/addNewUser","/auth/getFormateurById/**","/auth/generateToken","/form/categories","/form/villes", "/form/getByFilters","/form/getall","/form/addFormation/image","/individus/**").permitAll()
 			.requestMatchers("/auth/assistant/**").authenticated()
 
 								.requestMatchers("/images/**").permitAll()

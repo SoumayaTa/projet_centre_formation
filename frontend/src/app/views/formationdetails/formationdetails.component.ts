@@ -66,9 +66,11 @@ constructor(private inscriptionforservice: InscriptionformateurexternService,pri
       this.nombreHeur=params['nombreHeur'];
       this.ville=params["ville"];
       this.date=params['date'];
-      
-
-
+      this.objectifs= params['objectifs'];
+      this.categorie=params['categorie'];
+      this.cout=params['cout'];
+      this.programme=params['programme'];
+      this.nom=params['nom'];
     });
   }
 
@@ -107,7 +109,7 @@ constructor(private inscriptionforservice: InscriptionformateurexternService,pri
 }
 inscriotionformateurexterne(formationId:number):void {
 
-  const formateurFormValues = this.formateurexterne;  // Remplacez `formateurForm` par le nom réel de votre formulaire
+  const formateurFormValues = this.formateurexterne; 
   console.log("donner envoyer",formateurFormValues)
   const { name, email, mots_cles } = formateurFormValues;
   this.inscriptionforservice.inscriptionFormateurExtern(name, email, mots_cles)
@@ -126,8 +128,6 @@ openInscriptionFormateur(formationId: number): void {
   const dialogRef = this.dialog.open(InscriptionformateurexeterneComponent, {
     width: '400px', 
   });
-
-  // Vous pouvez ajouter des gestionnaires d'événements ici, par exemple, pour traiter le résultat après la fermeture de la popup.
   dialogRef.afterClosed().subscribe((result: any) => {
     if (result) {
       this.formateurexterne = result;
