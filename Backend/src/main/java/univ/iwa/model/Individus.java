@@ -25,4 +25,6 @@ public class Individus {
     @ManyToOne
     @JoinColumn(name = "formation_id")
     private Formation formation;
+    @OneToOne(mappedBy = "individus", cascade = CascadeType.ALL)
+    private Evaluation evaluation;
 }

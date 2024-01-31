@@ -8,7 +8,7 @@ import { UserAuthService } from './user-auth.service';
   providedIn: 'root'
 })
 export class EntrepriseService {
-  private apiUrl = 'http://localhost:8080';  // Mettez l'URL de votre API ici
+  private apiUrl = 'http://localhost:8080';
 
   constructor(private httpClient: HttpClient) { }
 

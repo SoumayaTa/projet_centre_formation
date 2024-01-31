@@ -29,13 +29,11 @@ public class Formation {
     private  String photos;
     private Long groupe_seuil;
 
-    @OneToMany(mappedBy = "formation")
+    @OneToMany(mappedBy = "formation", cascade = {CascadeType.REMOVE, CascadeType.MERGE})
     private List<Individus> inscrits;
 
-    @OneToMany(mappedBy = "formation")
+    @OneToMany(mappedBy = "formation", cascade = {CascadeType.REMOVE, CascadeType.MERGE})
     private List<Groupe> groupes;
-
-
 
 
 }

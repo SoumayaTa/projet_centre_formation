@@ -37,7 +37,8 @@ import { DemandeFormateurComponent } from './views/demande-formateur/demande-for
 import { FullCalendarModule } from '@fullcalendar/angular'; 
 import { CommonModule } from '@angular/common';
 import { TrainSessionComponent } from './train-session/train-session.component';
-
+import { EvaluationComponent } from './views/evaluation/evaluation.component';
+import { MatSliderModule } from '@angular/material/slider';
 
 @NgModule({
   declarations: [
@@ -59,14 +60,15 @@ import { TrainSessionComponent } from './train-session/train-session.component';
     TestCompenentComponent,
     AjouterEntrepriseComponent,
     TrainSessionComponent,
-    
     DemandeFormateurComponent,
-  ],
+    EvaluationComponent
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MatToolbarModule,
     MatButtonModule,
+    MatSliderModule,
     MatInputModule,
     MatFormFieldModule,
     BrowserAnimationsModule,

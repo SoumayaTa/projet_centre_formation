@@ -35,7 +35,7 @@ public class InscriptionController {
         } else {
             return new ResponseEntity<>("Unable to perform the operation", HttpStatus.BAD_REQUEST);
         }
-    }
+}
     @GetMapping("/getallfomateurexeterne")
     public List<InscriptionDto> getAllInscriptions() {
     	return service.getAllInscriptions();

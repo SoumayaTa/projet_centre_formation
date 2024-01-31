@@ -56,7 +56,7 @@ public class CalendrierService {
 
         Groupe groupeEntity = groupeRepository.findById(groupeId)
                 .orElseThrow(() -> new EntityNotFoundException("Groupe not found with ID: " + groupeId));
-
+        groupeEntity.setFormateur(formateurEntity);
         Calendrier entity = modelMapper.map(calendrierDto, Calendrier.class);
         entity.setFormation(formationEntity);
         entity.setFormateur(formateurEntity);

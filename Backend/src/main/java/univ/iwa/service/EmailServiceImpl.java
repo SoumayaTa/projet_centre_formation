@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import univ.iwa.service.EmailService;
 
+import java.util.List;
+
 @Service
 public class EmailServiceImpl implements EmailService {
 
