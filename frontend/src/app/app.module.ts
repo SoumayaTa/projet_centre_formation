@@ -34,10 +34,12 @@ import { TestCompenentComponent } from './views/test-compenent/test-compenent.co
 import { AjouterEntrepriseComponent } from './views/ajouter-entreprise/ajouter-entreprise.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { DemandeFormateurComponent } from './views/demande-formateur/demande-formateur.component';
+
 import { FullCalendarModule } from '@fullcalendar/angular'; 
 import { CommonModule } from '@angular/common';
-import { TrainSessionComponent } from './train-session/train-session.component';
-
+import { CalendarModule } from 'angular-calendar';
+import { TrainSessionComponent } from './views/train-session/train-session.component';
+import { AddTraineComponent } from './views/add-traine/add-traine.component';
 
 @NgModule({
   declarations: [
@@ -59,8 +61,9 @@ import { TrainSessionComponent } from './train-session/train-session.component';
     TestCompenentComponent,
     AjouterEntrepriseComponent,
     TrainSessionComponent,
-    
     DemandeFormateurComponent,
+    AddTraineComponent    
+
   ],
   imports: [
     BrowserModule,
@@ -75,6 +78,7 @@ import { TrainSessionComponent } from './train-session/train-session.component';
     AgrupaMaterialModule,
     MatIconModule,
     MatChipsModule,
+  
     CommonModule,
     ToastrModule.forRoot({
       timeOut: 3000,
@@ -82,7 +86,8 @@ import { TrainSessionComponent } from './train-session/train-session.component';
       preventDuplicates: true,
     }),
     MatPaginatorModule,
-    FullCalendarModule
+    FullCalendarModule,
+    
   ],
   providers: [AuthGuard,{
     provide:HTTP_INTERCEPTORS,

@@ -66,17 +66,7 @@ editFormation(id: number, formation: Formation, imageFile: File): Observable<For
 
 }
 
-// public showFormation(pageNumber: number, searchKey: string = ""): Observable<Formation[]> {
-//   const url = `${this.apiUrl}/getall?pageNumber=${pageNumber}&searchKey=${searchKey}`;
-//   return this.httpClient.get<Formation[]>(url);
-// }
-// showFormation(pageNumber: number, searchKey: string): Observable<{ content: Formation[], totalElements: number }> {
-//   const params = new HttpParams()
-//     .set('pageNumber', pageNumber.toString())
-//     .set('searchKey', searchKey);
 
-//   return this.httpClient.get<{ content: Formation[], totalElements: number }>('your-api-endpoint', { params });
-// }
 showFormation(page: number, itemsPerPage: number, searchKey: string): Observable<Formation[]> {
   const params = new HttpParams()
     .set('pageNumber', page.toString())
