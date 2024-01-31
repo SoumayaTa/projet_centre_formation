@@ -18,6 +18,9 @@
     <a mat-button routerLink="/formateurexeterne" *ngIf="isAdmin()" class="top-menu-item">
       <mat-icon>add_box</mat-icon><span> Formateurs externes</span>
     </a>
+    <a mat-button routerLink="/testTraine" *ngIf="isAdmin() || isAssistant()" class="top-menu-item">
+      <mat-icon>add_box</mat-icon><span> Plinifier</span>
+    </a>
   </div>
   <span class="menu-spacer"></span>
 

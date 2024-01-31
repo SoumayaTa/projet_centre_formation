@@ -40,6 +40,7 @@ import { CommonModule } from '@angular/common';
 import { CalendarModule } from 'angular-calendar';
 import { TrainSessionComponent } from './views/train-session/train-session.component';
 import { AddTraineComponent } from './views/add-traine/add-traine.component';
+import { FooterComponent } from './views/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { AddTraineComponent } from './views/add-traine/add-traine.component';
     AjouterEntrepriseComponent,
     TrainSessionComponent,
     DemandeFormateurComponent,
-    AddTraineComponent    
+    AddTraineComponent,
+    FooterComponent    
 
   ],
   imports: [

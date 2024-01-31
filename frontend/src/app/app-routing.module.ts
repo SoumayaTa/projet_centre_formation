@@ -36,7 +36,8 @@ const routes: Routes = [
     data: { roles: ['ROLE_ADMIN', 'ROLE_ASSISTANT'] }
   },
   { path: 'formationdetails', component: FormationdetailsComponent},
-  { path: 'testTraine', component: TrainSessionComponent},
+  { path: 'testTraine', component: TrainSessionComponent,canActivate: [AuthGuard],
+  data: { roles: ['ROLE_ADMIN', 'ROLE_ASSISTANT'] }},
   { path: 'testCompenent', component: TestCompenentComponent},
   { path: "joinus", component:InscriptionformateurexeterneComponent},
   { path: '**', redirectTo: 'home'}    

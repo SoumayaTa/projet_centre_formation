@@ -56,7 +56,7 @@ public class UserController {
         return userInfoService.updateUser(userdto,id);
     }
     @GetMapping("/allFormateur")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_ASSISTANT')")    
     @ResponseBody
     public List<UserInfoDto> getAllFormateurs() {
         return userInfoService.getAllFormateurs();
