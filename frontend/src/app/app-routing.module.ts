@@ -17,7 +17,6 @@ import { AjouterEntrepriseComponent } from './views/ajouter-entreprise/ajouter-e
 import { TrainSessionComponent } from './train-session/train-session.component';
 import { DemandeFormateurComponent } from './views/demande-formateur/demande-formateur.component';
 
-
 const routes: Routes = [
   { path: 'home', component: HomeComponent},
   { path: 'admin', component: AdminComponent,canActivate:[AuthGuard],data:{roles:['ROLE_ADMIN']}},

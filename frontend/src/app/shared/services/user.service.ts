@@ -26,7 +26,6 @@ export class UserService {
     return this.httpClient.post(this.API_BASE_URL + "/generateToken", loginData, { headers: this.requestHeader });
   }
 
-
   public forFormateur() {
     return this.httpClient.get(this.API_BASE_URL + '/format/formatProfile', { responseType: "text" });
   }
