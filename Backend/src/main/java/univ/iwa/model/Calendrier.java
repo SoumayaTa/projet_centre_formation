@@ -32,4 +32,8 @@ public class Calendrier {
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "groupe_id", nullable = false)
     Groupe groupe;
+
+    public boolean isFormationTerminee() {
+        return datefin != null && datefin.before(new Date());
+    }
 }

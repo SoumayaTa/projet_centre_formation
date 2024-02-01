@@ -25,4 +25,6 @@ public class GroupeService {
                 .map(groupe -> modelMapper.map(groupe, GroupeDto.class))
                 .collect(Collectors.toList());
     }
+
+
 }

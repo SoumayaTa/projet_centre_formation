@@ -8,6 +8,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import univ.iwa.dto.FormationDto;
+import univ.iwa.dto.GroupeDto;
+import univ.iwa.dto.IndividusDto;
+import univ.iwa.model.Individus;
 import univ.iwa.service.FormationService;
 
 import java.io.IOException;
@@ -144,7 +147,20 @@ public class FormationController {
             return ResponseEntity.status(500).build();
         }
     }
+    @GetMapping("/grpupes/{formationId}")
+    public List<GroupeDto> getGroupesForFormation(@PathVariable Long formationId) {
+        return service.getGroupesForFormation(formationId);
+    }
+    @GetMapping("/individus/{formationId}")
+    public List<String> getInscriptionEmailsForFormation(@PathVariable Long formationId) {
+        return service.getInscriptionForFormation(formationId);
+    }
 
+    @GetMapping("/sendemail/{formationId}")
+    public String sendEmailToInscrits(@PathVariable Long formationId) {
+        service.sendEmailsToInscrits(formationId);
+        return "Emails sent successfully";
+    }
 
 
 }

@@ -34,14 +34,13 @@ import { TestCompenentComponent } from './views/test-compenent/test-compenent.co
 import { AjouterEntrepriseComponent } from './views/ajouter-entreprise/ajouter-entreprise.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { DemandeFormateurComponent } from './views/demande-formateur/demande-formateur.component';
-
 import { FullCalendarModule } from '@fullcalendar/angular'; 
 import { CommonModule } from '@angular/common';
-import { CalendarModule } from 'angular-calendar';
 import { TrainSessionComponent } from './views/train-session/train-session.component';
 import { AddTraineComponent } from './views/add-traine/add-traine.component';
 import { FooterComponent } from './views/footer/footer.component';
-
+import { MatSliderModule } from '@angular/material/slider';
+import { EvaluationComponent } from './views/evaluation/evaluation.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,13 +63,15 @@ import { FooterComponent } from './views/footer/footer.component';
     TrainSessionComponent,
     DemandeFormateurComponent,
     AddTraineComponent,    
-    FooterComponent
+    FooterComponent,
+    EvaluationComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MatToolbarModule,
     MatButtonModule,
+    MatSliderModule,
     MatInputModule,
     MatFormFieldModule,
     BrowserAnimationsModule,

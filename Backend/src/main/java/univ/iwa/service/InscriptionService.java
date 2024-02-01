@@ -61,7 +61,7 @@ public class InscriptionService {
                 "<b>Mot de passe :</b> " + password + "<br/><br/>" +
                 "Connectez-vous avec ces informations et commencez à partager votre expertise avec nos apprenants.";
         String cc = "wiam.elberrari@etu.uae.ac.ma";
-        emailService.sendMail(to, cc, subject, body);
+        emailService.sendMail(to, cc, subject, "http://localhost:4200/evaluation");
     }
     public List<InscriptionDto> getAllInscriptions() {
         List<Inscription> inscriptions = repo.findAll();
@@ -86,4 +86,5 @@ public class InscriptionService {
             throw new RuntimeException("Formateur not found with id: " + id);
         }
 	}
+
 }

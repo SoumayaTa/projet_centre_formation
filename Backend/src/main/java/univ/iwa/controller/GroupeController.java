@@ -8,12 +8,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import univ.iwa.dto.EntrepriseDto;
 import univ.iwa.dto.GroupeDto;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+import univ.iwa.dto.EntrepriseDto;
+import univ.iwa.dto.GroupeDto;
+import univ.iwa.model.Groupe;
 import univ.iwa.service.GroupeService;
 
 import java.util.List;
 @RestController
 @RequestMapping("/groupe")
 @Controller
+@CrossOrigin(origins = "*")
 public class GroupeController {
 
     @Autowired
@@ -24,4 +32,6 @@ public class GroupeController {
     public List<GroupeDto> getAllGrouopes(){
         return groupeService.getAllGroupes();
     }
+
+
 }
