@@ -91,7 +91,7 @@ public class FormationService {
     }
 
         public List<FormationDto> getAllFormations(int pageNumber, String searchKey) {
-            Pageable pageable = PageRequest.of(pageNumber, 6);
+            Pageable pageable = PageRequest.of(pageNumber, 10);
 
             Page<Formation> page;
             if (searchKey.equals("")) {

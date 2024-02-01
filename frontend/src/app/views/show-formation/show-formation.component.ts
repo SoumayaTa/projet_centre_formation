@@ -60,16 +60,15 @@ export class ShowFormationComponent implements OnInit {
     this.formationService.showFormation(this.pageNumber, this.itemsPerPage, searchKey).subscribe(
       (resp: any) => {
         console.log("loading formations");
-        this.formationDetails = resp;  // Modifier ici
+        this.formationDetails = resp;  
         this.showTable = true;
-        this.totalItems = resp.length;  // Modifier ici
+        this.totalItems = resp.length; 
         console.log(this.formationDetails);
       },
       (err: HttpErrorResponse) => {
         console.log(err);
       }
     );
-    // Establecer un nuevo temporizador para esperar 3 segundos antes de emitir el evento
   
   }
   

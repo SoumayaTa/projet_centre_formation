@@ -41,6 +41,7 @@ import { CalendarModule } from 'angular-calendar';
 import { TrainSessionComponent } from './views/train-session/train-session.component';
 import { AddTraineComponent } from './views/add-traine/add-traine.component';
 import { FooterComponent } from './views/footer/footer.component';
+import { YsfComponent } from './views/ysf/ysf.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,7 @@ import { FooterComponent } from './views/footer/footer.component';
     TrainSessionComponent,
     DemandeFormateurComponent,
     AddTraineComponent,    
-    FooterComponent
+    FooterComponent, YsfComponent, 
   ],
   imports: [
     BrowserModule,

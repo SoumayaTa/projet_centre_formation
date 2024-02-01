@@ -5,6 +5,9 @@ import { FormationService } from 'src/app/shared/services/formation.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { Individus } from 'src/app/model/Individus.model';
+import { IndividusService } from 'src/app/shared/services/individuals.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -12,12 +15,15 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
   styleUrls: ['./home.component.css',
     '../../../assets/css/style.css',
     '../../../assets/css/bootstrap.min.css',
-    '../../../assets/css/all.min.css']
+    '../../../assets/css/all.min.css'
+  ]
 })
 export class HomeComponent implements OnInit {
   formations: Formation[] = [];
   selectedFormation: Formation | null = null;
   filteredFormations: Formation[] = [];
+  individus:Individus[]=[];
+  totalIndividu: number=0;
   search: string = '';
   filterNom: string = '';
   filterVille: string = '';
@@ -36,6 +42,8 @@ export class HomeComponent implements OnInit {
     private formationService: FormationService,
     private router: Router,
     private formBuilder: FormBuilder,
+    private individusService: IndividusService,
+     
   ) {
     this.filterForm = this.formBuilder.group({
       categorie: [''],
@@ -55,6 +63,7 @@ export class HomeComponent implements OnInit {
         this.formations = formations;
         this.filteredFormations = formations;
         this.totalItems = formations.length;
+        
       },
       (error: any) => {
         console.error('Erreur lors de la récupération des formations', error);
@@ -95,7 +104,9 @@ export class HomeComponent implements OnInit {
     this.formationService.getByFilters(categorie, ville).subscribe(
       (formations: Formation[]) => {
         this.filteredFormations = formations;
-        this.totalItems = formations.length; // Update totalItems
+        this.totalItems = formations.length; 
+        console.log("ana hnaaaa"+this.totalItems);
+        
       },
       (error: any) => {
         console.error('Erreur lors de la récupération des formations filtrées', error);
@@ -119,6 +130,30 @@ export class HomeComponent implements OnInit {
     const container = document.querySelector('.formation-container');
     console.log(container);
     container?.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
-    // this.showAllCourses = !this.showAllCourses;
   }
+
+  getIndividus(){
+    console.log("ana hnaaaaaaaaaaa");
+    this.individusService.getIndividus().subscribe(
+      (resp)=>{
+        console.log(resp);
+        this.totalIndividu=resp.length
+      },
+      (err: HttpErrorResponse) => {
+        console.log(err);
+      }
+    )
+  }
+
+  // fetchFormationsPlanifiees(): void {
+  //   this.votreService.getEvents().subscribe(
+  //     (events) => {
+  //       this.nombreFormationsPlanifiees = events.length; // Mettez à jour avec la logique appropriée selon votre structure de données
+  //     },
+  //     (error) => {
+  //       console.error('Erreur lors du chargement des événements :', error);
+  //       // Gérez l'erreur selon vos besoins
+  //     }
+  //   );
+  // }
 }
