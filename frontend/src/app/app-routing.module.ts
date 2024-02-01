@@ -16,6 +16,8 @@ import { InscriptionformateurexeterneComponent } from './views/inscriptionformat
 import { AjouterEntrepriseComponent } from './views/ajouter-entreprise/ajouter-entreprise.component';
 import { TrainSessionComponent } from './views/train-session/train-session.component';
 import { DemandeFormateurComponent } from './views/demande-formateur/demande-formateur.component';
+import { YsfComponent } from './views/ysf/ysf.component';
+
 import { EvaluationComponent } from './views/evaluation/evaluation.component';
 
 const routes: Routes = [
@@ -38,6 +40,7 @@ const routes: Routes = [
   { path: 'formationdetails', component: FormationdetailsComponent},
   { path: 'testTraine', component: TrainSessionComponent},
   { path: 'testCompenent', component: TestCompenentComponent},
+  { path: 'ysf', component: YsfComponent},
   { path: "joinus", component:InscriptionformateurexeterneComponent},
   { path: "evaluation", component: EvaluationComponent},
   { path: '**', redirectTo: 'home'}    

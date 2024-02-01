@@ -39,8 +39,11 @@ import { CommonModule } from '@angular/common';
 import { TrainSessionComponent } from './views/train-session/train-session.component';
 import { AddTraineComponent } from './views/add-traine/add-traine.component';
 import { FooterComponent } from './views/footer/footer.component';
+import { YsfComponent } from './views/ysf/ysf.component';
 import { MatSliderModule } from '@angular/material/slider';
 import { EvaluationComponent } from './views/evaluation/evaluation.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,6 +67,7 @@ import { EvaluationComponent } from './views/evaluation/evaluation.component';
     DemandeFormateurComponent,
     AddTraineComponent,    
     FooterComponent,
+    YsfComponent, 
     EvaluationComponent
   ],
   imports: [
