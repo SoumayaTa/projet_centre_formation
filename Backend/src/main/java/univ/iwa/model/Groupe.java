@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Data
@@ -17,12 +18,20 @@ public class Groupe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JsonIgnore
+
     @OneToMany(mappedBy = "groupe")
     private List<Individus> inscrits;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "formation_id")
     private Formation formation;
+
+    @ManyToOne
+    @JoinColumn(name = "user_info_id")
+    private UserInfo formateur;
+
+
+
 
 }

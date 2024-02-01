@@ -18,6 +18,7 @@ import { TrainSessionComponent } from './views/train-session/train-session.compo
 import { DemandeFormateurComponent } from './views/demande-formateur/demande-formateur.component';
 import { YsfComponent } from './views/ysf/ysf.component';
 
+import { EvaluationComponent } from './views/evaluation/evaluation.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent},
@@ -41,6 +42,7 @@ const routes: Routes = [
   { path: 'testCompenent', component: TestCompenentComponent},
   { path: 'ysf', component: YsfComponent},
   { path: "joinus", component:InscriptionformateurexeterneComponent},
+  { path: "evaluation", component: EvaluationComponent},
   { path: '**', redirectTo: 'home'}    
 ];
 @NgModule({

@@ -1,5 +1,6 @@
 package univ.iwa.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -8,8 +9,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import univ.iwa.dto.FormationDto;
+import univ.iwa.dto.GroupeDto;
+import univ.iwa.dto.IndividusDto;
 import univ.iwa.exception.FormationNotFoundException;
 import univ.iwa.model.Formation;
+import univ.iwa.model.Groupe;
+import univ.iwa.model.Individus;
 import univ.iwa.repository.FormationRepository;
 
 import java.io.File;
@@ -27,6 +32,8 @@ public class FormationService {
     FormationRepository repository;
     @Autowired
     private ModelMapper modelMapper;
+    @Autowired
+    private EmailServiceImpl emailservice;
 
 //    public FormationDto addFormation(FormationDto form) {
 //        Formation formationEntity = modelMapper.map(form, Formation.class);
@@ -232,8 +239,61 @@ public class FormationService {
         return repository.getDistinctCategories();
     }
 
+    public List<Individus> getInscritsForFormation(Long formationId) {
+        Formation formation = repository.findById(formationId)
+                .orElseThrow(() -> new EntityNotFoundException("Formation not found with ID: " + formationId));
+
+        return formation.getInscrits();
+    }
     public Optional<Formation> findById(Long formationId) {
         return repository.findById(formationId);
     }
+    public List<GroupeDto> getGroupesForFormation(Long formationId) {
+        Optional<Formation> formationOptional = repository.findById(formationId);
+
+        if (formationOptional.isPresent()) {
+            Formation formation = formationOptional.get();
+            List<Groupe> groupes = formation.getGroupes();
+            return groupes.stream()
+                    .map(groupe -> modelMapper.map(groupe, GroupeDto.class))
+                    .collect(Collectors.toList());
+        } else {
+            throw new FormationNotFoundException("Formation avec l'ID " + formationId + " introuvable");
+        }
+    }
+    public List<String> getInscriptionForFormation(Long formationId) {
+        Optional<Formation> formationOptional = repository.findById(formationId);
+
+        if (formationOptional.isPresent()) {
+            Formation formation = formationOptional.get();
+            List<Individus> individus = formation.getInscrits();
+            return individus.stream()
+                    .map(Individus::getEmail)
+                    .collect(Collectors.toList());
+        } else {
+            throw new FormationNotFoundException("Inscrit avec l'ID " + formationId + " introuvable");
+        }
+    }
+
+    public void sendEmailsToInscrits(Long formationId) {
+        Optional<Formation> formationOptional = repository.findById(formationId);
+        if (formationOptional.isPresent()) {
+            Formation formation = formationOptional.get();
+            List<Individus> individus = formation.getInscrits();
+
+            for (Individus individu : individus) {
+                String to = individu.getEmail();
+                String subject ="hhwj";
+                String body = "http://localhost:4200/evaluation?id="+individu.getId();
+                emailservice.sendMail(to, "tayoubsoumaya21@gmail.com", subject, body);
+            }
+        } else {
+            throw new FormationNotFoundException("Inscrit avec l'ID " + formationId + " introuvable");
+        }
+    }
+
+
+
 }
+
 
