@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Evaluation } from 'src/app/model/Evaluation.modul';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class EvaluationService {
 
   constructor(private http: HttpClient) { }
 
-  submitEvaluation(evaluationData: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/add`, evaluationData);
+  submitEvaluation(evaluationData: Evaluation,id:number): Observable<any> {
+    return this.http.post(`${this.apiUrl}/add/${id}`, evaluationData);
   }
 }

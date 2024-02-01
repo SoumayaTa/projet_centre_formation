@@ -21,7 +21,7 @@ export class ShowFormationComponent implements OnInit {
   showTable = false;
   showMoreFormation = false;
   pageNumber = 0;
-   
+  timer:any;
 
   totalItems = 0;
   itemsPerPage = 5; 
@@ -41,10 +41,16 @@ export class ShowFormationComponent implements OnInit {
   }
 
   public searchByKeyWord(searchKey: string) {
+    
     console.log(searchKey);
     this.pageNumber = 0;
     this.formationDetails = [];
-    this.showFormations(searchKey);
+
+    this.timer = setTimeout(() => {
+      console.log('espero 3')
+      this.showFormations(searchKey);
+    },1500);
+   
   }
 
   public showFormations(searchKey: string = "") {
@@ -63,6 +69,8 @@ export class ShowFormationComponent implements OnInit {
         console.log(err);
       }
     );
+    // Establecer un nuevo temporizador para esperar 3 segundos antes de emitir el evento
+  
   }
   
 

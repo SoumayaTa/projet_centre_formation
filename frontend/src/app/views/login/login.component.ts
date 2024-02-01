@@ -48,9 +48,9 @@ export class LoginComponent implements OnInit {
         const role = response.role;
         console.log(response);
         if (role === 'ROLE_ADMIN') {
-          this.router.navigate(['/admin']);
+          this.router.navigate(['/testTraine']);
         } else if (role === 'ROLE_ASSISTANT') {
-          this.router.navigate(['/assistant']);
+          this.router.navigate(['/testTraine']);
         } else if (role === 'ROLE_FORMAT') {
           this.router.navigate(['/format']);
         }

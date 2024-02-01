@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Formation } from 'src/app/model/formation.model';
 import { FormationService } from 'src/app/shared/services/formation.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { DatePipe } from '@angular/common';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css',
+    '../../../assets/css/style.css',
+    '../../../assets/css/bootstrap.min.css',
+    '../../../assets/css/all.min.css']
 })
 export class HomeComponent implements OnInit {
   formations: Formation[] = [];
@@ -22,6 +25,11 @@ export class HomeComponent implements OnInit {
   filterForm: FormGroup;
   villes: string[] = [];
   categories: string[] = [];
+  itemsPerPage = 5;
+  pageNumber = 0;
+  totalItems = 0;
+  showAllCourses: boolean = false;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
     private dialog: MatDialog,
@@ -46,6 +54,7 @@ export class HomeComponent implements OnInit {
         console.log(formations);
         this.formations = formations;
         this.filteredFormations = formations;
+        this.totalItems = formations.length;
       },
       (error: any) => {
         console.error('Erreur lors de la récupération des formations', error);
@@ -86,6 +95,7 @@ export class HomeComponent implements OnInit {
     this.formationService.getByFilters(categorie, ville).subscribe(
       (formations: Formation[]) => {
         this.filteredFormations = formations;
+        this.totalItems = formations.length; // Update totalItems
       },
       (error: any) => {
         console.error('Erreur lors de la récupération des formations filtrées', error);
@@ -97,5 +107,18 @@ export class HomeComponent implements OnInit {
     if (formation && formation.id !== undefined) {
       this.router.navigate(['/formation-details', formation.id]);
     }
+  }
+
+  loadPage(event: PageEvent): void {
+    this.pageNumber = event.pageIndex;
+    this.itemsPerPage = event.pageSize;
+    this.fetchFormations();
+  }
+
+  toggleShowAllCourses() {
+    const container = document.querySelector('.formation-container');
+    console.log(container);
+    container?.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+    // this.showAllCourses = !this.showAllCourses;
   }
 }

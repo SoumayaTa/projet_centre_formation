@@ -34,11 +34,14 @@ import { TestCompenentComponent } from './views/test-compenent/test-compenent.co
 import { AjouterEntrepriseComponent } from './views/ajouter-entreprise/ajouter-entreprise.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { DemandeFormateurComponent } from './views/demande-formateur/demande-formateur.component';
+
 import { FullCalendarModule } from '@fullcalendar/angular'; 
 import { CommonModule } from '@angular/common';
-import { TrainSessionComponent } from './train-session/train-session.component';
-import { EvaluationComponent } from './views/evaluation/evaluation.component';
+import { TrainSessionComponent } from './views/train-session/train-session.component';
+import { AddTraineComponent } from './views/add-traine/add-traine.component';
+import { FooterComponent } from './views/footer/footer.component';
 import { MatSliderModule } from '@angular/material/slider';
+import { EvaluationComponent } from './views/evaluation/evaluation.component';
 
 @NgModule({
   declarations: [
@@ -61,8 +64,10 @@ import { MatSliderModule } from '@angular/material/slider';
     AjouterEntrepriseComponent,
     TrainSessionComponent,
     DemandeFormateurComponent,
+    AddTraineComponent,    
+    FooterComponent,
     EvaluationComponent
-    ],
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -77,6 +82,7 @@ import { MatSliderModule } from '@angular/material/slider';
     AgrupaMaterialModule,
     MatIconModule,
     MatChipsModule,
+  
     CommonModule,
     ToastrModule.forRoot({
       timeOut: 3000,
@@ -84,7 +90,8 @@ import { MatSliderModule } from '@angular/material/slider';
       preventDuplicates: true,
     }),
     MatPaginatorModule,
-    FullCalendarModule
+    FullCalendarModule,
+    
   ],
   providers: [AuthGuard,{
     provide:HTTP_INTERCEPTORS,

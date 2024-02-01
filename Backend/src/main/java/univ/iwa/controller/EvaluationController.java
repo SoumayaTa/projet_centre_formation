@@ -12,9 +12,10 @@ public class EvaluationController {
     @Autowired
     EvaluationService service;
 
-//    @PostMapping("/add/{individuid}")
-//    public EvaluationDto addEvaluation(@RequestBody EvaluationDto evaluationDto,
-//                                       @PathVariable Long individuid) {
-//        return service.addEvaluation(evaluationDto,individuid);
-//    }
+   @PostMapping("/add/{individuid}")
+    public EvaluationDto addEvaluation(@RequestBody EvaluationDto evaluationDto,
+                                       @PathVariable Long individuid) {
+       System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+        return service.addEvaluation(evaluationDto,individuid);
+    }
 }

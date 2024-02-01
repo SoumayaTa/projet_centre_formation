@@ -42,7 +42,8 @@
 }
 /* Styles pour le menu latéral */
 .mat-sidenav.side-nav-items {
-  background-color: #f5f5f5; /* Couleur de fond du menu latéral */
+  background-color: #f5f5f5;
+  color: #fff; /* Couleur de fond du menu latéral */
 }
 
 /* Styles pour l'espaceur du menu */

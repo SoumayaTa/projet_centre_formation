@@ -10,6 +10,7 @@ import univ.iwa.dto.FormationDto;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Builder
 @Entity
@@ -34,6 +35,10 @@ public class Formation {
 
     @OneToMany(mappedBy = "formation", cascade = {CascadeType.REMOVE, CascadeType.MERGE})
     private List<Groupe> groupes;
+
+    @ManyToOne
+    @JoinColumn(name= "calendrier")
+    private Calendrier calendrier;
 
 
 }

@@ -1,6 +1,9 @@
 package univ.iwa.service;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
+import org.hibernate.Hibernate;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +22,8 @@ public class CalendrierService {
 
     @Autowired
     private FormationRepository formationRepository;
-
+    @Autowired
+    private  EmailServiceImpl emailService;
     @Autowired
     private UserInfoRepository userInfoRepository;
 
@@ -73,4 +77,25 @@ public class CalendrierService {
                 .map(event -> modelMapper.map(event, CalendrierDto.class))
                 .collect(Collectors.toList());
     }
+
+//
+//    private void notifyIfDateExceeded() {
+//        List<Calendrier> calendriers = repository.findAll();
+//        for (Calendrier calendrier : calendriers) {
+//            if (calendrier.isFormationTerminee()) {
+//                Hibernate.initialize(calendrier.getFormation().getInscrits());
+//                for (Individus inscrit : calendrier.getFormation().getInscrits()) {
+//                    String email = inscrit.getEmail();
+//                    if (email != null) {
+//                        String to = email;
+//                        String cc = "tayoubsoumaya21@gmail.com";
+//                        String subject = "Formation Date Exceeded Notification";
+//                        emailService.sendMail(to, cc, subject, "http://localhost:4200/evaluation?id=" + inscrit.getId());
+//                    } else {
+//                        throw new EntityNotFoundException("Email not found for Individu with ID: " + inscrit.getId());
+//                    }
+//                }
+//            }
+//        }
+//    }
 }

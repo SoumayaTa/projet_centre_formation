@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CalendarOptions, DateSelectArg } from 'fullcalendar';
-import { Calendrier } from '../model/Calendrier.modul';
-import { CalendrierService } from '../shared/services/calendrier.service';
+import { Calendrier } from '../../model/Calendrier.modul';
+import { CalendrierService } from '../../shared/services/calendrier.service';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGrigPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
-
+import { MatDialog } from '@angular/material/dialog';
+import { AddTraineComponent } from '../add-traine/add-traine.component';
 
 @Component({
   selector: 'app-train-session',
@@ -14,17 +15,20 @@ import interactionPlugin from '@fullcalendar/interaction';
 })
 export class TrainSessionComponent implements OnInit {
   events: Calendrier[] = [];
-  breadCrumbItems: any[] = [];
   calendarOptions: CalendarOptions = {
-    initialView: 'dayGridMonth',
-    events: [], 
+    initialView: 'timeGridWeek',
+    headerToolbar: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,timeGridWeek,timeGridDay'
+    },
     plugins: [dayGridPlugin, timeGrigPlugin, interactionPlugin],
-    dateClick: this.handleDateClick.bind(this),
+    editable: true,
     selectable: true,
-    select: this.handleDateSelect.bind(this)
+    select: this.handleDateSelect.bind(this),
   };
 
-  constructor(private calendrierService: CalendrierService) {}
+  constructor(private calendrierService: CalendrierService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.loadEvents();
@@ -35,40 +39,29 @@ export class TrainSessionComponent implements OnInit {
   }
 
   handleDateSelect(selectInfo: DateSelectArg) {
+    console.log("Dialog open: ");
     console.log(selectInfo);
-    
     console.log('Selection Start: ' + selectInfo.startStr);
     console.log('Selection End: ' + selectInfo.endStr);
 
-   
+    const dialogRef = this.dialog.open(AddTraineComponent, {
+      width: '400px',
+      data: {
+        start: selectInfo.startStr,
+        end: selectInfo.endStr
+      }
+    });
   }
 
   loadEvents(): void {
     this.calendrierService.getEvents().subscribe(
       (response: Calendrier[]) => {
-        
         this.events = response;
-        
-        
-        this.calendarOptions = {
-          initialView: 'timeGridWeek',
-          headerToolbar:{
-            left: 'prev,next today',
-            center:'title',
-            right: 'dayGridMonth,timeGridWeek,timeGridDay'
-          },
-          events: this.events.map(event => ({
-            title: event.title, 
-            start: new Date(event.datedebut), 
-            end: new Date(event.datefin),
-          })),
-          plugins: [dayGridPlugin, timeGrigPlugin, interactionPlugin],
-          editable:true,
-          selectable: true, 
-          select : (event: any) =>{console.log("selected");
-          },
-          
-        };
+        this.calendarOptions.events = this.events.map(event => ({
+          title: event.title,
+          start: new Date(event.datedebut),
+          end: new Date(event.datefin),
+        }));
       },
       error => {
         console.error('Erreur lors du chargement des événements :', error);
