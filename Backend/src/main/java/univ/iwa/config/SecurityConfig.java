@@ -48,13 +48,14 @@ public class SecurityConfig {
 								.requestMatchers("/auth/format/**").authenticated()
 								.requestMatchers("/form/formation/**").authenticated()
 								.requestMatchers("/entreprise/**").authenticated()
+								.requestMatchers("/entreprise/removeEntreprise/**").authenticated()
+								.requestMatchers("/entreprise/updateEntreprise/**").authenticated()
+								.requestMatchers("/entreprise/geEntrepriseById/**").authenticated()
 								.requestMatchers("/calendrier/**").authenticated()
 								.requestMatchers("/groupe/**").authenticated()
 								.requestMatchers("/auth/allFormateur").authenticated()
 								.requestMatchers("/auth/deleteFormateur/**").authenticated()
 								
-								
-
 
 				).csrf(csrf->csrf.disable())
 			.authenticationProvider(authenticationProvider())

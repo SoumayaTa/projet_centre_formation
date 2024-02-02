@@ -76,7 +76,6 @@ showFormation(page: number, itemsPerPage: number, searchKey: string): Observable
   return this.httpClient.get<Formation[]>(`${this.apiUrl}/getall`, { params });
 }
   public deleteFormation(id:number): Observable<any>{
-  
     return this.httpClient.delete(`${this.apiUrl}/formation/deleteFormation/`+id)
  
   }

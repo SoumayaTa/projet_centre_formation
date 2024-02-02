@@ -98,4 +98,7 @@ public class CalendrierService {
 //            }
 //        }
 //    }
+    public void deleteCalendriersByEntreprise(Entreprise entreprise) {
+    	repository.deleteByEntreprise(entreprise);
+    }
 }

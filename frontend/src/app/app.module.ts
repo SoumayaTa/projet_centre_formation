@@ -42,6 +42,7 @@ import { FooterComponent } from './views/footer/footer.component';
 import { YsfComponent } from './views/ysf/ysf.component';
 import { MatSliderModule } from '@angular/material/slider';
 import { EvaluationComponent } from './views/evaluation/evaluation.component';
+import { ShowentrepriseComponent } from './views/showentreprise/showentreprise.component';
 
 
 @NgModule({
@@ -68,7 +69,7 @@ import { EvaluationComponent } from './views/evaluation/evaluation.component';
     AddTraineComponent,    
     FooterComponent,
     YsfComponent, 
-    EvaluationComponent
+    EvaluationComponent, ShowentrepriseComponent
   ],
   imports: [
     BrowserModule,

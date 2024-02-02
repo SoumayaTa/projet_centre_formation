@@ -19,6 +19,7 @@ import { DemandeFormateurComponent } from './views/demande-formateur/demande-for
 import { YsfComponent } from './views/ysf/ysf.component';
 
 import { EvaluationComponent } from './views/evaluation/evaluation.component';
+import { ShowentrepriseComponent } from './views/showentreprise/showentreprise.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent},
@@ -30,7 +31,9 @@ const routes: Routes = [
   { path: 'allFormateur', component: FormateurDetailsComponent,canActivate:[AuthGuard],data:{roles:['ROLE_ADMIN']}},
   { path: 'addformation', component: FormationComponent, canActivate:[AuthGuard], data:{roles:['ROLE_ADMIN']}},
   { path: 'showFormation', component: ShowFormationComponent,canActivate:[AuthGuard],data:{roles:['ROLE_ADMIN']}},
-  { path:'formateurexeterne',component:DemandeFormateurComponent,canActivate:[AuthGuard],data:{roles:['ROLE_ADMIN']}},
+  { path: 'showEntreprise', component: ShowentrepriseComponent,canActivate:[AuthGuard],data:{roles:['ROLE_ADMIN']}},
+  { path:'formateurexeterne',component:DemandeFormateurComponent,canActivate:[AuthGuard],data:{ roles: ['ROLE_ADMIN', 'ROLE_ASSISTANT'] }},
+
   { 
     path: 'addEntreprise', 
     component: AjouterEntrepriseComponent,
