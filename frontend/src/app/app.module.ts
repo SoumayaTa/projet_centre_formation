@@ -34,15 +34,18 @@ import { TestCompenentComponent } from './views/test-compenent/test-compenent.co
 import { AjouterEntrepriseComponent } from './views/ajouter-entreprise/ajouter-entreprise.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { DemandeFormateurComponent } from './views/demande-formateur/demande-formateur.component';
-
 import { FullCalendarModule } from '@fullcalendar/angular'; 
 import { CommonModule } from '@angular/common';
 import { TrainSessionComponent } from './views/train-session/train-session.component';
 import { AddTraineComponent } from './views/add-traine/add-traine.component';
 import { FooterComponent } from './views/footer/footer.component';
+import { YsfComponent } from './views/ysf/ysf.component';
 import { MatSliderModule } from '@angular/material/slider';
 import { EvaluationComponent } from './views/evaluation/evaluation.component';
 import { NestedComponent } from './views/nested/nested.component';
+import { ShowentrepriseComponent } from './views/showentreprise/showentreprise.component';
+import { SubmittedComponent } from './views/submitted/submitted.component';
+
 
 @NgModule({
   declarations: [
@@ -68,7 +71,10 @@ import { NestedComponent } from './views/nested/nested.component';
     AddTraineComponent,    
     FooterComponent,
     EvaluationComponent,
-    NestedComponent
+    NestedComponent,
+    EvaluationComponent,
+    ShowentrepriseComponent,
+    SubmittedComponent
   ],
   imports: [
     BrowserModule,

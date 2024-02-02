@@ -5,4 +5,5 @@ export interface Evaluation {
     scours: number;
     stp: number;
     maitrise: number;
+    
   }

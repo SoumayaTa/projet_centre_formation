@@ -53,4 +53,8 @@
   }
   .spinnerT{
     margin-right: 10px;
+  }.custom-button {
+    margin: 5px; /* Ajoutez une marge autour des boutons */
+    font-size: 14px; /* Ajustez la taille de la police */
+    /* Ajoutez d'autres styles personnalisés selon vos préférences */
   }

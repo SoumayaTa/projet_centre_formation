@@ -26,6 +26,9 @@ export class TrainSessionComponent implements OnInit {
     editable: true,
     selectable: true,
     select: this.handleDateSelect.bind(this),
+    themeSystem: 'bootstrap', 
+    contentHeight: 'auto', 
+    eventBackgroundColor: '#2ecc71',
   };
 
   constructor(private calendrierService: CalendrierService, private dialog: MatDialog) {}

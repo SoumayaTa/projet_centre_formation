@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Formation } from 'src/app/model/formation.model';
+import { Formation, Groupe } from 'src/app/model/formation.model';
 import { UserAuthService } from './user-auth.service';
 import { HttpParams } from '@angular/common/http';
 
@@ -10,7 +10,7 @@ import { HttpParams } from '@angular/common/http';
   providedIn: 'root'
 })
 export class FormationService {
-  private apiUrl = 'http://localhost:8080/form';  // Remplacez par l'URL de votre backend
+  private apiUrl = 'http://localhost:8080/form'; 
 
   constructor(private httpClient: HttpClient, private userAuthService: UserAuthService) { }
 
@@ -76,7 +76,6 @@ showFormation(page: number, itemsPerPage: number, searchKey: string): Observable
   return this.httpClient.get<Formation[]>(`${this.apiUrl}/getall`, { params });
 }
   public deleteFormation(id:number): Observable<any>{
-  
     return this.httpClient.delete(`${this.apiUrl}/formation/deleteFormation/`+id)
  
   }
@@ -111,5 +110,10 @@ showFormation(page: number, itemsPerPage: number, searchKey: string): Observable
   
   getVilles(): Observable<string[]> {
     return this.httpClient.get<string[]>(`${this.apiUrl}/villes`);
+  }
+
+  getGroupesForFormation(formationId: number): Observable<Groupe[]> {
+    const url = `${this.apiUrl}/grpupes/${formationId}`;
+    return this.httpClient.get<Groupe[]>(url);
   }
 }

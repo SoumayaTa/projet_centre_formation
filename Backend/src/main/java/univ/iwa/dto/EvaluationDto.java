@@ -14,4 +14,5 @@ public class EvaluationDto {
     private Long scours;
     private Long stp;
     private Long maitrise;
+    private Long totalpercent;
 }

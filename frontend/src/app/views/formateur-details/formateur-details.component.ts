@@ -14,7 +14,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 })
 export class FormateurDetailsComponent implements OnInit {
   FormateurDetails :Formateur []=[];
-  displayedColumns:String[] = ['id', 'name', 'email','Actions']
+  displayedColumns:String[] = ['id', 'name', 'email','averageRating','Actions']
   selectedFormateurId: number | null = null;
 
 
@@ -33,6 +33,7 @@ export class FormateurDetailsComponent implements OnInit {
       console.log("hhhh");
       console.log(resp)
       this.FormateurDetails = resp;
+      this.updateAverageRatings();
       console.log(this.FormateurDetails);
       
     },(err:HttpErrorResponse)=>{
@@ -40,6 +41,25 @@ export class FormateurDetailsComponent implements OnInit {
     }
   )
   }
+
+  private updateAverageRatings() {
+    this.FormateurDetails.forEach(formateur => {
+      this.formateurService.getAverageRatingForFormateur(formateur.id).subscribe(
+        (averageRating: number) => {
+          formateur.averageRating = averageRating;
+        },
+        (err: HttpErrorResponse) => {
+          console.log(err);
+        }
+      );
+    });
+  }
+  stars(rating: number): number[] {
+    const fullStars = Math.floor(rating);
+    const halfStar = rating - fullStars >= 0.5 ? 1 : 0;
+    return Array(fullStars + halfStar).fill(0);
+  }
+  
 
   getFormateurById(id: number): void {
     this.formateurService.getFormateurById(id)
@@ -54,7 +74,7 @@ export class FormateurDetailsComponent implements OnInit {
         }
       );
   }
-
+  
   public deleteFormateur(id:number){
     console.log("delete")
     this.formateurService.deleteFormateurs(id).subscribe(

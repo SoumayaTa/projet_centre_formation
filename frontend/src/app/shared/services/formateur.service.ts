@@ -99,4 +99,20 @@ export class FormateurService {
     const url = `${this.baseUrl}/inscription/${name}/${email}/${motsCles}`;
     return this.httpClient.post<any>(url, null);
   }
+
+  public getAverageRatingForFormateur(formateurId: number): Observable<number> {
+    const jwtToken = this.userAuthService.getToken();
+    if (jwtToken) {
+      const headers = new HttpHeaders({
+        'Authorization': 'Bearer ' + jwtToken,
+        'Content-Type': 'application/json'
+      });
+  
+      return this.httpClient.get<number>(`${this.baseUrl}/evaluation/averageRating/${formateurId}`, { headers });
+    } else {
+      console.log('Token JWT non disponible');
+    }
+    return new Observable<number>();
+  }
+  
 }

@@ -3,6 +3,7 @@ package univ.iwa.service;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import univ.iwa.dto.GroupeDto;
 import univ.iwa.dto.IndividusDto;
 import univ.iwa.model.Formation;
 import univ.iwa.model.Groupe;
@@ -12,6 +13,7 @@ import univ.iwa.repository.GroupeRepository;
 import univ.iwa.repository.IndividusRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class IndividusService {
@@ -54,5 +56,12 @@ public class IndividusService {
         Groupe newGroupe = new Groupe();
         newGroupe.setFormation(formation);
         return groupeRepository.save(newGroupe);
+    }
+
+    public List<IndividusDto> getAllIndividus() {
+        List<Individus> individuses = individusRepository.findAll();
+        return individuses.stream()
+                .map(individu -> modelMapper.map(individu, IndividusDto.class))
+                .collect(Collectors.toList());
     }
 }

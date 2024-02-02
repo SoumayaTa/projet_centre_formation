@@ -18,6 +18,7 @@ public class Evaluation {
     private Long scours;
     private Long stp;
     private Long maitrise;
+    private Long totalpercent;
 
     @OneToOne
     @JoinColumn(name = "individus_id")
@@ -30,6 +31,14 @@ public class Evaluation {
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "formation_id", nullable = false)
     private Formation formation;
+
+    public void calculateTotalPercent() {
+        if (qualite_p != null && rythme != null && scours != null && stp != null && maitrise != null) {
+            totalpercent = (qualite_p + rythme + scours + stp + maitrise) / 5;
+        } else {
+            totalpercent = null;
+        }
+    }
 
 
 }

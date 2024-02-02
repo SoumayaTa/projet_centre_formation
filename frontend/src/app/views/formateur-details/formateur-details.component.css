@@ -57,6 +57,22 @@
   }
   
   tr.mat-row:nth-child(even) {
-    background-color: #ffffff; /* Even row background color */
+    background-color: #ffffff;
   }
+
+.high-rating {
+  color: green; 
+  font-weight: bold; 
+}
+
+.medium-rating {
+  color: orange;
+  font-weight: bold; 
+}
+
+.low-rating {
+  color: red;
+  font-weight: bold; 
+}
+
   

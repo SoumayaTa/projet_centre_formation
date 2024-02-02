@@ -98,7 +98,7 @@ public class FormationService {
     }
 
         public List<FormationDto> getAllFormations(int pageNumber, String searchKey) {
-            Pageable pageable = PageRequest.of(pageNumber, 6);
+            Pageable pageable = PageRequest.of(pageNumber, 10);
 
             Page<Formation> page;
             if (searchKey.equals("")) {
@@ -202,7 +202,6 @@ public class FormationService {
                 String ville
     ){
             Optional<Formation> optionalFormation = repository.findById(id);
-
             if (optionalFormation.isPresent()) {
                 Formation existingFormation = optionalFormation.get();
 
@@ -214,9 +213,7 @@ public class FormationService {
                 existingFormation.setProgramme(programme);
                 existingFormation.setCategorie(categorie);
                 existingFormation.setVille(ville);
-
                 existingFormation = repository.save(existingFormation);
-
                 return modelMapper.map(existingFormation, FormationDto.class);
             } else {
                 throw new FormationNotFoundException("Formation with id " + id + " not found");

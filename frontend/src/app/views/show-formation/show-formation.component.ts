@@ -1,78 +1,111 @@
 // show-formation.component.ts
-import { Component, OnInit, ViewChild } from '@angular/core';
+
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Formation } from 'src/app/model/formation.model';
+import { Formation, Groupe } from 'src/app/model/formation.model';
 import { FormationService } from 'src/app/shared/services/formation.service';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { ImageDialogComponent } from '../image-dialog/image-dialog.component';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { Subscription } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+import { GroupeService } from 'src/app/shared/services/groupe.service';
 
 @Component({
   selector: 'app-show-formation',
   templateUrl: './show-formation.component.html',
   styleUrls: ['./show-formation.component.css']
 })
-export class ShowFormationComponent implements OnInit {
+export class ShowFormationComponent implements OnInit, OnDestroy {
   formationDetails: Formation[] = [];
-  displayedColumns: string[] = ['id', 'nom', 'nombreHeur', 'cout', 'objectifs','programme','categorie','ville', 'Actions'];
+  displayedColumns: string[] = ['id', 'nom', 'nombreHeur', 'cout', 'objectifs', 'programme', 'categorie', 'ville', 'groupes', 'Actions'];
   selectedFormationId: number | null = null;
   showTable = false;
-  showMoreFormation = false;
   pageNumber = 0;
-  timer:any;
-
+  itemsPerPage = 5;
+  timer: any;
   totalItems = 0;
-  itemsPerPage = 5; 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-
+  private groupesSubscriptions: Subscription[] = [];
 
   constructor(
     private formationService: FormationService,
+    private groupeService: GroupeService,
     private dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
-    console.log("ysf");
-    
     this.showFormations();
   }
 
+  ngOnDestroy(): void {
+    this.groupesSubscriptions.forEach(sub => sub.unsubscribe());
+  }
+
   public searchByKeyWord(searchKey: string) {
-    
-    console.log(searchKey);
     this.pageNumber = 0;
     this.formationDetails = [];
 
     this.timer = setTimeout(() => {
-      console.log('espero 3')
       this.showFormations(searchKey);
-    },1500);
-   
+    }, 1500);
   }
 
   public showFormations(searchKey: string = "") {
-    console.log("starting...");
     this.showTable = false;
-  
+
     this.formationService.showFormation(this.pageNumber, this.itemsPerPage, searchKey).subscribe(
       (resp: any) => {
-        console.log("loading formations");
-        this.formationDetails = resp;  // Modifier ici
+        this.formationDetails = resp;
         this.showTable = true;
-        this.totalItems = resp.length;  // Modifier ici
-        console.log(this.formationDetails);
+        this.totalItems = resp.length;
+        this.loadGroupesForFormations();
       },
       (err: HttpErrorResponse) => {
         console.log(err);
       }
     );
-    // Establecer un nuevo temporizador para esperar 3 segundos antes de emitir el evento
-  
   }
+
+  private loadGroupesForFormations(): void {
+    this.groupesSubscriptions.forEach(sub => sub.unsubscribe());
+    this.groupesSubscriptions = [];
   
+    this.formationDetails.forEach((formation: Formation) => {
+      if (formation.id) {
+        const subscription = this.formationService.getGroupesForFormation(formation.id).subscribe(
+          (groupes: Groupe[]) => {
+            const formationIndex = this.formationDetails.findIndex(form => form.id === formation.id);
+            if (formationIndex !== -1) {
+              this.formationDetails[formationIndex]['groupes'] = groupes;
+            }
+          },
+          (error: any) => {
+            console.error(`Error fetching groupes for formation with id ${formation.id}:`, error);
+          }
+        );
+        this.groupesSubscriptions.push(subscription);
+      } else {
+        console.error('Formation id is undefined or null.');
+      }
+    });
+  }
+  sendFeedback(formation: any, groupe: any): void {
+    this.groupeService.sendFeedbackEmail(groupe.id).subscribe(
+
+      (response) => {
+        console.log('Feedback envoyé avec succès', response);
+      },
+      (error) => {
+        console.error('Error sending feedback:', error);
+        this.toastr.success('Feedback envoyé avec succès.', 'Envoie réussie');
+      }
+    );
+  }
 
   public editFormationDetails(id: number) {
     this.selectedFormationId = id;
@@ -80,8 +113,6 @@ export class ShowFormationComponent implements OnInit {
   }
 
   viewImage(id: number, photos: string) {
-    console.log('URL de l\'image :', photos);
-
     if (id) {
       this.formationService.getFormationById(id).subscribe(
         (formation: Formation) => {
@@ -100,16 +131,12 @@ export class ShowFormationComponent implements OnInit {
   }
 
   public delete(id: number) {
-    console.log('starting deleting ...');
-    console.log('Testing Mar1 ...');
-
     this.formationService.deleteFormation(id).subscribe(
       () => {
-        console.log('deleting the formation');
         this.ngOnInit();
-        console.log('Formation supprimé avec succès.');
-        console.log(this.formationDetails);
-      }, (err: HttpErrorResponse) => {
+        console.log('Formation supprimée avec succès.');
+      },
+      (err: HttpErrorResponse) => {
         console.log(err);
       }
     );
@@ -126,7 +153,6 @@ export class ShowFormationComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result: any) => {
       if (result) {
         this.delete(idFormation);
-
       }
     });
   }
@@ -136,6 +162,7 @@ export class ShowFormationComponent implements OnInit {
     this.itemsPerPage = event.pageSize;
     this.showFormations();
   }
+
   toggleSubrow(element: any): void {
     element.showSubrow = !element.showSubrow;
   }
@@ -143,5 +170,4 @@ export class ShowFormationComponent implements OnInit {
   get hasSubrow(): boolean {
     return this.formationDetails.some((element: any) => element.showSubrow);
   }
-
 }

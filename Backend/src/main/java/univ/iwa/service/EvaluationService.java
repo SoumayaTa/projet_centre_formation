@@ -15,6 +15,7 @@ import univ.iwa.repository.IndividusRepository;
 import univ.iwa.repository.UserInfoRepository;
 import univ.iwa.model.Formation;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import univ.iwa.model.Calendrier;
@@ -22,21 +23,16 @@ import univ.iwa.model.Calendrier;
 public class EvaluationService {
     @Autowired
     private EvaluationRepository repository;
-
     @Autowired
     private ModelMapper modelMapper;
-
     @Autowired
     private IndividusRepository indrepo;
-
     @Autowired
     private UserInfoRepository userepo;
-
     @Autowired
     private EmailServiceImpl emailService;
     @Autowired
     private FormationRepository frepo;
-
     public EvaluationDto addEvaluation(EvaluationDto evaluationDto, Long individuId) {
         Optional<Individus> individuOptional = indrepo.findById(individuId);
         Individus individu = individuOptional.get();
@@ -49,6 +45,7 @@ public class EvaluationService {
         evaluation.setIndividus(individu);
         evaluation.setFormation(formation);
         evaluation.setFormateur(formateur);
+        evaluation.calculateTotalPercent();
         sendThanksForFeedbackEmail(individuId);
         return modelMapper.map(repository.save(evaluation), EvaluationDto.class);
     }
@@ -61,5 +58,26 @@ public class EvaluationService {
             String subject = "Thanks for Your Feedback";
             String body = "On a bien recu votre feedback on va le prendre en compte pour ameliorer notre service ";
             emailService.sendMail(to, cc, subject,body);
+    }
+    public Double calculateAverageRatingForFormateur(Long formateurId) {
+        List<Evaluation> evaluations = repository.findByFormateurId(formateurId);
+        if (evaluations != null && !evaluations.isEmpty()) {
+            double totalRating = 0;
+            int numberOfEvaluations = 0;
+            for (Evaluation evaluation : evaluations) {
+                if (evaluation.getTotalpercent() != null) {
+                    totalRating += evaluation.getTotalpercent();
+                    numberOfEvaluations++;
+                }
+            }
+            if (numberOfEvaluations > 0) {
+                return totalRating / numberOfEvaluations;
+            }
+        }
+        return null;
+    }
+
+    public boolean hasSubmittedFeedback(Long userId) {
+        return repository.existsByIndividusId(userId);
     }
 }

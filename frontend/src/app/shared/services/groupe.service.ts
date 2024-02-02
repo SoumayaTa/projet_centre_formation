@@ -14,19 +14,31 @@ export class GroupeService {
   constructor(private httpClient: HttpClient, private userAuthService: UserAuthService) { }
 
   public getGroupes(): Observable<Groupe[]> {
-
     const jwtToken = this.userAuthService.getToken();
     if (jwtToken) {
       const headers = new HttpHeaders({
         'Authorization': 'Bearer ' + jwtToken,
-
         'Content-Type': 'application/json'
       });
       return this.httpClient.get<Groupe[]>(`${this.apiUrl}/groupe/getAllGroupes`, { headers });
-    }else{
+    } else {
       console.log('Token JWT non disponible');
     }
     return new Observable<any>();
-
   }
+
+  public sendFeedbackEmail(groupeId: number): Observable<any> {
+    const jwtToken = this.userAuthService.getToken();
+    if (jwtToken) {
+      const headers = new HttpHeaders({
+        'Authorization': 'Bearer ' + jwtToken,
+        'Content-Type': 'application/json'
+      });
+      return this.httpClient.get(`${this.apiUrl}/groupe/sendemail/${groupeId}`, { headers });
+    } else {
+      console.log('Token JWT non disponible');
+    }
+    return new Observable<any>();
+  }
+
 }
