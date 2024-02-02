@@ -57,8 +57,11 @@
         <button mat-stroked-button color="warn" type="button" (click)="entrepriseForm.reset()">
           Effacer
         </button>
-        <button mat-stroked-button color="primary" type="submit">
+        <button mat-stroked-button color="primary" type="submit" *ngIf="isNewEntreprise">
           Ajouter l'entreprise
+        </button>
+        <button mat-stroked-button color="primary" type="submit" *ngIf="!isNewEntreprise">
+          modifier la formation
         </button>
       </div>
     </form>

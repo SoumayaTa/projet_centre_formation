@@ -83,7 +83,6 @@ export class FormationComponent implements OnInit {
         this.formationService.editFormation(this.editingFormationId, formateurData, this.selectedImage).subscribe(
           (response) => {
             console.log('Formation modifiée avec succès :', response);
-
             this.toastr.success('Formation a été modifiée avec succès.', 'Modification réussie');
             this.formationForm.reset();
             this.selectedImage = null;
