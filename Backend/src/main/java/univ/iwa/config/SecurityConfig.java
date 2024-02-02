@@ -36,13 +36,13 @@ public class SecurityConfig {
 		http
 				.cors(cors->cors.configurationSource(request -> new CorsConfiguration(corsFilter())))
 				.authorizeHttpRequests((auth)->auth
-			.requestMatchers("/auth/welcome","/evaluation/**","/mail2/**","/calendrieraddnewCalendar/**","/mail/**","/images/**","/externe/**","/externe/deleteinscription/**","/externe/deleteAndCreateUserInfo/**", "/auth/addNewUser","/auth/getFormateurById/**","/auth/generateToken","/form/categories","/form/villes", "/form/getByFilters","/form/getall","/form/grpupes/**","/form/sendemail/**","/form/individus/**","/form/addFormation/image","/individus/**","/evaluation/add/**").permitAll()
+			.requestMatchers("/auth/welcome","/evaluation/**","/mail2/**","/mail/**","/images/**","/externe/**","/externe/deleteinscription/**","/externe/deleteAndCreateUserInfo/**", "/auth/addNewUser","/auth/getFormateurById/**","/auth/generateToken","/form/categories","/form/villes", "/form/getByFilters","/form/getall","/form/grpupes/**","/form/sendemail/**","/form/individus/**","/form/addFormation/image","/individus/**","/evaluation/add/**").permitAll()
 			.requestMatchers("/auth/assistant/**").authenticated()
-
+								.requestMatchers("/individus/getAllIndividus").permitAll()
 								.requestMatchers("/images/**").permitAll()
+								.requestMatchers("auth/allFormateurByNom").permitAll()
 								.requestMatchers("/auth/welcome", "/auth/addNewUser", "/auth/generateToken", "/form/getByDate/**", "/form/getByVille/**", "/form/getByCategorie/**","/form/getall").permitAll()
 								.requestMatchers("/auth/assistant/**").authenticated()
-
 								.requestMatchers("/auth/admin/**").authenticated()
 								.requestMatchers("/auth/updateUser/**").authenticated()
 								.requestMatchers("/auth/format/**").authenticated()
@@ -52,11 +52,9 @@ public class SecurityConfig {
 								.requestMatchers("/groupe/**").authenticated()
 								.requestMatchers("/auth/allFormateur").authenticated()
 								.requestMatchers("/auth/deleteFormateur/**").authenticated()
-								
-								
+								.requestMatchers("/calendrier/addnewCalendar").authenticated()
 
-
-				).csrf(csrf->csrf.disable())
+												).csrf(csrf->csrf.disable())
 			.authenticationProvider(authenticationProvider())
 			.addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class);
 		return http.build();

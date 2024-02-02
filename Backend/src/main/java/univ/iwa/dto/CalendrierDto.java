@@ -15,10 +15,11 @@ public class CalendrierDto {
     private Date datedebut;
     private Date datefin;
     private String title;
+    private Long formationId;
+    private int formateurId;
+    private Long entrepriseId;
+    private Long groupeId;
 
-//    private Long formationId;
-//    private int formateurId;
-//    private Long entrepriseId;
 
 
 }

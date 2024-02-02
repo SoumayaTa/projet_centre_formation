@@ -22,10 +22,12 @@ public class Groupe {
     @OneToMany(mappedBy = "groupe")
     private List<Individus> inscrits;
 
+
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "formation_id")
     private Formation formation;
+
 
     @ManyToOne
     @JoinColumn(name = "user_info_id")

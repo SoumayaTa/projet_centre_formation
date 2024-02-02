@@ -99,6 +99,12 @@ public class UserController {
         }
     }
 
+    @GetMapping("/allFormateurByNom")
+    @ResponseBody
+    public List<UserInfoDto> getAllFormatByNom() {
+        return userInfoService.getAllFormateurs();
+    }
+
     @PostMapping("/generateToken")
     public ResponseEntity<String> authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));

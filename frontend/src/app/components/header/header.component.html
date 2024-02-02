@@ -5,12 +5,12 @@
   <span id="menuTitle">Gestion Formation</span>
 
   <div class="top-menu">
-    <a mat-button routerLink="/home" class="top-menu-item" *ngIf="!isAdmin() && !isAssistant()"><mat-icon>home</mat-icon> Home</a>
+    <a mat-button routerLink="/home" class="top-menu-item" ><mat-icon>home</mat-icon> Home</a>
     <!-- <a mat-button routerLink="/addFormateur" *ngIf="isAdmin()" class="top-menu-item"><mat-icon>person_add</mat-icon> Ajouter Formateur</a> -->
     <a mat-button routerLink="/allFormateur" *ngIf="isAdmin()"
       class="top-menu-item"><mat-icon>people</mat-icon>Formateurs</a>
     <!-- <a mat-button routerLink="/addformation" *ngIf="isAdmin()" class="top-menu-item"><mat-icon>add_box</mat-icon> Ajouter Formation</a> -->
-    <a mat-button routerLink="/showFormation"  class="top-menu-item"><mat-icon>event</mat-icon>
+    <a mat-button routerLink="/showFormation" *ngIf="isAdmin()"  class="top-menu-item"><mat-icon>event</mat-icon>
       Formations</a>
     <a mat-button routerLink="/addEntreprise" *ngIf="isAdmin() || isAssistant()" class="top-menu-item">
       <mat-icon>business</mat-icon> Ajouter Entreprise
