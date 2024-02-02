@@ -17,6 +17,7 @@ import { AjouterEntrepriseComponent } from './views/ajouter-entreprise/ajouter-e
 import { TrainSessionComponent } from './views/train-session/train-session.component';
 import { DemandeFormateurComponent } from './views/demande-formateur/demande-formateur.component';
 import { EvaluationComponent } from './views/evaluation/evaluation.component';
+import { NestedComponent } from './views/nested/nested.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent},
@@ -40,6 +41,8 @@ const routes: Routes = [
   { path: 'testCompenent', component: TestCompenentComponent},
   { path: "joinus", component:InscriptionformateurexeterneComponent},
   { path: "evaluation", component: EvaluationComponent},
+  { path: "nested", component: NestedComponent},
+  
   { path: '**', redirectTo: 'home'}    
 ];
 @NgModule({

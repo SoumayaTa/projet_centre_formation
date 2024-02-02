@@ -136,5 +136,12 @@ export class ShowFormationComponent implements OnInit {
     this.itemsPerPage = event.pageSize;
     this.showFormations();
   }
+  toggleSubrow(element: any): void {
+    element.showSubrow = !element.showSubrow;
+  }
+
+  get hasSubrow(): boolean {
+    return this.formationDetails.some((element: any) => element.showSubrow);
+  }
 
 }

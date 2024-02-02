@@ -42,6 +42,7 @@ import { AddTraineComponent } from './views/add-traine/add-traine.component';
 import { FooterComponent } from './views/footer/footer.component';
 import { MatSliderModule } from '@angular/material/slider';
 import { EvaluationComponent } from './views/evaluation/evaluation.component';
+import { NestedComponent } from './views/nested/nested.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { EvaluationComponent } from './views/evaluation/evaluation.component';
     DemandeFormateurComponent,
     AddTraineComponent,    
     FooterComponent,
-    EvaluationComponent
+    EvaluationComponent,
+    NestedComponent
   ],
   imports: [
     BrowserModule,

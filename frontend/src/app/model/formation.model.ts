@@ -1,4 +1,5 @@
 export interface Formation {
+  [x: string]: unknown;
   id?: number;        
   nom: string;   
   nombreHeur: number;   
