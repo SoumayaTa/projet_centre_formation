@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { Entreprise } from 'src/app/model/Entreprise.modul';
 import { EntrepriseService } from 'src/app/shared/services/entreprise.service';
@@ -101,7 +101,11 @@ export class ShowentrepriseComponent {
     this.selectedFormationId = id;
     this.router.navigate(['/addEntreprise'], { queryParams: { id: id } });
   }
-
+  loadPage(event: PageEvent): void {
+    this.pageNumber = event.pageIndex;
+    this.itemsPerPage = event.pageSize;
+    this.showEntreprise();
+  }
  
  
 
