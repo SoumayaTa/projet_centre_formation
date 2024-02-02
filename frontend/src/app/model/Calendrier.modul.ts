@@ -11,6 +11,6 @@ export interface Calendrier {
   title: string;
   formation: Formation;
   formateur: Formateur | User;
-  entreprise: Entreprise;
-  groupe: Groupe;
+  entreprise?: Entreprise | null;
+  groupe?: Groupe | null;
 }

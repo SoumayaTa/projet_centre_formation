@@ -56,7 +56,7 @@ export class FormateurDetailsComponent implements OnInit {
   }
 
   public deleteFormateur(id:number){
-    console.log("delete")
+    console.log("deleteeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
     this.formateurService.deleteFormateurs(id).subscribe(
       () => {
         this.ngOnInit();
@@ -74,7 +74,7 @@ export class FormateurDetailsComponent implements OnInit {
         console.log('Formateur modifier avec succès.');
       },
       (erreur) => {
-        console.error('Erreur lors de la suppression du formateur :', erreur);
+        console.error('Erreur lors de la modification du formateur :', erreur);
       }
     );
   }

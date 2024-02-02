@@ -8,6 +8,9 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Individus } from 'src/app/model/Individus.model';
 import { IndividusService } from 'src/app/shared/services/individuals.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { CalendrierService } from 'src/app/shared/services/calendrier.service';
+import { FormateurService } from 'src/app/shared/services/formateur.service';
+import { Formateur } from 'src/app/model/Formateur.model';
 
 @Component({
   selector: 'app-home',
@@ -35,6 +38,9 @@ export class HomeComponent implements OnInit {
   pageNumber = 0;
   totalItems = 0;
   showAllCourses: boolean = false;
+  nombreFormationsPlanifiees: number = 0;
+  nomFormateur:string[]=[];
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
@@ -43,7 +49,10 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private individusService: IndividusService,
-     
+    private calendarService: CalendrierService,
+    private formateurService:FormateurService
+
+    
   ) {
     this.filterForm = this.formBuilder.group({
       categorie: [''],
@@ -54,6 +63,9 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.fetchFormations();
     this.fetchCategoriesAndVilles();
+    this.fetchFormationsPlanifiees();
+    this.getIndividus();
+    this.getFormateurNom();
   }
 
   fetchFormations(): void {
@@ -145,15 +157,31 @@ export class HomeComponent implements OnInit {
     )
   }
 
-  // fetchFormationsPlanifiees(): void {
-  //   this.votreService.getEvents().subscribe(
-  //     (events) => {
-  //       this.nombreFormationsPlanifiees = events.length; // Mettez à jour avec la logique appropriée selon votre structure de données
-  //     },
-  //     (error) => {
-  //       console.error('Erreur lors du chargement des événements :', error);
-  //       // Gérez l'erreur selon vos besoins
-  //     }
-  //   );
-  // }
+
+  fetchFormationsPlanifiees(): void {
+    this.formationService.getFormations().subscribe(
+      (event)=>{
+        this.nombreFormationsPlanifiees=event.length;
+      },
+       (error) => {
+        console.error('Erreur lors du chargement des événements :', error);
+        
+      }
+    )
+  }
+  
+  getFormateurNom():void{
+    this.formateurService.getFormateurByNom().subscribe(
+      (resp)=>{
+      this.nomFormateur=resp.map((formateur:Formateur)=>formateur.name)
+      console.log("les nom             "+this.nomFormateur);
+      
+      },
+      (error) => {
+        console.error('Erreur lors du chargement des événements :', error);
+        
+      }
+    )
+  }
+  
 }
