@@ -36,7 +36,7 @@ public class SecurityConfig {
 		http
 				.cors(cors->cors.configurationSource(request -> new CorsConfiguration(corsFilter())))
 				.authorizeHttpRequests((auth)->auth
-			.requestMatchers("/auth/welcome","/evaluation/**","/mail2/**","/calendrieraddnewCalendar/**","/mail/**","/images/**","/externe/**","/externe/deleteinscription/**","/externe/deleteAndCreateUserInfo/**", "/auth/addNewUser","/auth/getFormateurById/**","/auth/generateToken","/form/categories","/form/villes", "/form/getByFilters","/form/getall","/form/grpupes/**","/form/sendemail/**","/form/individus/**","/form/addFormation/image","/individus/**","/evaluation/add/**").permitAll()
+			.requestMatchers("/auth/welcome","/mail2/**","/mail/**","/calendrieraddnewCalendar/**","/images/**","/externe/**","/group/getAllGroupes","/externe/deleteinscription/**","/externe/deleteAndCreateUserInfo/**", "/auth/addNewUser","/auth/getFormateurById/**","/auth/generateToken","/form/categories","/form/villes", "/form/getByFilters","/form/getall","/form/addFormation/image","/individus/**","/evaluation/add/**").permitAll()
 			.requestMatchers("/auth/assistant/**").authenticated()
 
 								.requestMatchers("/images/**").permitAll()
@@ -48,13 +48,14 @@ public class SecurityConfig {
 								.requestMatchers("/auth/format/**").authenticated()
 								.requestMatchers("/form/formation/**").authenticated()
 								.requestMatchers("/entreprise/**").authenticated()
+								.requestMatchers("/entreprise/removeEntreprise/**").authenticated()
+								.requestMatchers("/entreprise/updateEntreprise/**").authenticated()
+								.requestMatchers("/entreprise/geEntrepriseById/**").authenticated()
 								.requestMatchers("/calendrier/**").authenticated()
 								.requestMatchers("/groupe/**").authenticated()
 								.requestMatchers("/auth/allFormateur").authenticated()
 								.requestMatchers("/auth/deleteFormateur/**").authenticated()
 								
-								
-
 
 				).csrf(csrf->csrf.disable())
 			.authenticationProvider(authenticationProvider())
