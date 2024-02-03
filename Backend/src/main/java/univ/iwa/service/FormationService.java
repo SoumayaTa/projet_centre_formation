@@ -282,7 +282,7 @@ public class FormationService {
                 String to = individu.getEmail();
                 String subject ="hhwj";
                 String body = "http://localhost:4200/evaluation?id="+individu.getId();
-                emailservice.sendMail(to, "tayoubsoumaya21@gmail.com", subject, body);
+                emailservice.sendMail(to, "wiam.elberrari@etu.uae.ac.ma", subject, body);
             }
         } else {
             throw new FormationNotFoundException("Inscrit avec l'ID " + formationId + " introuvable");
