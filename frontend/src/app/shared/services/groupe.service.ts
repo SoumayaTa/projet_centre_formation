@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Groupe } from 'src/app/model/Group.model';
 import { UserAuthService } from './user-auth.service';
+import { Individus } from 'src/app/model/Individus.model';
 
 @Injectable({
   providedIn: 'root'
@@ -40,5 +41,18 @@ export class GroupeService {
     }
     return new Observable<any>();
   }
+  public getInscriptionEmailsForFormation(groupeId: number): Observable<Individus[]> {
+    const jwtToken = this.userAuthService.getToken();
+    if (jwtToken) {
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + jwtToken,
+      'Content-Type': 'application/json'
+    });
+
+    return this.httpClient.get<Individus[]>(`${this.apiUrl}/groupe/individus/${groupeId}`, { headers });
+  }else{
+    console.log('Token JWT non disponible');
+  }
+  return new Observable<any>();}
 
 }

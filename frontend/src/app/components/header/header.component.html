@@ -5,7 +5,7 @@
   <style>
     .proexcel {
       font-family: 'Arial', sans-serif;
-      font-size: 25px;
+      
       font-weight: bold;
       display: inline-block;
       padding: 10px;
@@ -14,7 +14,8 @@
       animation: backgroundAnimation 5s infinite; /* 5s pour la durée de l'animation, infinite pour la boucle */
     }
   </style>
-  <span id="menuTitle" class="proexcel"><span >ProExcel</span> Centre de Formation </span>
+  <span id="menuTitle" class="proexcel"><mat-icon>school</mat-icon>
+    ProExcel</span> 
 
   <div class="top-menu">
     <a mat-button routerLink="/home" class="top-menu-item" *ngIf="!isAdmin() && !isAssistant()"><mat-icon>home</mat-icon> Accueil</a>

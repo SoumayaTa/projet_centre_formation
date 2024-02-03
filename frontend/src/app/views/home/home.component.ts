@@ -22,6 +22,7 @@ import { Formateur } from 'src/app/model/Formateur.model';
   ]
 })
 export class HomeComponent implements OnInit {
+  FormateurDetails :Formateur []=[];
   formations: Formation[] = [];
   selectedFormation: Formation | null = null;
   filteredFormations: Formation[] = [];
@@ -183,5 +184,8 @@ export class HomeComponent implements OnInit {
       }
     )
   }
+  
+  
+  
   
 }
