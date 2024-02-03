@@ -108,34 +108,27 @@ export class AddTraineComponent implements OnInit {
   onSubmit(): void {
     console.log('Formation Name:', this.form.get('formationName')?.value);
     console.log('Formateur Name:', this.form.get('formateurName')?.value);
-  
+    console.log('title',this.form.get('title')?.value);
     const selectedFormation = this.formations.find(form => form.id === this.form.get('formationName')?.value);
     const selectedFormateur = this.formateurs.find(formateur => formateur.id === this.form.get('formateurName')?.value);
-  
     console.log('Selected Formation:', selectedFormation);
     console.log('Selected Formateur:', selectedFormateur);
-  
     const selectedEntreprise = this.entreprises.find(entreprise => entreprise.id === this.entrepriseName);
-    const selectedGroupe = this.groupes.find(groupe => groupe.id === this.groupeId);
-  
+    console.log('entreprise', selectedEntreprise);
+    const selectedGroupe = this.groupes.find(groupe => groupe.id === this.form.get('groupeId')?.value);
+    console.log('wiaammmnnnnnajatttm', selectedGroupe);
     const selectedOptionValue = this.form.get('selectedOptionValue')?.value;
-
-  
-    console.log('', selectedOptionValue);
-
-
+    console.log('wiaammmm', selectedOptionValue);
     if (selectedFormation && selectedFormateur && selectedOptionValue !== undefined) {
       const newCalendrier: Calendrier = {
         datedebut: this.selectedPeriod.start,
         datefin: this.selectedPeriod.end,
-        title: this.title,
-        formation: selectedFormation,
-        formateur: selectedFormateur,
+        title: this.form.get('title')?.value,
+        formation: this.form.get('formationName')?.value,
+        formateur:this.form.get('formateurName')?.value,
         entreprise: selectedOptionValue === 'entreprise' ? selectedEntreprise || null : null,
         groupe: selectedOptionValue === 'groupe' ? selectedGroupe || null : null
       };
-      
-  
       if (selectedFormation.id && selectedFormateur.id) {
         this.calendrierService.addTraine(newCalendrier, selectedFormation.id, selectedFormateur.id, selectedOptionValue)
           .subscribe(

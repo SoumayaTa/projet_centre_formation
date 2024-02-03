@@ -45,7 +45,32 @@
           </div>
         </mat-form-field>
       </div>
-
+      <div class="mb-3 w-100">
+        <mat-form-field appearance="outline" class="w-100" style="width: 70%;">
+          <mat-label>Mots-clés</mat-label>
+          <mat-chip-grid #chipGrid aria-label="Enter mots cles">
+            <mat-chip-row *ngFor="let mot of formateurForm?.get('mots_cles')?.value?.split(',') || []"
+              (removed)="removeMot(mot)" [editable]="true" (edited)="editMot(mot, $event)"
+              [aria-description]="'press enter to edit ' + mot">
+              {{ mot }}
+              <mat-icon matChipRemove (click)="removeMot(mot)">cancel</mat-icon>
+            </mat-chip-row>
+            <input matInput placeholder="Nouveau mot-clé..." [matChipInputFor]="chipGrid"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+              (matChipInputTokenEnd)="addMot($event)" />
+          </mat-chip-grid>
+          <div
+            *ngIf="formateurForm?.get('mots_cles')?.hasError('required') && formateurForm?.get('mots_cles')?.touched"
+            class="error-message">
+            Les mots-clés sont requis.
+          </div>
+          <div
+            *ngIf="formateurForm?.get('mots_cles')?.hasError('minlength') && formateurForm?.get('mots_cles')?.touched"
+            class="error-message">
+            Les mots-clés doivent contenir au moins 2 caractères.
+          </div>
+        </mat-form-field>
+      </div>
       <div class="form-group" align="end">
         <button mat-stroked-button color="warn" type="button" (click)="formateurForm.reset()">
           Effacer
