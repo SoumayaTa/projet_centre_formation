@@ -9,6 +9,7 @@ import { InscriptionformateurexeterneComponent } from '../inscriptionformateurex
 import { FormateurService } from 'src/app/shared/services/formateur.service';
 import { InscriptionformateurexternService } from 'src/app/shared/services/inscriptionformateurextern.service';
 import { Inscription } from 'src/app/model/inscription.model';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-formationdetails',
   templateUrl: './formationdetails.component.html',
@@ -44,7 +45,7 @@ export class FormationdetailsComponent implements OnInit {
 
   };
 
-constructor(private inscriptionforservice: InscriptionformateurexternService,private route: ActivatedRoute, private individusService: IndividusService,private fb: FormBuilder,private dialog: MatDialog) {
+constructor(private inscriptionforservice: InscriptionformateurexternService,private route: ActivatedRoute, private individusService: IndividusService,private fb: FormBuilder,private dialog: MatDialog, private toastr: ToastrService,) {
     this.inscriptionForm = this.fb.group({
       nom: ['', Validators.required],
       prenom: ['', Validators.required],
@@ -86,6 +87,7 @@ constructor(private inscriptionforservice: InscriptionformateurexternService,pri
       (result) => {
         // Traitement du résultat si nécessaire
         console.log('Inscription réussie:', result);
+        this.toastr.success('Félicitations ! Vous avez été avec succès inscrit(e) dans notre formation.', 'Inscription réussie');
       },
       (error) => {
         // Traitement de l'erreur si nécessaire
