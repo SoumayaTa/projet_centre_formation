@@ -19,7 +19,10 @@
             <th mat-header-cell *matHeaderCellDef> Formateur Email </th>
             <td mat-cell *matCellDef="let element"> {{element.email}} </td>
           </ng-container>
-          
+          <ng-container matColumnDef="comp" class="mat-col-description">
+            <th mat-header-cell *matHeaderCellDef>  competence  </th>
+            <td mat-cell *matCellDef="let element"> {{element.mots_cles}} </td>
+          </ng-container>
           <ng-container matColumnDef="averageRating">
             <th mat-header-cell *matHeaderCellDef> Note moyenne </th>
             <td mat-cell *matCellDef="let element">
