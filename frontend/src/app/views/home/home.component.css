@@ -65,4 +65,10 @@ body {
     display: flex;
     gap: 10px;
   }
-  
+
+
+.slider-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}

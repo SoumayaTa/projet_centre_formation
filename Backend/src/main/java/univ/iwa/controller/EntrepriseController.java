@@ -43,6 +43,7 @@ public class EntrepriseController {
 
 	   {
 	        try {
+	        	
 	            EntrepriseDto updatedEntreprise = service.updateEntreprise(id, name, address, phoneNumber, email, url);
 	            System.out.println(updatedEntreprise);
 	            return ResponseEntity.ok(updatedEntreprise);

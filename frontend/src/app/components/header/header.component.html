@@ -2,10 +2,22 @@
   <button mat-icon-button (click)="sidenav.toggle()" id="menuIcon" aria-label="Toggle menu">
     <mat-icon>menu</mat-icon>
   </button>
-  <span id="menuTitle">Gestion Formation</span>
+  <style>
+    .proexcel {
+      font-family: 'Arial', sans-serif;
+      font-size: 25px;
+      font-weight: bold;
+      display: inline-block;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      animation: backgroundAnimation 5s infinite; /* 5s pour la durée de l'animation, infinite pour la boucle */
+    }
+  </style>
+  <span id="menuTitle" class="proexcel"><span >ProExcel</span> Centre de Formation </span>
 
   <div class="top-menu">
-    <a mat-button routerLink="/home" class="top-menu-item" *ngIf="!isAdmin() && !isAssistant()"><mat-icon>home</mat-icon> Home</a>
+    <a mat-button routerLink="/home" class="top-menu-item" *ngIf="!isAdmin() && !isAssistant()"><mat-icon>home</mat-icon> Accueil</a>
     <!-- <a mat-button routerLink="/addFormateur" *ngIf="isAdmin()" class="top-menu-item"><mat-icon>person_add</mat-icon> Ajouter Formateur</a> -->
     <a mat-button routerLink="/allFormateur" *ngIf="isAdmin()"
       class="top-menu-item"><mat-icon>people</mat-icon>Formateurs</a>
@@ -39,8 +51,8 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav [fixedInViewport]="true" [fixedTopGap]="60" mode="side">
     <div class="side-nav-items">
-      <a mat-button routerLink="/home" class="side-menu-item">
-        <mat-icon>home</mat-icon> <span>Home</span>
+      <a mat-button routerLink="/home" class="side-menu-item" *ngIf="!isAdmin() && !isAssistant()">
+        <mat-icon>home</mat-icon> <span>Accueil</span>
       </a>
       <!-- <a  *ngIf="isAdmin()" mat-button routerLink="/addFormateur" class="side-menu-item">
         <mat-icon>people</mat-icon> <span >Formateur</span>
@@ -50,14 +62,19 @@
       </a>
       <a mat-button routerLink="/showFormation" *ngIf="isAdmin()" class="side-menu-item"><mat-icon>event</mat-icon>
         Formations</a>
+        <a mat-button routerLink="/showEntreprise" *ngIf="isAdmin() || isAssistant()" class="side-menu-item">
+          <mat-icon>business</mat-icon> Entreprise
+        </a>
       <!-- <a mat-button routerLink="/addformation" *ngIf="isAdmin()" class="side-menu-item">
         <mat-icon>add_box</mat-icon><span> Ajouter Formation</span>
       </a> -->
       <a mat-button routerLink="/formateurexeterne" *ngIf="isAdmin()" class="side-menu-item">
         <mat-icon>add_box</mat-icon><span> Formateurs externes</span>
       </a>
-      
-      <a mat-button routerLink="/joinus" class="side-menu-item"><mat-icon>how_to_reg</mat-icon>Rejoignez-nous</a>
+      <a mat-button routerLink="/testTraine" *ngIf="isAdmin() || isAssistant()" class="side-menu-item">
+        <mat-icon>add_box</mat-icon><span>Planification</span>
+      </a>
+      <a mat-button routerLink="/joinus" class="side-menu-item" *ngIf="!isAdmin() && !isAssistant()"><mat-icon>how_to_reg</mat-icon>Rejoignez-nous</a>
       <a mat-button routerLink="/login" *ngIf="!isLoggedIn()" class="side-menu-item">
         <mat-icon>account_circle</mat-icon> Connexion
       </a>
