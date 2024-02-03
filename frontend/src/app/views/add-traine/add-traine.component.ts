@@ -23,9 +23,11 @@ export class AddTraineComponent implements OnInit {
   formateurs: Formateur[] = [];
   entreprises: Entreprise[] = [];
   groupes: Groupe[] = [];
+  groupess: Groupe[] = [];
   formationName: number = 0;
   formateurName: number = 0;
   entrepriseName: number = 0;
+  formationid:number=0;
   groupeId: number = 0;
   title: any;
   selectedPeriod: any;
@@ -50,7 +52,6 @@ export class AddTraineComponent implements OnInit {
       groupeId: [''],
       selectedOptionValue: ['entreprise']
     });
-    
   }
 
   ngOnInit(): void {
@@ -58,6 +59,7 @@ export class AddTraineComponent implements OnInit {
     this.loadFormateurs();
     this.loadEntreprises();
     this.loadGroupes();
+   
   }
 
   loadFormations(): void {
@@ -70,7 +72,23 @@ export class AddTraineComponent implements OnInit {
       }
     );
   }
-
+  
+  onFormationSelected(event: any): void {
+    this.formationid = event.value;
+    // Faites quelque chose avec l'ID de la formation choisie
+    console.log('ID de la formation choisie :', this.formationid);
+    this.formationService.getGroupesForFormation(this.formationid).subscribe(
+      (groupes: Groupe[]) => {
+        this.groupess = groupes;
+        
+        console.log('Groupes chargés avec succès :', groupes);
+      },
+      (error) => {
+        console.error('Erreur lors du chargement des groupes :', error);
+      }
+    );
+    // Vous pouvez également mettre à jour d'autres parties de votre composant ou effectuer des actions supplémentaires ici
+  }
   loadFormateurs(): void {
     this.formateurService.showFormateurs().subscribe(
       (formateurs: Formateur[]) => {
@@ -103,6 +121,25 @@ export class AddTraineComponent implements OnInit {
         console.error('Erreur lors du chargement des groupes :', error);
       }
     );
+  }
+  loadformationGroupes(): void {
+    
+    if(this.form){
+    const idFormation = this.form.get('formationName')?.value;
+    console.log("shshshsh",idFormation)
+    this.formationService.getGroupesForFormation(this.formationid).subscribe(
+      (groupes: Groupe[]) => {
+        this.groupess = groupes;
+        
+        console.log('Groupes chargés avec succès :', groupes);
+      },
+      (error) => {
+        console.error('Erreur lors du chargement des groupes :', error);
+      }
+    );
+    }else{
+      console.log("viiide");
+    }
   }
 
   onSubmit(): void {
