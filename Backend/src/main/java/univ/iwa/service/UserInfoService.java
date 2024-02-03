@@ -56,6 +56,14 @@ public class UserInfoService implements UserDetailsService {
 		return "User Added Successfully";
 	}
 
+	public String addAssisstant(UserInfoDto userInfoDto) {
+		UserInfo userInfo = modelMapper.map(userInfoDto, UserInfo.class);
+		userInfo.setPassword(encoder.encode(userInfo.getPassword()));
+		userInfo.setRoles("ROLE_ASSISTANT");
+		repository.save(userInfo);
+		return "User Added Successfully";
+	}
+
 
 	public UserInfoDto updateUser(UserInfoDto userinfodto, int id) {
 		Optional<UserInfo> optionalUser = repository.findById(id);
