@@ -131,7 +131,6 @@ public class FormationController {
         return result;
     }
 
-
     @GetMapping("formation/getFormationById/{id}")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_ASSISTANT')")
     public ResponseEntity<FormationDto> getFormationById(@PathVariable Long id){

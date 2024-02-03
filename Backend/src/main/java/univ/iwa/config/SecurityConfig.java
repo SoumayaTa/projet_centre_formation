@@ -36,13 +36,18 @@ public class SecurityConfig {
 		http
 				.cors(cors->cors.configurationSource(request -> new CorsConfiguration(corsFilter())))
 				.authorizeHttpRequests((auth)->auth
+			.requestMatchers("/auth/welcome","/mail2/**","/crypt/**","/mail/**","/calendrieraddnewCalendar/**","/images/**","/externe/**","/externe/deleteinscription/**","/externe/deleteAndCreateUserInfo/**", "/auth/addNewUser","/auth/getFormateurById/**","/auth/generateToken","/form/categories","/form/villes","/form/grpupes/**","/form/individus/**","/form/sendemail/**", "/form/getByFilters","/form/getall","/form/addFormation/image","/individus/**",
+					"/evaluation/add/**","/evaluation/averageRating/**","evaluation/hasSubmittedFeedback").permitAll()
+				.requestMatchers("/auth/addNewUser", "/auth/generateToken", "/form/getByDate/**", "/form/getByVille/**", "/form/getByCategorie/**","/form/getall").permitAll()
+
 			.requestMatchers("/auth/welcome","/evaluation/**","/mail2/**","/mail/**","/images/**","/externe/**","/externe/deleteinscription/**","/externe/deleteAndCreateUserInfo/**", "/auth/addNewUser","/auth/getFormateurById/**","/auth/generateToken","/form/categories","/form/villes", "/form/getByFilters","/form/getall","/form/grpupes/**","/form/sendemail/**","/form/individus/**","/form/addFormation/image","/individus/**","/evaluation/add/**").permitAll()
-			.requestMatchers("/auth/welcome","/mail2/**","/mail/**","/calendrieraddnewCalendar/**","/images/**","/externe/**","/group/getAllGroupes","/externe/deleteinscription/**","/externe/deleteAndCreateUserInfo/**", "/auth/addNewUser","/auth/getFormateurById/**","/auth/generateToken","/form/categories","/form/villes", "/form/getByFilters","/form/getall","/form/addFormation/image","/individus/**","/evaluation/add/**").permitAll()
+			.requestMatchers("/auth/welcome","/mail2/**","/mail/**","/calendrier/addnewCalendar/**","/images/**","/externe/**","/group/getAllGroupes","/externe/deleteinscription/**","/externe/deleteAndCreateUserInfo/**", "/auth/addNewUser","/auth/getFormateurById/**","/auth/generateToken","/form/categories","/form/villes", "/form/getByFilters","/form/getall","/form/addFormation/image","/individus/**","/evaluation/add/**").permitAll()
 			.requestMatchers("/auth/assistant/**").authenticated()
 								.requestMatchers("/individus/getAllIndividus").permitAll()
 								.requestMatchers("/images/**").permitAll()
 								.requestMatchers("auth/allFormateurByNom").permitAll()
 								.requestMatchers("/auth/welcome", "/auth/addNewUser", "/auth/generateToken", "/form/getByDate/**", "/form/getByVille/**", "/form/getByCategorie/**","/form/getall").permitAll()
+
 								.requestMatchers("/auth/assistant/**").authenticated()
 								.requestMatchers("/auth/admin/**").authenticated()
 								.requestMatchers("/auth/updateUser/**").authenticated()

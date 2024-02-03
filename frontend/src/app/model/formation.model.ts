@@ -1,4 +1,9 @@
+export interface Groupe {
+  id: number;
+  // Ajoutez d'autres propriétés de groupe au besoin
+}
 export interface Formation {
+  [x: string]: unknown;
   id?: number;        
   nom: string;   
   nombreHeur: number;   

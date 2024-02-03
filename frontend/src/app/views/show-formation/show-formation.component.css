@@ -53,4 +53,23 @@
   }
   .spinnerT{
     margin-right: 10px;
+  }.custom-button {
+    margin: 5px; 
+    font-size: 14px; 
   }
+  .nested-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px; 
+  }
+  
+  .nested-table th, .nested-table td {
+    border: 1px solid #ddd; 
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .custom-button {
+    margin-right: 4px; 
+  }
+  

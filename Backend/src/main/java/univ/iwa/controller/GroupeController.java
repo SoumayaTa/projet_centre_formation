@@ -33,5 +33,17 @@ public class GroupeController {
         return groupeService.getAllGroupes();
     }
 
+    @GetMapping("/individus/{groupeId}")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_ASSISTANT')")
+    public List<String> getInscriptionEmailsForFormation(@PathVariable Long groupeId) {
+        return groupeService.getInscriptionForGroupe(groupeId);
+    }
+
+    @GetMapping("/sendemail/{groupeId}")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_ASSISTANT')")
+    public String sendEmailToInscrits(@PathVariable Long groupeId) {
+        groupeService.sendEmailsToInscrits(groupeId);
+        return "Emails sent successfully";
+    }
 
 }

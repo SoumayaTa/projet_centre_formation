@@ -2,21 +2,22 @@
 
 <div class="table-container mt-5 p-3">
 
-    <mat-form-field appearance="outline" class="w-50">
-      <mat-label>Search any product</mat-label>
-      <input matInput 
+  <mat-form-field appearance="outline" class="w-50">
+    <mat-label>Search any product</mat-label>
+    <input matInput 
       #searchKey
       (keyup)="searchByKeyWord(searchKey.value)"
       name="searchKey"
       id="searchKey"
       placeholder="Search any formation">
-      <div *ngIf="searchByKeyWord" matSuffix mat-icon-button aria-label="Filtrar...">
-        <mat-spinner diameter="25" class="spinnerT"></mat-spinner>
-    </div>
-  
-      <mat-hint>Search any formation</mat-hint>
-    </mat-form-field>
-    <div>
+    <button *ngIf="searchByKeyWord" matSuffix mat-icon-button aria-label="Search" (click)="searchByKeyWord(searchKey.value)">
+      <mat-icon>search</mat-icon>
+    </button>
+    <!-- <div *ngIf="searchByKeyWord" matSuffix mat-icon-button aria-label="Loading...">
+      <mat-spinner diameter="25" class="spinnerT"></mat-spinner>
+    </div> -->
+  </mat-form-field>
+    <div class="addbutton">
       <a mat-flat-button color="primary" routerLink="/addEntreprise" class="top-menu-item">
         <mat-icon>add</mat-icon> Ajouter Entreprise
       </a>

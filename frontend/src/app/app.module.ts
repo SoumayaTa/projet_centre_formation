@@ -42,7 +42,10 @@ import { FooterComponent } from './views/footer/footer.component';
 import { YsfComponent } from './views/ysf/ysf.component';
 import { MatSliderModule } from '@angular/material/slider';
 import { EvaluationComponent } from './views/evaluation/evaluation.component';
+import { NestedComponent } from './views/nested/nested.component';
 import { ShowentrepriseComponent } from './views/showentreprise/showentreprise.component';
+import { SubmittedComponent } from './views/submitted/submitted.component';
+import { GroupComponent } from './views/group/group.component';
 
 
 @NgModule({
@@ -68,8 +71,12 @@ import { ShowentrepriseComponent } from './views/showentreprise/showentreprise.c
     DemandeFormateurComponent,
     AddTraineComponent,    
     FooterComponent,
-    YsfComponent, 
-    EvaluationComponent, ShowentrepriseComponent
+    EvaluationComponent,
+    NestedComponent,
+    EvaluationComponent,
+    ShowentrepriseComponent,
+    SubmittedComponent,
+    GroupComponent
   ],
   imports: [
     BrowserModule,

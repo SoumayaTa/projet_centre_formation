@@ -19,7 +19,9 @@ import { DemandeFormateurComponent } from './views/demande-formateur/demande-for
 import { YsfComponent } from './views/ysf/ysf.component';
 
 import { EvaluationComponent } from './views/evaluation/evaluation.component';
+import { NestedComponent } from './views/nested/nested.component';
 import { ShowentrepriseComponent } from './views/showentreprise/showentreprise.component';
+import { SubmittedComponent } from './views/submitted/submitted.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent},
@@ -33,6 +35,7 @@ const routes: Routes = [
   { path: 'showFormation', component: ShowFormationComponent,canActivate:[AuthGuard],data:{roles:['ROLE_ADMIN']}},
   { path: 'showEntreprise', component: ShowentrepriseComponent,canActivate:[AuthGuard],data:{roles:['ROLE_ADMIN']}},
   { path:'formateurexeterne',component:DemandeFormateurComponent,canActivate:[AuthGuard],data:{ roles: ['ROLE_ADMIN', 'ROLE_ASSISTANT'] }},
+  { path:'alreadySubmitted',component:SubmittedComponent,data:{ roles: ['ROLE_ADMIN', 'ROLE_ASSISTANT'] }},
 
   { 
     path: 'addEntreprise', 
@@ -46,6 +49,8 @@ const routes: Routes = [
   { path: 'ysf', component: YsfComponent},
   { path: "joinus", component:InscriptionformateurexeterneComponent},
   { path: "evaluation", component: EvaluationComponent},
+  { path: "nested", component: NestedComponent},
+  
   { path: '**', redirectTo: 'home'}    
 ];
 @NgModule({

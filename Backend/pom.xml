@@ -94,9 +94,15 @@
         <version>1.15</version>
     </dependency>
     <dependency>
-        <groupId>org.apache.commons</groupId>
+    <groupId>org.apache.commons</groupId>
         <artifactId>commons-lang3</artifactId>
-        <version>3.12.0</version> <!-- Utilisez la version la plus récente disponible -->
+        <version>3.12.0</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.jasypt</groupId>
+        <artifactId>jasypt</artifactId>
+        <version>1.9.3</version>
     </dependency>
 </dependencies>
 
