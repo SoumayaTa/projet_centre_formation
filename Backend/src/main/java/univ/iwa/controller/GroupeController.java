@@ -6,8 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import univ.iwa.dto.EntrepriseDto;
-import univ.iwa.dto.GroupeDto;
+import univ.iwa.dto.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -35,7 +34,7 @@ public class GroupeController {
 
     @GetMapping("/individus/{groupeId}")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_ASSISTANT')")
-    public List<String> getInscriptionEmailsForFormation(@PathVariable Long groupeId) {
+    public List<IndividusDto> getInscriptionEmailsForFormation(@PathVariable Long groupeId) {
         return groupeService.getInscriptionForGroupe(groupeId);
     }
 

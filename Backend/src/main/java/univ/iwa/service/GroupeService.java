@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import univ.iwa.dto.GroupeDto;
+import univ.iwa.dto.IndividusDto;
 import univ.iwa.exception.FormationNotFoundException;
 import univ.iwa.model.Groupe;
 import univ.iwa.model.Individus;
@@ -32,19 +33,20 @@ public class GroupeService {
                 .collect(Collectors.toList());
     }
 
-    public List<String> getInscriptionForGroupe(Long groupeId) {
+    public List<IndividusDto> getInscriptionForGroupe(Long groupeId) {
         Optional<Groupe> groupeOptional = repository.findById(groupeId);
-
         if (groupeOptional.isPresent()) {
             Groupe groupe = groupeOptional.get();
-            List<Individus> individus = groupe.getInscrits();
-            return individus.stream()
-                    .map(Individus::getEmail)
+            List<IndividusDto> individusDtoList = groupe.getInscrits()
+                    .stream()
+                    .map(individus -> modelMapper.map(individus, IndividusDto.class))
                     .collect(Collectors.toList());
+            return individusDtoList;
         } else {
             throw new FormationNotFoundException("Inscrit avec l'ID " + groupeId + " introuvable");
         }
     }
+
 
     public void sendEmailsToInscrits(Long groupeId) {
         Optional<Groupe> groupeOptional = repository.findById(groupeId);
@@ -54,7 +56,7 @@ public class GroupeService {
 
             for (Individus individu : individus) {
                 String to = individu.getEmail();
-                String subject ="hhwj";
+                String subject ="FeedBack";
                 String encryptedId = crypt.encryptId(individu.getId());
                 String body = "http://localhost:4200/evaluation?id="+encryptedId;
                 emailservice.sendMail(to, "tayoubsoumaya21@gmail.com", subject, body);
