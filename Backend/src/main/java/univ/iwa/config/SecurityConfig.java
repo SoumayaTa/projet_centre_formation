@@ -61,12 +61,14 @@ public class SecurityConfig {
 								.requestMatchers("/groupe/**").authenticated()
 								.requestMatchers("/auth/allFormateur").authenticated()
 								.requestMatchers("/auth/deleteFormateur/**").authenticated()
-
+								.requestMatchers("/auth/addNewAssisstant/**").authenticated()
 								.requestMatchers("/calendrier/addnewCalendar").authenticated()
 
+												).csrf(csrf->csrf.disable())
+
+								
 
 
-				).csrf(csrf->csrf.disable())
 			.authenticationProvider(authenticationProvider())
 			.addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class);
 		return http.build();

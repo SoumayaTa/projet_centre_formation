@@ -28,7 +28,7 @@ export class InscriptionFormComponent implements OnInit {
     console.log("valeur recuprer de la formulaire ",this.inscriptionForm.value);
     const formValues = this.inscriptionForm.value;
 
-    // Mettre à jour l'objet individu avec les valeurs du formulaire
+    
     this.dialogRef.close(formValues);
   }
   cancel(): void {

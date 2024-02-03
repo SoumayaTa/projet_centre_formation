@@ -47,6 +47,15 @@ public class UserController {
         return userInfoService.addUser(userInfo);
     }
 
+        @PostMapping("/addNewAssisstant")
+        @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+        public String addNewAssisstant(@RequestBody UserInfoDto userInfo) {
+            System.out.println("############");
+            System.out.println(userInfo);
+            System.out.println("############");
+            return userInfoService.addAssisstant(userInfo);
+        }
+
     @PutMapping("/updateUser/{id}")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public UserInfoDto updateUser(@RequestBody UserInfoDto userdto, @PathVariable int id){
