@@ -29,6 +29,7 @@ export class TrainSessionComponent implements OnInit {
     themeSystem: 'bootstrap', 
     contentHeight: 'auto', 
     eventBackgroundColor: '#2ecc71',
+    eventClick: this.handleEventClick.bind(this),
   };
 
   constructor(private calendrierService: CalendrierService, private dialog: MatDialog) {}
@@ -61,6 +62,7 @@ export class TrainSessionComponent implements OnInit {
       (response: Calendrier[]) => {
         this.events = response;
         this.calendarOptions.events = this.events.map(event => ({
+          id: event.id?.toString(),
           title: event.title,
           start: new Date(event.datedebut),
           end: new Date(event.datefin),
@@ -70,5 +72,36 @@ export class TrainSessionComponent implements OnInit {
         console.error('Erreur lors du chargement des événements :', error);
       }
     );
+  }
+
+  handleEventClick(clickInfo: any) {
+    console.log('Event clicked:', clickInfo.event);
+
+  
+  console.log('Event ID (string):', clickInfo.event.id);
+
+  const eventId = parseInt(clickInfo.event.id, 10); 
+
+  console.log('Event ID (number):', eventId);
+    
+   
+
+    console.log('Event ID:', eventId);
+
+    const dialogRef = this.dialog.open(AddTraineComponent, {
+      width: '400px',
+      data: {
+        eventId: eventId,
+        start: clickInfo.event.startStr,
+        end: clickInfo.event.endStr,
+        title: clickInfo.event.title
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.loadEvents();
+      }
+    });
   }
 }

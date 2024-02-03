@@ -1,4 +1,4 @@
-  <h1 mat-dialog-title>Ajouter une séance de formation</h1>
+<h1 mat-dialog-title>{{ data.eventId ? 'Modifier une séance de formation' : 'Ajouter une séance de formation' }}</h1>
 
   <div mat-dialog-content>
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -57,7 +57,7 @@
 
       <div mat-dialog-actions>
         <button mat-button (click)="onCancel()">Annuler</button>
-        <button mat-button type="submit" [mat-dialog-close]="true">Ajouter</button>
+        <button mat-button type="submit" [mat-dialog-close]="true">{{ data.eventId ? 'Modifier' : 'Ajouter' }}</button>
       </div>
     </form>
   </div>
