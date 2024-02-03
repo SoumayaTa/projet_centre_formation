@@ -47,7 +47,6 @@ public class SecurityConfig {
 								.requestMatchers("/images/**").permitAll()
 								.requestMatchers("auth/allFormateurByNom").permitAll()
 								.requestMatchers("/auth/welcome", "/auth/addNewUser", "/auth/generateToken", "/form/getByDate/**", "/form/getByVille/**", "/form/getByCategorie/**","/form/getall").permitAll()
-
 								.requestMatchers("/auth/assistant/**").authenticated()
 								.requestMatchers("/auth/admin/**").authenticated()
 								.requestMatchers("/auth/updateUser/**").authenticated()

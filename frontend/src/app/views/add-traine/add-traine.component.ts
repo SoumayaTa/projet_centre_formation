@@ -23,13 +23,10 @@ export class AddTraineComponent implements OnInit {
   formateurs: Formateur[] = [];
   entreprises: Entreprise[] = [];
   groupes: Groupe[] = [];
-  formationName: number = 0;
-  formateurName: number = 0;
-  entrepriseName: number = 0;
-  groupeId: number = 0;
   title: any;
   selectedPeriod: any;
   selectedOption: 'entreprise' | 'groupe' = 'entreprise'; // Default to 'entreprise'
+  eventId: number | undefined;
 
   constructor(
     private dialogRef: MatDialogRef<AddTraineComponent>,
@@ -42,6 +39,7 @@ export class AddTraineComponent implements OnInit {
     private calendrierService: CalendrierService
   ) {
     this.selectedPeriod = data;
+    this.eventId = data?.eventId; // Ajout d'une vérification d'existence
     this.form = this.formBuilder.group({
       title: ['', Validators.required],
       formationName: ['', Validators.required],
@@ -50,7 +48,6 @@ export class AddTraineComponent implements OnInit {
       groupeId: [''],
       selectedOptionValue: ['entreprise']
     });
-    
   }
 
   ngOnInit(): void {
@@ -58,6 +55,31 @@ export class AddTraineComponent implements OnInit {
     this.loadFormateurs();
     this.loadEntreprises();
     this.loadGroupes();
+    console.log("ID :" + this.eventId)
+    if (this.eventId) {
+      this.loadEventData(this.eventId);
+    }
+  }
+
+  loadEventData(eventId: number): void {
+    this.calendrierService.getEventById(eventId).subscribe(
+      (eventData: Calendrier) => {
+        console.log("gfdrfrfrf" + eventData);
+
+        this.form.patchValue({
+          title: eventData.title,
+          formationName: eventData.formation.id,
+          entrepriseName: eventData.entreprise ? eventData.entreprise.id : null,
+          groupeId: eventData.groupe ? eventData.groupe.id : null,
+          selectedOptionValue: eventData.entreprise ? 'entreprise' : 'groupe'
+        });
+        console.log(eventData);
+
+      },
+      (error) => {
+        console.error('Erreur lors du chargement des données de l\'événement :', error);
+      }
+    );
   }
 
   loadFormations(): void {
@@ -97,7 +119,6 @@ export class AddTraineComponent implements OnInit {
     this.groupeService.getGroupes().subscribe(
       (groupes: Groupe[]) => {
         this.groupes = groupes;
-        console.log('Groupes chargés avec succès :', groupes);
       },
       (error) => {
         console.error('Erreur lors du chargement des groupes :', error);
@@ -106,60 +127,61 @@ export class AddTraineComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log('Formation Name:', this.form.get('formationName')?.value);
-    console.log('Formateur Name:', this.form.get('formateurName')?.value);
-  
-    const selectedFormation = this.formations.find(form => form.id === this.form.get('formationName')?.value);
-    const selectedFormateur = this.formateurs.find(formateur => formateur.id === this.form.get('formateurName')?.value);
-  
-    console.log('Selected Formation:', selectedFormation);
-    console.log('Selected Formateur:', selectedFormateur);
-  
-    const selectedEntreprise = this.entreprises.find(entreprise => entreprise.id === this.entrepriseName);
-    const selectedGroupe = this.groupes.find(groupe => groupe.id === this.groupeId);
-  
-    const selectedOptionValue = this.form.get('selectedOptionValue')?.value;
+    if (this.form.valid) {
+      const selectedFormation = this.formations.find(form => form.id === this.form.get('formationName')?.value);
+      const selectedFormateur = this.formateurs.find(formateur => formateur.id === this.form.get('formateurName')?.value);
+      const selectedEntreprise = this.entreprises.find(entreprise => entreprise.id === this.form.get('entrepriseName')?.value);
+      const selectedGroupe = this.groupes.find(groupe => groupe.id === this.form.get('groupeId')?.value);
+      const selectedOptionValue = this.form.get('selectedOptionValue')?.value;
 
-  
-    console.log('', selectedOptionValue);
+      if (selectedFormation && selectedFormateur && selectedOptionValue !== undefined) {
+        const newCalendrier: Calendrier = {
+          datedebut: this.selectedPeriod.start,
+          datefin: this.selectedPeriod.end,
+          title: this.form.get('title')?.value,
+          formation: selectedFormation,
+          formateur: selectedFormateur,
+          entrepriseId: selectedOptionValue === 'entreprise' ? selectedEntreprise!.id || null : null,
+          groupeId: selectedOptionValue === 'groupe' ? selectedGroupe!.id || null : null
+        };
 
-
-    if (selectedFormation && selectedFormateur && selectedOptionValue !== undefined) {
-      const newCalendrier: Calendrier = {
-        datedebut: this.selectedPeriod.start,
-        datefin: this.selectedPeriod.end,
-        title: this.title,
-        formation: selectedFormation,
-        formateur: selectedFormateur,
-        entreprise: selectedOptionValue === 'entreprise' ? selectedEntreprise || null : null,
-        groupe: selectedOptionValue === 'groupe' ? selectedGroupe || null : null
-      };
-      
-  
-      if (selectedFormation.id && selectedFormateur.id) {
-        this.calendrierService.addTraine(newCalendrier, selectedFormation.id, selectedFormateur.id, selectedOptionValue)
-          .subscribe(
+        if (this.eventId) {
+          this.calendrierService.updateEvent(newCalendrier, selectedOptionValue).subscribe(
             (response: Calendrier) => {
-              console.log('Calendrier ajouté avec succès :', response);
+              console.log('Calendrier mis à jour avec succès :', response);
             },
             (error) => {
-              console.error('Erreur lors de l\'ajout du calendrier :', error);
+              console.error('Erreur lors de la mise à jour du calendrier :', error);
             },
             () => {
-              this.dialogRef.close(); // Fermer la boîte de dialogue après l'ajout réussi
+              this.dialogRef.close();
             }
           );
+        } else {
+          if (selectedFormation.id && selectedFormateur.id) {
+            this.calendrierService.addTraine(newCalendrier, selectedFormation.id, selectedFormateur.id, selectedOptionValue).subscribe(
+              (response: Calendrier) => {
+                console.log('Calendrier ajouté avec succès :', response);
+              },
+              (error) => {
+                console.error('Erreur lors de l\'ajout du calendrier :', error);
+              },
+              () => {
+                this.dialogRef.close();
+              }
+            );
+          } else {
+            console.error('ID manquant pour la création du calendrier');
+          }
+        }
       } else {
-        console.error('ID manquant pour la création du calendrier');
+        console.error('Sélection manquante pour la création du calendrier');
       }
     } else {
-      console.error('Sélection manquante pour la création du calendrier');
+      console.error('Formulaire invalide');
     }
   }
-  
-  
-  
-  
+
   onCancel(): void {
     this.dialogRef.close();
   }
