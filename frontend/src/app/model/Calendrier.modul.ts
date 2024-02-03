@@ -13,4 +13,6 @@ export interface Calendrier {
   formateur: Formateur | User;
   entreprise?: Entreprise | null;
   groupe?: Groupe | null;
+  entrepriseId?: number | null;
+  groupeId?: number | null;
 }
