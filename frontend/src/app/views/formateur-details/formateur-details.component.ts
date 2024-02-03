@@ -14,7 +14,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 })
 export class FormateurDetailsComponent implements OnInit {
   FormateurDetails :Formateur []=[];
-  displayedColumns:String[] = ['id', 'name', 'email','averageRating','Actions']
+  displayedColumns:String[] = ['id', 'name', 'email','comp','averageRating','Actions']
   selectedFormateurId: number | null = null;
 
 
