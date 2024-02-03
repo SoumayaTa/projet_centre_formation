@@ -1,3 +1,36 @@
+
+
+<div class="centered-container">
+  <section class="banner">
+    <div class="banner-wrapper-main"></div>
+    <div class="container">
+      <div class="row">
+        <div class="slider-wrapper">
+          <div class="box-01">
+            <div class="content">
+              <h1>ÉLARGISSEZ VOS CONNAISSANCES AVEC DES TUTEURS</h1>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem quasi laborum deserunt necessitatibus.
+                Earum excepturi nobis,v
+                reprehenderit deserunt minima, veniam omnis libero, debitis fugiat autem alias eos architecto? In, eos!</p>
+
+              <div class="btn-001">
+                <ul>
+                  <li><a href="#">COMMENCEZ MAINTENANT</a></li>
+                  <li><a href="javascript:void(0)" (click)="toggleShowAllCourses()">VOIR LES COURS</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="box-01">
+            <div class="slider-image">
+              <img src="../../../assets/images/slider/1.png">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
 <div class="centered-container">
   <form [formGroup]="filterForm" (ngSubmit)="filterFormations()">
     <div class="horizontal-form-group">
@@ -23,39 +56,6 @@
     </div>
   </form>
 </div>
-
-<div class="centered-container">
-  <section class="banner">
-    <div class="banner-wrapper-main"></div>
-    <div class="container">
-      <div class="row">
-        <div class="slider-wrapper">
-          <div class="box-01">
-            <div class="content">
-              <h1>ÉLARGISSEZ VOS CONNAISSANCES AVEC DES TUTEURS</h1>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem quasi laborum deserunt necessitatibus.
-                Earum excepturi nobis,
-                reprehenderit deserunt minima, veniam omnis libero, debitis fugiat autem alias eos architecto? In, eos!</p>
-
-              <div class="btn-001">
-                <ul>
-                  <li><a href="#">GET STARTED NOW</a></li>
-                  <li><a href="javascript:void(0)" (click)="toggleShowAllCourses()">VIEW COURSES</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="box-01">
-            <div class="slider-image">
-              <img src="../../../assets/images/slider/1.png">
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-</div>
-
 <div class="centered-container">
   <div class="formation-container">
     <div *ngIf="showAllCourses; else filteredCourses">
@@ -120,7 +120,7 @@
   <div class="container">
       <div class="row">
           <div class="heading">
-              <h2>Popular Category</h2>
+              <h2>Catégorie Populaire</h2>
               <span></span>
           </div>
 
@@ -288,21 +288,21 @@
                         <ol>
                             <li>
                                 <div class="_lk_bg_cd">
-                                    <div class="counting" data-count="100"></div>
-                                    <h5>Active Cources</h5>
-                                </div>
+                                    <div class="counting">{{ nombreFormationsPlanifiees }}</div>
+                                    <h5>Formations Planifiées</h5>
+                                  </div>
                             </li>
 
                             <li>
                                 <div class="_lk_bg_cd">
-                                    <div class="counting" data-count="130"></div>
+                                    <div class="counting" data-count="130">{{totalIndividu}}</div>
                                     <h5>Student Learning</h5>
                                 </div>
                             </li>
 
                             <li>
                                 <div class="_lk_bg_cd">
-                                    <div class="counting" data-count="20">20</div>
+                                    <div class="counting" data-count="20">200</div>
                                     <h5>Free Cources</h5>
                                 </div>
                             </li>
@@ -333,7 +333,7 @@
                 <div class="team-main-box">
                     <img src="../../../assets/images/team/2.jpg">
                     <div class="team-content-box">
-                        <h3>James</h3>
+                        <h3>{{nomFormateur[0]}}</h3>
                         <b>Designer</b>
                     </div>
                 </div>
@@ -343,7 +343,7 @@
                 <div class="team-main-box">
                     <img src="../../../assets/images/team/4.jpg">
                     <div class="team-content-box">
-                        <h3>Smith</h3>
+                        <h3>{{nomFormateur[1]}}</h3>
                         <b>Dveloper</b>
                     </div>
                 </div>
@@ -353,7 +353,7 @@
                 <div class="team-main-box">
                     <img src="../../../assets/images/team/3.jpg">
                     <div class="team-content-box">
-                        <h3>Johnsy</h3>
+                        <h3>{{nomFormateur[2]}}</h3>
                         <b>SEO</b>
                     </div>
                 </div>
@@ -363,7 +363,7 @@
                 <div class="team-main-box">
                     <img src="../../../assets/images/team/1.jpg">
                     <div class="team-content-box">
-                        <h3>Albert</h3>
+                        <h3>{{nomFormateur[3]}}</h3>
                         <b>Art Designer</b>
                     </div>
                 </div>

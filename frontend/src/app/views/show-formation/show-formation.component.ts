@@ -12,6 +12,7 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { GroupeService } from 'src/app/shared/services/groupe.service';
+import { GroupComponent } from '../group/group.component';
 
 @Component({
   selector: 'app-show-formation',
@@ -95,17 +96,12 @@ export class ShowFormationComponent implements OnInit, OnDestroy {
     });
   }
   sendFeedback(formation: any, groupe: any): void {
-    this.groupeService.sendFeedbackEmail(groupe.id).subscribe(
-
-      (response) => {
-        console.log('Feedback envoyé avec succès', response);
-      },
-      (error) => {
-        console.error('Error sending feedback:', error);
-        this.toastr.success('Feedback envoyé avec succès.', 'Envoie réussie');
-      }
-    );
+    this.dialog.open(GroupComponent, {
+      width: '400px',
+      data: { formation, groupe },
+    });
   }
+  
 
   public editFormationDetails(id: number) {
     this.selectedFormationId = id;

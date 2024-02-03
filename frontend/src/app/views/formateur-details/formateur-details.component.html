@@ -24,8 +24,8 @@
             <th mat-header-cell *matHeaderCellDef> Note moyenne </th>
             <td mat-cell *matCellDef="let element">
               <ng-container *ngIf="element.averageRating !== null; else noRating">
-                <span [ngClass]="{'high-rating': element.averageRating >= 70, 'medium-rating': element.averageRating >= 50 && element.averageRating < 70, 'low-rating': element.averageRating < 50}">
-                  {{ element.averageRating | number:'1.1-1' }} %
+                <span [ngClass]="{'high-rating': element.averageRating >= 4, 'medium-rating': element.averageRating >= 2.5 && element.averageRating < 4, 'low-rating': element.averageRating < 2.5}">
+                  {{ element.averageRating | number:'1.1-1' }} /5
                 </span>
               </ng-container>
               <ng-template #noRating>

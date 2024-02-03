@@ -37,7 +37,9 @@ export class FormateurService {
   public getFormateurProfile(): Observable<any> {
     return this.httpClient.get(`${this.API_BASE_URL}/format/formatProfile`, { responseType: "text" });
   }
-
+  public getFormateurByNom(): Observable<any> {
+    return this.httpClient.get(`${this.API_BASE_URL}/allFormateurByNom`);
+  }
   public showFormateurs(): Observable<Formateur[]> {
 
     const jwtToken = this.userAuthService.getToken();

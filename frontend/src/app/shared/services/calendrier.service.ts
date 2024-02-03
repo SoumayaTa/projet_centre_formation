@@ -39,20 +39,28 @@ export class CalendrierService {
       );
   }
 
-  public addTraine(calendrier: Calendrier, formationId: number, formateurId: number, entrepriseId: number, groupeId: number): Observable<Calendrier> {
+  public addTraine(calendrier: Calendrier, formationId: number, formateurId: number, select: string): Observable<Calendrier> {
     const jwtToken = this.userAuthService.getToken();
-
+  
     if (!jwtToken) {
       console.log('Token JWT non disponible');
       return throwError('Token JWT non disponible');
     }
-
+  
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + jwtToken,
       'Content-Type': 'application/json'
     });
-
-    const url = `${this.API_BASE_URL}/calendrier/addnewCalendar/${formationId}/${formateurId}/${entrepriseId}/${groupeId}`;
+  
+    let url: string;
+  
+    if (select === 'entreprise' || select === 'groupe') {
+      url = `${this.API_BASE_URL}/calendrier/addnewCalendar/${formationId}/${formateurId}/${select}`;
+    } else {
+      console.error('Sélection invalide pour la création du calendrier');
+      return throwError('Sélection invalide pour la création du calendrier');
+    }
+  
     return this.httpClient.post<Calendrier>(url, calendrier, { headers })
       .pipe(
         catchError(error => {
@@ -61,4 +69,5 @@ export class CalendrierService {
         })
       );
   }
+  
 }

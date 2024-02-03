@@ -1,0 +1,20 @@
+<div class="popup-container">
+    <mat-icon class="close-icon" (click)="closePopup()">cancel</mat-icon>
+    <h2 class="popup-title">Groups for {{ data.formation.nom }}</h2>
+  
+    <div *ngIf="data.formation.groupes && data.formation.groupes.length > 0" class="group-list">
+      <ul>
+        <li *ngFor="let groupe of data.formation.groupes" class="group-item">
+          <span class="group-id"> Groupe {{ groupe.id }}</span>
+          <button mat-raised-button color="primary" class="send-feedback-button" (click)="sendFeedback(data.formation, groupe)">
+            Send Feedback
+          </button>
+        </li>
+      </ul>
+    </div>
+  
+    <div *ngIf="!data.formation.groupes || data.formation.groupes.length === 0" class="no-groups">
+      Aucun groupe associé
+    </div>
+  </div>
+  

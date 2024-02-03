@@ -45,6 +45,7 @@ import { EvaluationComponent } from './views/evaluation/evaluation.component';
 import { NestedComponent } from './views/nested/nested.component';
 import { ShowentrepriseComponent } from './views/showentreprise/showentreprise.component';
 import { SubmittedComponent } from './views/submitted/submitted.component';
+import { GroupComponent } from './views/group/group.component';
 
 
 @NgModule({
@@ -74,7 +75,8 @@ import { SubmittedComponent } from './views/submitted/submitted.component';
     NestedComponent,
     EvaluationComponent,
     ShowentrepriseComponent,
-    SubmittedComponent
+    SubmittedComponent,
+    GroupComponent
   ],
   imports: [
     BrowserModule,

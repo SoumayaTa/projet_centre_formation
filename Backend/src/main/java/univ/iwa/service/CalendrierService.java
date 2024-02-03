@@ -48,28 +48,64 @@ public class CalendrierService {
             return CalendrierDto.toDto( repository.save(entity));
     }*/
 
-    public CalendrierDto addCalendrier(CalendrierDto calendrierDto, Long formationId, int formateurId, Long entrepriseId, Long groupeId) {
-        Formation formationEntity = formationRepository.findById(formationId)
-                .orElseThrow(() -> new EntityNotFoundException("Formation not found with ID: " + formationId));
+//    public CalendrierDto addCalendrier(CalendrierDto calendrierDto, Long formationId, int formateurId, Long entrepriseId, Long groupeId) {
+//        Formation formationEntity = formationRepository.findById(formationId)
+//                .orElseThrow(() -> new EntityNotFoundException("Formation not found with ID: " + formationId));
+//
+//        UserInfo formateurEntity = userInfoRepository.findById(formateurId)
+//                .orElseThrow(() -> new EntityNotFoundException("Formateur not found with ID: " + formateurId));
+//
+//        Entreprise entrepriseEntity = entrepriseRepository.findById(entrepriseId)
+//                .orElseThrow(() -> new EntityNotFoundException("Entreprise not found with ID: " + entrepriseId));
+//
+//        Groupe groupeEntity = groupeRepository.findById(groupeId)
+//                .orElseThrow(() -> new EntityNotFoundException("Groupe not found with ID: " + groupeId));
+//        groupeEntity.setFormateur(formateurEntity);
+//        Calendrier entity = modelMapper.map(calendrierDto, Calendrier.class);
+//        entity.setFormation(formationEntity);
+//        entity.setFormateur(formateurEntity);
+//        entity.setEntreprise(entrepriseEntity);
+//        entity.setGroupe(groupeEntity);
+//
+//        return modelMapper.map(repository.save(entity), CalendrierDto.class);
+//    }
+        public CalendrierDto addCalendrier(CalendrierDto calendrierDto, Long formationId, int formateurId, String select) {
+            System.out.println("ana hnaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa 3333333");
 
-        UserInfo formateurEntity = userInfoRepository.findById(formateurId)
-                .orElseThrow(() -> new EntityNotFoundException("Formateur not found with ID: " + formateurId));
+            Formation formationEntity = formationRepository.findById(formationId)
+                    .orElseThrow(() -> new EntityNotFoundException("Formation not found with ID: " + formationId));
 
-        Entreprise entrepriseEntity = entrepriseRepository.findById(entrepriseId)
-                .orElseThrow(() -> new EntityNotFoundException("Entreprise not found with ID: " + entrepriseId));
+            UserInfo formateurEntity = userInfoRepository.findById(formateurId)
+                    .orElseThrow(() -> new EntityNotFoundException("Formateur not found with ID: " + formateurId));
 
-        Groupe groupeEntity = groupeRepository.findById(groupeId)
-                .orElseThrow(() -> new EntityNotFoundException("Groupe not found with ID: " + groupeId));
-        groupeEntity.setFormateur(formateurEntity);
-        Calendrier entity = modelMapper.map(calendrierDto, Calendrier.class);
-        entity.setFormation(formationEntity);
-        entity.setFormateur(formateurEntity);
-        entity.setEntreprise(entrepriseEntity);
-        entity.setGroupe(groupeEntity);
+            Calendrier entity = modelMapper.map(calendrierDto, Calendrier.class);
+            entity.setFormation(formationEntity);
+            entity.setFormateur(formateurEntity);
 
-        return modelMapper.map(repository.save(entity), CalendrierDto.class);
-    }
+            if ("entreprise".equals(select)) {
+                if (calendrierDto.getEntrepriseId() != null) {
+                    Entreprise entrepriseEntity = entrepriseRepository.findById(calendrierDto.getEntrepriseId())
+                            .orElseThrow(() -> new EntityNotFoundException("Entreprise not found with ID: " + calendrierDto.getEntrepriseId()));
+                    entity.setEntreprise(entrepriseEntity);
+                } else {
+                    entity.setEntreprise(null); // Remplacez l'exception par la mise à null de l'entreprise
+                }
+                entity.setGroupe(null); // Assurez-vous que le groupe est null si l'entreprise est sélectionnée
+            } else if ("groupe".equals(select)) {
+                if (calendrierDto.getGroupeId() != null) {
+                    Groupe groupeEntity = groupeRepository.findById(calendrierDto.getGroupeId())
+                            .orElseThrow(() -> new EntityNotFoundException("Groupe not found with ID: " + calendrierDto.getGroupeId()));
+                    entity.setGroupe(groupeEntity);
+                } else {
+                    entity.setGroupe(null); // Remplacez l'exception par la mise à null du groupe
+                }
+                entity.setEntreprise(null); // Assurez-vous que l'entreprise est null si le groupe est sélectionné
+            } else {
+                throw new IllegalArgumentException("Invalid value for 'select'");
+            }
 
+            return modelMapper.map(repository.save(entity), CalendrierDto.class);
+        }
 
     public List<CalendrierDto> getEvents() {
         List<Calendrier> events = repository.findAll();
