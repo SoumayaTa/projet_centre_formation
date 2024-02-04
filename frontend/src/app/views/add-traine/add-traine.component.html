@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>{{ data.eventId ? 'Modifier une séance de formation' : 'Ajouter une séance de formation' }}</h1>
+<h1 mat-dialog-title>{{ data.title ? 'Modifier une séance de formation' : 'Ajouter une séance de formation' }}</h1>
 
   <div mat-dialog-content>
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -9,8 +9,8 @@
 
       <mat-form-field class="full-width">
         <mat-label>Nom de formation</mat-label>
-        <mat-select formControlName="formationName" required>
-          <mat-option *ngFor="let formation of formations" [value]="formation.id">
+        <mat-select formControlName="formationName" required >
+          <mat-option *ngFor="let formation of formations" [value]="formation.id" >
             {{ formation.nom }}
           </mat-option>
         </mat-select>
@@ -57,7 +57,7 @@
 
       <div mat-dialog-actions>
         <button mat-button (click)="onCancel()">Annuler</button>
-        <button mat-button type="submit" [mat-dialog-close]="true">{{ data.eventId ? 'Modifier' : 'Ajouter' }}</button>
+        <button mat-button type="submit" [mat-dialog-close]="true">{{ data.title ? 'Modifier' : 'Ajouter' }}</button>
       </div>
     </form>
   </div>

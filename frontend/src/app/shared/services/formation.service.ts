@@ -82,11 +82,12 @@ showFormation(page: number, itemsPerPage: number, searchKey: string): Observable
    public getFormationById(id:number){
       return this.httpClient.get<Formation>(`${this.apiUrl}/formation/getFormationById/`+id)
    }
-
+  
+   
    getFormations():Observable<Formation[]>{
     return this.httpClient.get<Formation[]>(`${this.apiUrl}/getall`);
    }
-  
+    
   getByFilters(categorie: string, ville: string): Observable<Formation[]> {
     const jwtToken = this.userAuthService.getToken();
 
@@ -113,7 +114,7 @@ showFormation(page: number, itemsPerPage: number, searchKey: string): Observable
   }
 
   getGroupesForFormation(formationId: number): Observable<Groupe[]> {
-    const url = `${this.apiUrl}/grpupes/${formationId}`;
+    const url = `${this.apiUrl}/groupes/${formationId}`;
     return this.httpClient.get<Groupe[]>(url);
   }
 }

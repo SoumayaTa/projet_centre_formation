@@ -96,7 +96,7 @@ export class CalendrierService {
   }
 
 
-  public updateEvent(calendrier: Calendrier, select: string): Observable<Calendrier> {
+  public updateEvent(calendrier: any, select: string): Observable<Calendrier> {
     const jwtToken = this.userAuthService.getToken();
   
     if (!jwtToken) {

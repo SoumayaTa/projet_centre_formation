@@ -1,6 +1,6 @@
 export interface Groupe {
   id: number;
-  // Ajoutez d'autres propriétés de groupe au besoin
+  
 }
 export interface Formation {
   [x: string]: unknown;
@@ -15,4 +15,5 @@ export interface Formation {
   date: Date;     
   groupe_seuil: number;
   photos?: string;
+  
 }

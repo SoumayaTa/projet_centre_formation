@@ -146,7 +146,8 @@ public class FormationController {
             return ResponseEntity.status(500).build();
         }
     }
-    @GetMapping("/grpupes/{formationId}")
+    @GetMapping("/groupes/{formationId}")
+
     public List<GroupeDto> getGroupesForFormation(@PathVariable Long formationId) {
         return service.getGroupesForFormation(formationId);
     }
