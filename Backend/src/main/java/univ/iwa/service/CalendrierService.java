@@ -111,16 +111,46 @@ public class CalendrierService {
     public List<CalendrierDto> getEvents() {
         List<Calendrier> events = repository.findAll();
         return events.stream()
-                .map(event -> modelMapper.map(event, CalendrierDto.class))
+                .map(event -> {
+
+                    CalendrierDto calendrierDto = modelMapper.map(event, CalendrierDto.class);
+
+                    if( event.getFormateur() != null)  calendrierDto.setFormateurId(event.getFormateur().getId());
+                    if( event.getGroupe() != null)  calendrierDto.setGroupeId(event.getGroupe().getId());
+                    if( event.getFormation() != null) calendrierDto.setFormationId(event.getFormation().getId());
+                    if( event.getEntreprise() != null) calendrierDto.setEntrepriseId(event.getEntreprise().getId());
+                    return calendrierDto ;
+                })
                 .collect(Collectors.toList());
     }
     public CalendrierDto getEventById(Long eventId) {
         Calendrier eventEntity = repository.findById(eventId)
                 .orElseThrow(() -> new EntityNotFoundException("Event not found with ID: " + eventId));
 
-        return modelMapper.map(eventEntity, CalendrierDto.class);
+        CalendrierDto calendrierDto = modelMapper.map(eventEntity, CalendrierDto.class);
+
+        if (eventEntity.getFormateur() != null) {
+            calendrierDto.setFormateurId(eventEntity.getFormateur().getId());
+
+        }
+
+        if (eventEntity.getGroupe() != null) {
+            calendrierDto.setGroupeId(eventEntity.getGroupe().getId());
+        }
+
+        if (eventEntity.getFormation() != null) {
+            calendrierDto.setFormationId(eventEntity.getFormation().getId());
+
+        }
+
+        if (eventEntity.getEntreprise() != null) {
+            calendrierDto.setEntrepriseId(eventEntity.getEntreprise().getId());
+        }
+
+        return calendrierDto;
     }
-//
+
+    //
 //    private void notifyIfDateExceeded() {
 //        List<Calendrier> calendriers = repository.findAll();
 //        for (Calendrier calendrier : calendriers) {

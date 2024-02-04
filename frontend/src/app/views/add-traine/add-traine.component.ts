@@ -39,7 +39,9 @@ export class AddTraineComponent implements OnInit {
     private calendrierService: CalendrierService
   ) {
     this.selectedPeriod = data;
-    this.eventId = data?.eventId; // Ajout d'une vérification d'existence
+    this.eventId = data?.eventId;
+    console.log("anaaaaaa honaaaa"+this.eventId );
+    
     this.form = this.formBuilder.group({
       title: ['', Validators.required],
       formationName: ['', Validators.required],
@@ -51,30 +53,38 @@ export class AddTraineComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log("data is "+this.data);
+    
     this.loadFormations();
     this.loadFormateurs();
     this.loadEntreprises();
-    this.loadGroupes();
+    
     console.log("ID :" + this.eventId)
-    if (this.eventId) {
-      this.loadEventData(this.eventId);
+    if (this.data.id) {
+      this.loadEventData(this.data.id);
     }
+    this.form.get('formationName')?.valueChanges.subscribe((formationId: number) => {
+      if (formationId) {
+        this.loadGroupes(formationId);
+      }
+    });
   }
 
   loadEventData(eventId: number): void {
     this.calendrierService.getEventById(eventId).subscribe(
-      (eventData: Calendrier) => {
-        console.log("gfdrfrfrf" + eventData);
-
+      (eventData: any) => {
+        console.log("#####################", eventData);
+        this.data = eventData ;
         this.form.patchValue({
           title: eventData.title,
-          formationName: eventData.formation.id,
-          entrepriseName: eventData.entreprise ? eventData.entreprise.id : null,
-          groupeId: eventData.groupe ? eventData.groupe.id : null,
+          formationName: eventData.formationId??null,
+          entrepriseName: eventData.entrepriseId??null,
+          groupeId: eventData.groupeId??null,
+          formateurName: eventData.formateurId??null,
           selectedOptionValue: eventData.entreprise ? 'entreprise' : 'groupe'
         });
         console.log(eventData);
-
+  
       },
       (error) => {
         console.error('Erreur lors du chargement des données de l\'événement :', error);
@@ -114,9 +124,8 @@ export class AddTraineComponent implements OnInit {
       }
     );
   }
-
-  loadGroupes(): void {
-    this.groupeService.getGroupes().subscribe(
+  loadGroupes(formationId: number): void {
+    this.formationService.getGroupesForFormation(formationId).subscribe(
       (groupes: Groupe[]) => {
         this.groupes = groupes;
       },
@@ -145,8 +154,19 @@ export class AddTraineComponent implements OnInit {
           groupeId: selectedOptionValue === 'groupe' ? selectedGroupe!.id || null : null
         };
 
-        if (this.eventId) {
-          this.calendrierService.updateEvent(newCalendrier, selectedOptionValue).subscribe(
+        if (this.data.title) {
+          console.log("updating ....");
+          let data = {
+            id: this.data.id,
+            datedebut: newCalendrier.datedebut,
+            datefin: newCalendrier.datefin,
+            title: newCalendrier.title ,
+            formationId: newCalendrier.formation.id,
+            formateurId: newCalendrier.formateur.id,
+            entrepriseId: newCalendrier.entrepriseId,
+            groupeId: newCalendrier.groupeId
+        }
+          this.calendrierService.updateEvent(data, selectedOptionValue).subscribe(
             (response: Calendrier) => {
               console.log('Calendrier mis à jour avec succès :', response);
             },
@@ -158,6 +178,8 @@ export class AddTraineComponent implements OnInit {
             }
           );
         } else {
+          console.log("adding  ....");
+
           if (selectedFormation.id && selectedFormateur.id) {
             this.calendrierService.addTraine(newCalendrier, selectedFormation.id, selectedFormateur.id, selectedOptionValue).subscribe(
               (response: Calendrier) => {

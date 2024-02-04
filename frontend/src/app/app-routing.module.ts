@@ -33,7 +33,7 @@ const routes: Routes = [
   { path: 'allFormateur', component: FormateurDetailsComponent,canActivate:[AuthGuard],data:{roles:['ROLE_ADMIN']}},
   { path: 'addformation', component: FormationComponent, canActivate:[AuthGuard], data:{roles:['ROLE_ADMIN']}},
   { path: 'showFormation', component: ShowFormationComponent,canActivate:[AuthGuard],data:{roles:['ROLE_ADMIN']}},
-  { path: 'showEntreprise', component: ShowentrepriseComponent,canActivate:[AuthGuard],data:{roles:['ROLE_ADMIN']}},
+  { path: 'showEntreprise', component: ShowentrepriseComponent,canActivate:[AuthGuard],data:{roles:['ROLE_ADMIN','ROLE_ASSISTANT']}},
   { path:'formateurexeterne',component:DemandeFormateurComponent,canActivate:[AuthGuard],data:{ roles: ['ROLE_ADMIN', 'ROLE_ASSISTANT'] }},
   { path:'alreadySubmitted',component:SubmittedComponent,data:{ roles: ['ROLE_ADMIN', 'ROLE_ASSISTANT'] }},
 

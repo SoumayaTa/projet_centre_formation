@@ -28,13 +28,13 @@ public class CalendrierController {
             CalendrierDto result = service.addCalendrier(calendrierDto, formationId, formateurId, select);
             return new ResponseEntity<>(result, HttpStatus.OK);
         } catch (EntityNotFoundException e) {
-            e.printStackTrace();  // Affichez l'exception dans la console
+            e.printStackTrace();
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         } catch (IllegalArgumentException e) {
-            e.printStackTrace();  // Affichez l'exception dans la console
+            e.printStackTrace();
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
-            e.printStackTrace();  // Affichez l'exception dans la console
+            e.printStackTrace();
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

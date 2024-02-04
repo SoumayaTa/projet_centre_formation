@@ -60,12 +60,16 @@ export class TrainSessionComponent implements OnInit {
   loadEvents(): void {
     this.calendrierService.getEvents().subscribe(
       (response: Calendrier[]) => {
+
         this.events = response;
+        console.log(response);
+        
         this.calendarOptions.events = this.events.map(event => ({
           id: event.id?.toString(),
           title: event.title,
           start: new Date(event.datedebut),
           end: new Date(event.datefin),
+          extendedProps:{event}
         }));
       },
       error => {
@@ -74,34 +78,54 @@ export class TrainSessionComponent implements OnInit {
     );
   }
 
-  handleEventClick(clickInfo: any) {
-    console.log('Event clicked:', clickInfo.event);
+  // handleEventClick(clickInfo: any) {
+  //   console.log('Event clicked:', clickInfo.event.extendedProps);
 
   
-  console.log('Event ID (string):', clickInfo.event.id);
+  //     // console.log('Event ID (string):', clickInfo.event.id);
 
-  const eventId = parseInt(clickInfo.event.id, 10); 
+  //     // const eventId = parseInt(clickInfo.event.id, 10); 
 
-  console.log('Event ID (number):', eventId);
-    
-   
+  //     // console.log('Event ID (number):', eventId);
+  
+  //     //   console.log('Event ID:', eventId);
 
-    console.log('Event ID:', eventId);
+  //   const dialogRef = this.dialog.open(AddTraineComponent, {
+  //     width: '400px',
+  //     data: {
+  //       eventId: clickInfo.event.id,
+  //       start: clickInfo.event.startStr,
+  //       end: clickInfo.event.endStr,
+  //       title: clickInfo.event.title
 
+  //     }
+  //   });
+
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     if (result) {
+  //       this.loadEvents();
+  //     }
+  //   });
+  // }
+
+  handleEventClick(clickInfo: any) {
+    console.log('Event clicked:', clickInfo.event.extendedProps);
+  
     const dialogRef = this.dialog.open(AddTraineComponent, {
       width: '400px',
       data: {
-        eventId: eventId,
+        id: clickInfo.event.id,
         start: clickInfo.event.startStr,
         end: clickInfo.event.endStr,
-        title: clickInfo.event.title
+        title: clickInfo.event.title,
       }
     });
-
+  
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.loadEvents();
+        this.loadEvents(); // Recharger les événements après la fermeture de la boîte de dialogue si nécessaire
       }
     });
   }
+  
 }
