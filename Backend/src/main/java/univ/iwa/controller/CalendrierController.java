@@ -15,6 +15,7 @@ import java.util.List;
 @RequestMapping("/calendrier")
 @CrossOrigin(origins = "*")
 public class CalendrierController {
+
     @Autowired
     CalendrierService service;
 
@@ -56,6 +57,18 @@ public class CalendrierController {
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/getEventsByFormateurId/{formateurId}")
+    @PreAuthorize("hasAnyAuthority('ROLE_FORMAT')")
+    public List<CalendrierDto> getEventsByFormateurId(@PathVariable int formateurId) {
+        try {
+            List<CalendrierDto> events = service.getEventsByFormateurId(formateurId);
+            return events != null ? new ResponseEntity<>(events, HttpStatus.OK).getBody() : (List<CalendrierDto>) new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return (List<CalendrierDto>) new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

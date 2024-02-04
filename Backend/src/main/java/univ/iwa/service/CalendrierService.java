@@ -123,6 +123,24 @@ public class CalendrierService {
                 })
                 .collect(Collectors.toList());
     }
+    public List<CalendrierDto> getEventsByFormateurId(int formateurId) {
+        List<Calendrier> events = repository.findByFormateur_Id(formateurId);
+        return events.stream()
+                .map(event -> {
+                    CalendrierDto calendrierDto = modelMapper.map(event, CalendrierDto.class);
+
+                    if (event.getFormateur() != null) calendrierDto.setFormateurId(event.getFormateur().getId());
+                    if (event.getGroupe() != null) calendrierDto.setGroupeId(event.getGroupe().getId());
+                    if (event.getFormation() != null) calendrierDto.setFormationId(event.getFormation().getId());
+                    if (event.getEntreprise() != null) calendrierDto.setEntrepriseId(event.getEntreprise().getId());
+
+                    return calendrierDto;
+                })
+                .collect(Collectors.toList());
+    }
+
+
+
     public CalendrierDto getEventById(Long eventId) {
         Calendrier eventEntity = repository.findById(eventId)
                 .orElseThrow(() -> new EntityNotFoundException("Event not found with ID: " + eventId));
@@ -215,5 +233,7 @@ public class CalendrierService {
         // Enregistrez les modifications apportées à l'entité existante
         return modelMapper.map(repository.save(existingCalendrier), CalendrierDto.class);
     }
+
+
 
 }

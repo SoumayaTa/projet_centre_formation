@@ -31,4 +31,7 @@ export class HeaderComponent implements OnInit {
   public isAssistant(){
     return this.userAuthService.isAssistant();
   }
+  public isFormateur() {
+    return this.userAuthService.isFormat();
+  }
 }

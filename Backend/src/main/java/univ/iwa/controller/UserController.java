@@ -114,17 +114,33 @@ public class UserController {
         return userInfoService.getAllFormateurs();
     }
 
+//    @PostMapping("/generateToken")
+//    public ResponseEntity<String> authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
+//        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
+//        if (authentication.isAuthenticated()) {
+//            List<String> roles = authentication.getAuthorities().stream()
+//                    .map(GrantedAuthority::getAuthority)
+//                    .collect(Collectors.toList());
+//            String token = jwtService.generateToken(authRequest.getUsername(), roles.get(0));
+//            return ResponseEntity.ok("{\"message\":\"" + token + "\",\"role\":\"" + roles.get(0) + "\"}");
+//        } else {
+//            throw new UsernameNotFoundException("Invalid user request!");
+//        }
+//    }
+
     @PostMapping("/generateToken")
     public ResponseEntity<String> authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
+        UserInfoDto user = userInfoService.findUserByName(authRequest.getUsername());
         if (authentication.isAuthenticated()) {
+            System.out.println("gen token");
             List<String> roles = authentication.getAuthorities().stream()
                     .map(GrantedAuthority::getAuthority)
                     .collect(Collectors.toList());
-            String token = jwtService.generateToken(authRequest.getUsername(), roles.get(0));
-            return ResponseEntity.ok("{\"message\":\"" + token + "\",\"role\":\"" + roles.get(0) + "\"}");
+
+            return new ResponseEntity<>("{\"message\":\"" + jwtService.generateToken(authRequest.getUsername(), roles.get(0)) + "\",\"role\":\""+ roles.get(0)+"\",\"userId\":\""+user.getId()+"\"}", HttpStatus.OK);
         } else {
-            throw new UsernameNotFoundException("Invalid user request!");
+            throw new UsernameNotFoundException("invalid user request !");
         }
     }
 

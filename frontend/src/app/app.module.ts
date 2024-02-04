@@ -46,6 +46,7 @@ import { NestedComponent } from './views/nested/nested.component';
 import { ShowentrepriseComponent } from './views/showentreprise/showentreprise.component';
 import { SubmittedComponent } from './views/submitted/submitted.component';
 import { GroupComponent } from './views/group/group.component';
+import { PlanificationFormateurComponent } from './views/planification-formateur/planification-formateur.component';
 
 
 @NgModule({
@@ -76,7 +77,8 @@ import { GroupComponent } from './views/group/group.component';
     EvaluationComponent,
     ShowentrepriseComponent,
     SubmittedComponent,
-    GroupComponent
+    GroupComponent,
+    PlanificationFormateurComponent
   ],
   imports: [
     BrowserModule,

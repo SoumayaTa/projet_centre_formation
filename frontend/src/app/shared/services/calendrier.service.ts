@@ -127,5 +127,28 @@ export class CalendrierService {
       );
   }
   
+
+  public getEventsByFormateurId(formateurId: number): Observable<Calendrier[]> {
+    const jwtToken = this.userAuthService.getToken();
+
+    if (!jwtToken) {
+      console.log('Token JWT non disponible');
+      return throwError('Token JWT non disponible');
+    }
+
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + jwtToken,
+      'Content-Type': 'application/json'
+    });
+
+    const url = `${this.API_BASE_URL}/calendrier/getEventsByFormateurId/${formateurId}`;
+    return this.httpClient.get<Calendrier[]>(url, { headers })
+      .pipe(
+        catchError(error => {
+          console.error(`Erreur lors du chargement des événements pour le formateur avec l'ID ${formateurId} :`, error);
+          return throwError(`Erreur lors du chargement des événements pour le formateur avec l'ID ${formateurId}`);
+        })
+      );
+  }
   
 }

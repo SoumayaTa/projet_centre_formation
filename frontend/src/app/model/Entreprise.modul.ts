@@ -5,4 +5,4 @@ export interface Entreprise {
     phoneNumber: string;
     email: string;
     url: string;
-  }
+  } 

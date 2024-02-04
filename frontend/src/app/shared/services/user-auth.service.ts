@@ -47,6 +47,14 @@ export class UserAuthService {
   public isAssistant(): boolean {
     return this.hasRole('ROLE_ASSISTANT');
   }
+  
 
+  public setUserId(id: string): void {
+    localStorage.setItem("userId", id);
+  }
+
+  public getUserId(): string {
+    return localStorage.getItem('userId') || '';
+  }
   
 }

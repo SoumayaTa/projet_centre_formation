@@ -22,16 +22,19 @@ import { EvaluationComponent } from './views/evaluation/evaluation.component';
 import { NestedComponent } from './views/nested/nested.component';
 import { ShowentrepriseComponent } from './views/showentreprise/showentreprise.component';
 import { SubmittedComponent } from './views/submitted/submitted.component';
+import { PlanificationFormateurComponent } from './views/planification-formateur/planification-formateur.component';
 
 const routes: Routes = [
+
   { path: 'home', component: HomeComponent},
   { path: 'admin', component: AdminComponent,canActivate:[AuthGuard],data:{roles:['ROLE_ADMIN']}},
   { path: 'format', component: FormateurComponent,canActivate:[AuthGuard],data:{roles:['ROLE_FORMAT']}},
-  { path: 'assistant', component: AssistantComponent,canActivate:[AuthGuard],data:{roles:['ROLE_ASSISTANT']}},
-  { path: 'addFormateur', component: AddFormateurComponent,canActivate:[AuthGuard],data:{roles:['ROLE_ADMIN']}},
-  { path: 'login', component: LoginComponent},
-  { path: 'allFormateur', component: FormateurDetailsComponent,canActivate:[AuthGuard],data:{roles:['ROLE_ADMIN']}},
-  { path: 'addformation', component: FormationComponent, canActivate:[AuthGuard], data:{roles:['ROLE_ADMIN']}},
+  { path: 'planifiactionformat', component: PlanificationFormateurComponent,canActivate:[AuthGuard],data:{roles:['ROLE_FORMAT']}},
+  { path: 'assistant', component: AssistantComponent,canActivate:[AuthGuard],data:{roles:['ROLE_ASSISTANT']}},   
+  { path: 'addFormateur', component: AddFormateurComponent,canActivate:[AuthGuard],data:{roles:['ROLE_ADMIN']}},    
+  { path: 'login', component: LoginComponent},    
+  { path: 'allFormateur', component: FormateurDetailsComponent,canActivate:[AuthGuard],data:{roles:['ROLE_ADMIN']}},   
+  { path: 'addformation', component: FormationComponent, canActivate:[AuthGuard], data:{roles:['ROLE_ADMIN']}},        
   { path: 'showFormation', component: ShowFormationComponent,canActivate:[AuthGuard],data:{roles:['ROLE_ADMIN']}},
   { path: 'showEntreprise', component: ShowentrepriseComponent,canActivate:[AuthGuard],data:{roles:['ROLE_ADMIN','ROLE_ASSISTANT']}},
   { path:'formateurexeterne',component:DemandeFormateurComponent,canActivate:[AuthGuard],data:{ roles: ['ROLE_ADMIN', 'ROLE_ASSISTANT'] }},
