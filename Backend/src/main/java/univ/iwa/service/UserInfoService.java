@@ -139,4 +139,9 @@ public class UserInfoService implements UserDetailsService {
 
 		return modelMapper.map(repository.save(formateurEntity), UserInfoDto.class);
 	}
-} 
+
+	public UserInfoDto findUserByName(String username) {
+		UserInfo user = repository.findByName(username).orElseThrow(() -> new UsernameNotFoundException("User not found " + username));
+		return modelMapper.map(user, UserInfoDto.class);
+	}
+}

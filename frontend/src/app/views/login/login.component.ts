@@ -45,6 +45,7 @@ export class LoginComponent implements OnInit {
         console.log("roll " + response.role);
         this.userAuthService.setRoles(response.role);
         this.userAuthService.setToken(response.message);
+        this.userAuthService.setUserId(response.userId)
         const role = response.role;
         console.log(response);
         if (role === 'ROLE_ADMIN') {

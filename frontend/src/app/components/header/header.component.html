@@ -34,6 +34,9 @@
     <a mat-button routerLink="/testTraine" *ngIf="isAdmin() || isAssistant()" class="top-menu-item">
       <mat-icon>add_box</mat-icon><span>Planification</span>
     </a>
+    <a mat-button routerLink="/planifiactionformat" *ngIf="isFormateur()" class="top-menu-item">
+      <mat-icon>people</mat-icon><span>Mon Planification</span>
+    </a>
   </div>
   <span class="menu-spacer"></span>
 

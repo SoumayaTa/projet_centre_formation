@@ -14,7 +14,7 @@ import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation
 })
 export class ShowentrepriseComponent {
   entrepriseDetails: Entreprise[] = [];
-  displayedColumns: string[] = ['id', 'name', 'adress', 'phoneNumber', 'email','url', 'Actions'];
+  displayedColumns: string[] = ['id', 'name', 'address', 'phoneNumber', 'email','url', 'Actions'];
   selectedFormationId: number | null = null;
   showTable = false;
   showMoreFormation = false;
